@@ -47,6 +47,11 @@ tools/eslint-rules/        자체 가드 규칙 (lint 묶음이 쓴다)
 e2e/                       Playwright 테스트
 ```
 
+## 요청과 문제 보고
+
+컴포넌트·토큰이 모자라거나 문제가 생기면 GitHub 이슈로 올린다.
+양식 고르는 법과 에이전트용 `gh` 명령은 [REQUESTS.md](REQUESTS.md) 에 있다.
+
 ## 다른 프로젝트에서 lint 쓰기
 
 `tools/design-system-lint` 와 `tools/eslint-rules` 를 복사해 `eslint.config.mjs` 에 펼치면 된다.

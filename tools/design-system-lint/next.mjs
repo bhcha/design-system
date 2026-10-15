@@ -33,7 +33,8 @@ export function withDesignSystemLint(nextConfig = {}, { enabled = true, paths = 
       throw new Error(
         `디자인 시스템 규칙 위반 ${errorCount}건 — 고치기 전에는 ${
           phase === "phase-production-build" ? "빌드" : "개발 서버"
-        }를 시작하지 않는다. (끄려면 DESIGN_SYSTEM_LINT=off)`,
+        }를 시작하지 않는다. (끄려면 DESIGN_SYSTEM_LINT=off)\n` +
+          `필요한 컴포넌트·토큰이 없거나 오탐이면 이슈로 요청: https://github.com/bhcha/design-system/issues/new/choose`,
       );
     }
     return resolved;

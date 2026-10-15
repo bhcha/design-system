@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 요청 절차 안내
+    url: https://github.com/bhcha/design-system/blob/main/REQUESTS.md
+    about: 어떤 양식을 고를지, 무엇을 적을지 먼저 확인한다.

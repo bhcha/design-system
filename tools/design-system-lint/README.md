@@ -48,6 +48,25 @@ export default withDesignSystemLint(nextConfig, { enabled: true });
 Next.js 16 은 `next build` 에서 lint 를 돌리지 않는다. 이 래퍼가 `next build`·`next dev`
 시작 시 ESLint 를 돌리고, 오류가 1건이라도 있으면 위반 목록을 찍고 시작을 거부한다.
 
+5. 쓰는 프로젝트의 `AGENTS.md`(또는 `CLAUDE.md`)에 아래 문구를 붙인다.
+   그 프로젝트의 에이전트가 모자란 것을 직접 만들지 않고 이슈로 요청하게 된다.
+
+```md
+## 디자인 시스템
+
+- UI 는 디자인 시스템(https://github.com/bhcha/design-system)의 컴포넌트와 토큰으로만 만든다.
+- 필요한 컴포넌트·variant·토큰이 없거나, 컴포넌트·토큰·lint 가 잘못 동작하면
+  화면에서 직접 만들거나 lint 를 끄지 말고 디자인 시스템 저장소에 이슈를 올린다.
+  양식과 `gh issue create` 예시: https://github.com/bhcha/design-system/blob/main/REQUESTS.md
+- 올린 이슈 번호를 작업 기록에 남긴다.
+```
+
+## 요청과 문제 보고
+
+lint 오류를 고칠 방법이 디자인 시스템 안에 없으면(필요한 컴포넌트나 토큰이 없으면)
+https://github.com/bhcha/design-system/issues/new/choose 에 요청한다.
+lint 오탐도 같은 곳에 "문제 보고"로 올린다. 자세한 절차는 저장소의 `REQUESTS.md` 에 있다.
+
 ## 끄기
 
 - 설정에서 `enabled: false`

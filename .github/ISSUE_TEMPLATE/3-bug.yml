@@ -1,0 +1,43 @@
+name: 문제 보고
+description: 컴포넌트·토큰·lint 가 잘못 동작하거나 모양이 design.md 와 다를 때.
+title: "[문제] "
+labels: ["bug"]
+body:
+  - type: input
+    id: requester
+    attributes:
+      label: 발견한 곳
+      description: 프로젝트 이름과 화면(또는 에이전트 세션).
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 영역
+      options:
+        - 컴포넌트
+        - 토큰
+        - lint (오탐·누락 포함)
+        - 문서·카탈로그
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 무슨 일이 있었나
+      description: 기대한 결과와 실제 결과.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 재현 방법
+      description: 최소 코드, 순서, 오류 메시지 전문.
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 쓰고 있는 버전
+      description: 복사해 간 커밋 해시(알면). 예) aa6fd67

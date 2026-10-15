@@ -1,0 +1,52 @@
+name: 토큰 요청
+description: 색·간격·곡률·서체 같은 토큰의 추가나 값 변경을 요청한다.
+title: "[토큰] "
+labels: ["request:token"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        토큰 밖의 hex·px 값은 lint 가 막는다. 필요한 값이 없으면 여기에 요청한다.
+        시각 정본은 `design.md` 이므로, 원문에 없는 값이면 왜 필요한지 꼭 적는다.
+  - type: input
+    id: requester
+    attributes:
+      label: 요청한 곳
+      description: 프로젝트 이름과 화면(또는 에이전트 세션).
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 종류
+      options:
+        - 새 토큰
+        - 기존 토큰 값 변경
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 분류
+      options:
+        - 색
+        - 간격
+        - 곡률
+        - 서체·글자 크기
+        - 기타
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 제안 이름과 값
+      description: 예) --status-pending / #a855f7. 기존 토큰이면 지금 값과 바꿀 값.
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: 필요한 이유
+      description: 쓰려는 곳과, 지금 있는 토큰으로 안 되는 까닭.
+    validations:
+      required: true
