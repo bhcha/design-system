@@ -8,6 +8,16 @@ import { GlobalNav } from "@/components/ui/global-nav";
 import { PageHeader } from "@/components/ui/page-header";
 import { SideNav } from "@/components/ui/side-nav";
 import { SkipLink } from "@/components/ui/skip-link";
+import { LinkTabs } from "@/components/ui/link-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Grid, Section, Specimen } from "../_catalog";
 
 const SIDE_NAV_GROUPS = [
@@ -45,9 +55,39 @@ const SIDE_NAV_GROUPS = [
   },
 ] as const;
 
+/** 문서·작업 도구형 좌측 탐색 표본 — compact 밀도. */
+const DOC_NAV_GROUPS = [
+  {
+    id: "demo-doc-learn",
+    label: "학습",
+    items: [
+      { label: "질문 입력", href: "/design#app-frame", description: "자연어 질문" },
+      { label: "변환 단계", href: "/design#app-frame", current: true },
+      { label: "생성 SQL", href: "/design#app-frame", count: 3 },
+    ],
+  },
+  {
+    id: "demo-doc-ref",
+    label: "참고",
+    items: [
+      { label: "스키마", href: "/design#app-frame" },
+      { label: "실행 기록", href: "/design#app-frame", disabled: true },
+    ],
+  },
+] as const;
+
+/** 내비게이션 사용 기준 — 어떤 자리에 어떤 컴포넌트를 쓰나. */
+const NAV_GUIDE = [
+  { place: "전역 상단", component: "GlobalNav", when: "제품 전체에 걸친 이동·위치(브레드크럼)" },
+  { place: "앱 좌측 탐색", component: "SideNav", when: "화면 사이 이동. 문서·작업 도구는 density=\"compact\"" },
+  { place: "접히는 좌측 탐색", component: "Sidebar", when: "아이콘 모드·오프캔버스로 접어야 할 때" },
+  { place: "프로젝트 수평 탭", component: "LinkTabs", when: "탭마다 주소가 바뀐다(새로고침·딥링크 유지)" },
+  { place: "상세 보기 탭", component: "Tabs", when: "같은 화면 안에서 패널만 바꾼다(주소 그대로)" },
+] as const;
+
 const CRUMBS = [
   { label: "워크스페이스", href: "/design#app-frame" },
-  { label: "Atlas", href: "/design#app-frame" },
+  { label: "Sample", href: "/design#app-frame" },
   { label: "웹 개편", relation: "구성 1:N" },
 ] as const;
 
@@ -73,9 +113,9 @@ export function AppFrameSection() {
         </Specimen>
 
         <Specimen name="avatar.tsx" state="neutral / accent · sm / md / lg">
-          <CodeAvatar initials="AT" size="sm" />
-          <CodeAvatar initials="AT" size="md" />
-          <CodeAvatar initials="AT" size="lg" />
+          <CodeAvatar initials="SA" size="sm" />
+          <CodeAvatar initials="SA" size="md" />
+          <CodeAvatar initials="SA" size="lg" />
           <CodeAvatar initials="PM" tone="primary" size="md" />
           <CodeAvatar initials="TM" tone="primary" size="lg" label="팀 관점" />
         </Specimen>
@@ -88,7 +128,7 @@ export function AppFrameSection() {
           <div className="flex w-full flex-col gap-6">
             <PageHeader
               as="h2"
-              eyebrow="Atlas · 프로젝트"
+              eyebrow="Sample · 프로젝트"
               title="프로젝트 탐색기"
               description="선택한 워크스페이스의 프로젝트부터 마일스톤·작업까지 탐색합니다."
               actions={
@@ -114,7 +154,7 @@ export function AppFrameSection() {
         <div className="flex w-full flex-col gap-3">
           <Card className="gap-0 overflow-hidden py-0">
             <GlobalNav
-              brand="Atlas"
+              brand="Sample"
               label="전역 (브레드크럼)"
               className="static"
               breadcrumb={<PathBreadcrumb items={CRUMBS} label="위치 (표본)" />}
@@ -128,7 +168,7 @@ export function AppFrameSection() {
 
           <Card className="gap-0 overflow-hidden py-0">
             <GlobalNav
-              brand="Atlas"
+              brand="Sample"
               tone="dark"
               label="전역 (검정 · design.md)"
               className="static"
@@ -152,15 +192,97 @@ export function AppFrameSection() {
             header={
               <Item variant="muted" size="sm">
                 <ItemMedia>
-                  <CodeAvatar initials="AT" size="md" />
+                  <CodeAvatar initials="SA" size="md" />
                 </ItemMedia>
                 <ItemContent>
-                  <ItemTitle>Atlas</ItemTitle>
+                  <ItemTitle>Sample</ItemTitle>
                 </ItemContent>
               </Item>
             }
           />
         </Card>
+      </Specimen>
+
+      <Specimen
+        name="side-nav.tsx · density"
+        state="default / compact (문서·작업 도구)"
+        span
+        note="compact — 메뉴 14px/20px · 한 줄 32px · 그룹 12px/16px · 선택은 옅은 면 + 굵기. 부제는 showDescription 으로만 켠다."
+      >
+        <div className="flex w-full flex-wrap gap-4">
+          <Card className="w-64 gap-0 p-3">
+            <SideNav groups={DOC_NAV_GROUPS} idPrefix="density-default-" />
+          </Card>
+          <Card variant="muted" className="w-60 gap-0 p-2">
+            <SideNav groups={DOC_NAV_GROUPS} idPrefix="density-compact-" density="compact" />
+          </Card>
+        </div>
+      </Specimen>
+
+      <Specimen
+        name="내비게이션 사용 기준"
+        state="전역 상단 · 좌측 탐색 · 프로젝트 탭 · 상세 보기 탭"
+        span
+      >
+        <div className="flex w-full flex-col gap-4">
+          <Card className="w-full gap-0 overflow-hidden py-0">
+            <GlobalNav
+              brand="Sample"
+              label="전역 (사용 기준 표본)"
+              className="static"
+              breadcrumb={<PathBreadcrumb items={CRUMBS} label="위치 (사용 기준 표본)" />}
+            />
+            <div className="flex">
+              <Card variant="muted" className="m-2 w-56 shrink-0 gap-0 p-2">
+                <SideNav groups={DOC_NAV_GROUPS} idPrefix="guide-" density="compact" />
+              </Card>
+              <div className="flex min-w-0 flex-1 flex-col gap-4 p-4">
+                <LinkTabs
+                  label="프로젝트 (사용 기준 표본)"
+                  current="steps"
+                  items={[
+                    { value: "steps", label: "변환 단계", href: "/design#app-frame" },
+                    { value: "schema", label: "스키마", href: "/design#app-frame" },
+                    { value: "history", label: "기록", href: "/design#app-frame" },
+                  ]}
+                />
+                <Tabs defaultValue="sql">
+                  <TabsList aria-label="상세 보기 (사용 기준 표본)">
+                    <TabsTrigger value="sql">SQL</TabsTrigger>
+                    <TabsTrigger value="tree">질의 트리</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="sql" className="mt-2">
+                    <p className="text-sm text-charcoal">같은 화면 안에서 패널만 바뀐다.</p>
+                  </TabsContent>
+                  <TabsContent value="tree" className="mt-2">
+                    <p className="text-sm text-charcoal">주소는 그대로다.</p>
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </div>
+          </Card>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>자리</TableHead>
+                <TableHead>컴포넌트</TableHead>
+                <TableHead>언제</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {NAV_GUIDE.map((row) => (
+                <TableRow key={row.place}>
+                  <TableCell>{row.place}</TableCell>
+                  <TableCell>
+                    <span className="font-mono">{row.component}</span>
+                  </TableCell>
+                  <TableCell>{row.when}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </Specimen>
 
       <Specimen
@@ -171,7 +293,7 @@ export function AppFrameSection() {
       >
         <Card className="w-full gap-0 overflow-hidden py-0">
           <GlobalNav
-            brand="Atlas"
+            brand="Sample"
             label="전역 (셸 표본)"
             className="static"
             breadcrumb={<PathBreadcrumb items={CRUMBS} label="위치 (셸 표본)" />}

@@ -182,7 +182,7 @@ export function DataSection() {
             layout="inline"
             items={[
               { term: "마일스톤", description: "MS-02" },
-              { term: "워크스페이스", description: "Atlas" },
+              { term: "워크스페이스", description: "Sample" },
               { term: "담당", description: "디자이너" },
             ]}
           />

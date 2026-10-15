@@ -139,7 +139,7 @@ import { Switch } from "@/components/ui/switch";
 import { TextLink } from "@/components/ui/text-link";
 import { Grid, Section, Specimen } from "../_catalog";
 
-/** 카탈로그 안에서만 쓰는 예시 데이터(Atlas). 업무 데이터가 아니다. */
+/** 카탈로그 안에서만 쓰는 예시 데이터(Sample). 업무 데이터가 아니다. */
 const STATUS_ITEMS = [
   { label: "초안", value: "draft" },
   { label: "검토 중", value: "review" },
@@ -149,8 +149,8 @@ const STATUS_ITEMS = [
 ];
 
 const PROJECTS = [
-  "Atlas 웹 개편",
-  "Atlas 모바일",
+  "Sample 웹 개편",
+  "Sample 모바일",
   "디자인 시스템 정비",
   "검색 품질 개선",
   "리뷰 자동화",
@@ -464,7 +464,7 @@ export function ShadcnMoreSection() {
             variant="outline"
             onClick={() =>
               toast("리뷰 요청을 보냈습니다", {
-                description: "Atlas 웹 개편 · 마일스톤 2 · 작업 3건",
+                description: "Sample 웹 개편 · 마일스톤 2 · 작업 3건",
               })
             }
           >
@@ -537,7 +537,7 @@ export function ShadcnMoreSection() {
         </Specimen>
 
         <Specimen name="navigation-menu.tsx" state="트리거 pill · 열림 패널" span>
-          <NavigationMenu aria-label="Atlas 탐색 (표본)">
+          <NavigationMenu aria-label="Sample 탐색 (표본)">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>프로젝트</NavigationMenuTrigger>
@@ -545,7 +545,7 @@ export function ShadcnMoreSection() {
                   <div className="grid w-80 gap-1">
                     <NavigationMenuLink href="/design#shadcn-more">
                       <span className="flex flex-col gap-0.5">
-                        <span className="font-medium">Atlas 웹 개편</span>
+                        <span className="font-medium">Sample 웹 개편</span>
                         <span className="text-muted-foreground">검토 중 · 작업 12건</span>
                       </span>
                     </NavigationMenuLink>
@@ -580,9 +580,9 @@ export function ShadcnMoreSection() {
         >
           <Card size="sm" className="h-80 w-full gap-0 overflow-hidden py-0">
             <SidebarProvider className="h-full min-h-0">
-              <Sidebar collapsible="none" aria-label="Atlas 사이드바 (표본)">
+              <Sidebar collapsible="none" aria-label="Sample 사이드바 (표본)">
                 <SidebarHeader>
-                  <p className="px-2 text-sm font-semibold text-foreground">Atlas</p>
+                  <p className="px-2 text-sm font-semibold text-foreground">Sample</p>
                 </SidebarHeader>
                 <SidebarSeparator />
                 <SidebarContent>
@@ -628,7 +628,7 @@ export function ShadcnMoreSection() {
                 <div className="flex flex-col gap-2 p-4">
                   <p className="text-base font-medium text-foreground">프로젝트</p>
                   <p className="text-sm text-muted-foreground">
-                    Atlas 웹 개편 · 검토 중 — 본문 영역(SidebarInset)이다.
+                    Sample 웹 개편 · 검토 중 — 본문 영역(SidebarInset)이다.
                   </p>
                 </div>
               </SidebarInset>
@@ -662,11 +662,11 @@ export function ShadcnMoreSection() {
         <Specimen name="hover-card.tsx" state="링크에 hover · focus">
           <HoverCard>
             <HoverCardTrigger render={<TextLink href="/design#shadcn-more" />}>
-              Atlas 웹 개편
+              Sample 웹 개편
             </HoverCardTrigger>
             <HoverCardContent>
               <div className="flex flex-col gap-1">
-                <p className="font-medium text-foreground">Atlas 웹 개편</p>
+                <p className="font-medium text-foreground">Sample 웹 개편</p>
                 <p className="text-muted-foreground">마일스톤 2 · 검토 중 · 작업 12건</p>
               </div>
             </HoverCardContent>
@@ -681,7 +681,7 @@ export function ShadcnMoreSection() {
                 <DrawerHeader>
                   <DrawerTitle>리뷰 요청</DrawerTitle>
                   <DrawerDescription>
-                    Atlas 웹 개편 · 마일스톤 2 의 작업 3건을 리뷰어에게 보낸다.
+                    Sample 웹 개편 · 마일스톤 2 의 작업 3건을 리뷰어에게 보낸다.
                   </DrawerDescription>
                 </DrawerHeader>
                 <div className="p-4">

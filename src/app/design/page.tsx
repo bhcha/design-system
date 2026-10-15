@@ -78,7 +78,7 @@ export default function DesignSystemPage() {
   return (
     <>
       <GlobalNav
-        brand="Atlas"
+        brand="Sample"
         items={NAV_ITEMS}
         label="전역"
         actions={<Button size="sm">액션</Button>}
@@ -409,7 +409,7 @@ export default function DesignSystemPage() {
           <Specimen name="{component.primary-nav}" state="표본" span>
             <Card className="w-full gap-0 overflow-hidden py-0">
               <GlobalNav
-                brand="Atlas"
+                brand="Sample"
                 items={NAV_ITEMS}
                 label="전역 (표본)"
                 className="static"

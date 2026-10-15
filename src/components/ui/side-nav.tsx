@@ -39,16 +39,25 @@ import { CountBadge } from "./count-badge";
  *   (Button 기본 높이와 같다). 높이를 고정하지 않는 이유: 부제가 붙는 메뉴는
  *   두 줄이라 고정 높이면 글자가 잘린다. 패딩으로 만들면 두 줄은 자연히 늘어난다.
  *   Item 의 기본값(1px 사방 테두리 · text-sm · flex-wrap · hover bg-muted)은 덮는다:
- *   테두리는 좌측 2px 만, 글자 --text-base/500, 줄바꿈 없음, hover --color-accent
+ *   테두리 없음, 글자 --text-base/500, 줄바꿈 없음, hover --color-accent
  *   (사이드바 면이 --color-muted 라 bg-muted hover 는 보이지 않는다).
  *   기본 --color-foreground · 선택 --color-selected + --color-primary + font-semibold
  *   비활성 --color-mute (포커스 대상 아님) · 부제 --text-xs + --color-charcoal
  *   그룹 라벨 --text-xs + font-semibold + --color-charcoal + uppercase
  *
+ *   density="compact" — 문서·작업 도구용(이슈 #1). 기본값은 바꾸지 않는다.
+ *     항목 --text-sm(14px/20px) · px-2 py-1.5 → 한 줄 32px (Sidebar 의 SidebarMenuButton 과 같은 높이)
+ *     그룹 라벨 --text-xs(12px/16px) · 대문자 변환 없음
+ *     rounded-md · 부제는 기본으로 그리지 않는다(showDescription 으로 켠다)
+ *     hover --color-accent/60 · 선택 --color-accent + font-semibold + --color-foreground
+ *     (선택 규칙이 Sidebar 의 data-active 와 같다 — 옅은 중립 면 + 굵기)
+ *
  * 상태
  *   기본 / hover / 선택(aria-current="page") / 비활성 / focus-visible(Item 의 ring)
- *   선택은 배경색 + 글자 색 + weight + 좌측 2px 바 네 가지로 전달한다(작업 도구 계열 패턴).
+ *   선택은 배경색 + 글자 색 + weight 세 가지로 전달한다. 좌측 강조 바는 쓰지 않는다(이슈 #1).
  *   선택 항목은 hover 에도 선택 배경을 유지한다.
+ *   compact 는 배경 + 굵기 두 가지로 전달한다(색 강조 없음). 색만으로 전달하지 않는다.
+ *   current(aria-current)와 키보드 포커스(focus-visible ring)는 별개로 보인다.
  *
  * 키보드·ARIA
  *   이동이므로 항목은 <Link>. 비활성 항목은 <span aria-disabled>(포커스 대상에서 제거).
@@ -57,6 +66,12 @@ import { CountBadge } from "./count-badge";
  * 수용 기준
  *   - 선택 항목에 aria-current="page" 가 하나만 붙는다.
  *   - 긴 라벨이 카운트를 밀어내지 않는다(min-w-0 + truncate).
+ *   - compact 의 한 줄 항목은 32px, 메뉴 글자는 14px, 그룹 라벨은 12px 이다.
+ *   - 화면은 색·곡률을 덮어쓰지 않고 density 로만 고른다.
+ *
+ * 무엇으로 만드나 — 내비게이션 사용 기준(카탈로그 "내비게이션 사용 기준")
+ *   전역 상단 GlobalNav · 앱 좌측 탐색 SideNav(접기가 필요하면 Sidebar)
+ *   프로젝트 수평 탭(주소가 바뀐다) LinkTabs · 상세 보기 탭(같은 화면 안 패널 전환) Tabs
  */
 export type SideNavItem = {
   label: string;
@@ -76,7 +91,9 @@ export type SideNavGroup = {
   items: readonly SideNavItem[];
 };
 
-function ItemBody({ item }: { item: SideNavItem }) {
+export type SideNavDensity = "default" | "compact";
+
+function ItemBody({ item, showDescription }: { item: SideNavItem; showDescription: boolean }) {
   return (
     <>
       {item.icon ? (
@@ -87,7 +104,7 @@ function ItemBody({ item }: { item: SideNavItem }) {
 
       <ItemContent className="min-w-0">
         <span className="truncate">{item.label}</span>
-        {item.description ? (
+        {showDescription && item.description ? (
           <span className="truncate text-xs font-normal text-charcoal">
             {item.description}
           </span>
@@ -103,16 +120,35 @@ function ItemBody({ item }: { item: SideNavItem }) {
   );
 }
 
-/** 좌측 2px 바는 선택 표식이다(작업 도구 계열 패턴 — 선택 항목은 배경 + 좌측 바 + 색 셋 다).
-    기본은 투명으로 자리만 지켜 선택이 바뀌어도 텍스트가 밀리지 않는다.
-    Item(size="xs") 위에 덮는 몫만 적는다. */
-const ITEM_BASE =
-  "flex-nowrap gap-2 border-0 border-l-2 px-2 py-1.5 text-left text-base font-medium";
+/** density 별 모양. Item(size="xs") 위에 덮는 몫만 적는다.
+    default — 선택은 진한 면 + 색 + 굵기.
+    compact — 선택은 옅은 중립 면 + 굵기. 둘 다 좌측 강조 바는 없다. */
+const ITEM_STYLE = {
+  default: {
+    base: "flex-nowrap gap-2 border-0 px-2 py-1.5 text-left text-base font-medium",
+    disabled: "text-mute",
+    current: "bg-selected font-semibold text-primary [a]:hover:bg-selected",
+    idle: "text-foreground [a]:hover:bg-accent",
+  },
+  compact: {
+    base: "flex-nowrap gap-2 rounded-md border-0 px-2 py-1.5 text-left text-sm font-normal",
+    disabled: "text-mute",
+    current: "bg-accent font-semibold text-foreground [a]:hover:bg-accent",
+    idle: "text-foreground [a]:hover:bg-accent/60",
+  },
+} satisfies Record<SideNavDensity, Record<string, string>>;
+
+const GROUP_LABEL_STYLE = {
+  default: "px-2 pb-0.5 text-xs font-semibold text-charcoal uppercase",
+  compact: "px-2 pb-0.5 text-xs font-semibold text-charcoal",
+} satisfies Record<SideNavDensity, string>;
 
 export function SideNav({
   groups,
   header,
   idPrefix = "",
+  density = "default",
+  showDescription = density === "default",
   className,
 }: {
   groups: readonly SideNavGroup[];
@@ -123,10 +159,18 @@ export function SideNav({
    * 데스크톱) aria-labelledby 가 가리키는 id 가 중복되지 않게 한다.
    */
   idPrefix?: string;
+  /** 문서·작업 도구 화면은 "compact"(14px 한 줄, 옅은 선택 면). */
+  density?: SideNavDensity;
+  /** 부제를 그릴지. 기본값은 default 에서 true, compact 에서 false. */
+  showDescription?: boolean;
   className?: string;
 }) {
+  const style = ITEM_STYLE[density];
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
+    <div
+      data-density={density}
+      className={cn("flex flex-col", density === "compact" ? "gap-4" : "gap-5", className)}
+    >
       {/* 서버 화면이 넘긴 header 는 이 클라이언트 컴포넌트에서 그룹 목록과 형제로 그려진다.
           직렬화된 요소에는 key 검사 표시가 없어 React 가 key 경고를 내므로 자리에 고정 key 를 준다. */}
       <Fragment key="side-nav-header">{header}</Fragment>
@@ -139,7 +183,7 @@ export function SideNav({
         >
           <p
             id={`${idPrefix}${group.id}`}
-            className="px-2 pb-0.5 text-xs font-semibold text-charcoal uppercase"
+            className={GROUP_LABEL_STYLE[density]}
           >
             {group.label}
           </p>
@@ -152,23 +196,18 @@ export function SideNav({
                     size="xs"
                     render={<span />}
                     aria-disabled="true"
-                    className={cn(ITEM_BASE, "border-l-transparent text-mute")}
+                    className={cn(style.base, style.disabled)}
                   >
-                    <ItemBody item={item} />
+                    <ItemBody item={item} showDescription={showDescription} />
                   </Item>
                 ) : (
                   <Item
                     size="xs"
                     render={<Link href={item.href} />}
                     aria-current={item.current ? "page" : undefined}
-                    className={cn(
-                      ITEM_BASE,
-                      item.current
-                        ? "border-l-primary bg-selected font-semibold text-primary [a]:hover:bg-selected"
-                        : "border-l-transparent text-foreground [a]:hover:bg-accent",
-                    )}
+                    className={cn(style.base, item.current ? style.current : style.idle)}
                   >
-                    <ItemBody item={item} />
+                    <ItemBody item={item} showDescription={showDescription} />
                   </Item>
                 )}
               </li>

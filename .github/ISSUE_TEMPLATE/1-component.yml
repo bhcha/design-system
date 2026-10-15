@@ -11,7 +11,7 @@ body:
     id: requester
     attributes:
       label: 요청한 곳
-      description: 프로젝트 이름과 화면(또는 에이전트 세션). 예) atlas-web /settings
+      description: 프로젝트 이름과 화면(또는 에이전트 세션). 예) sample-web /settings
     validations:
       required: true
   - type: dropdown

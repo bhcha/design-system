@@ -6,7 +6,7 @@ import { SearchInput } from "@/components/ui/search-input";
 import { StageFlow, type StageCard } from "@/components/ui/stage-flow";
 import { Section, Specimen } from "../_catalog";
 
-/** 카탈로그 전시용 가상 데이터 — 워크스페이스 "Atlas" 의 프로젝트 → 마일스톤 → 작업. */
+/** 카탈로그 전시용 가상 데이터 — 워크스페이스 "Sample" 의 프로젝트 → 마일스톤 → 작업. */
 
 const RELEASE_STEPS: FlowStep[] = [
   { id: "f1", label: "MS-01", value: "요구사항", hint: "승인", tone: "neutral" },
@@ -151,7 +151,7 @@ export function DiagramsSection() {
         span
         note="현재 단계는 aria-current 로 알린다 — 색에만 기대지 않는다."
       >
-        <FlowSteps label="Atlas 웹 개편 마일스톤" steps={RELEASE_STEPS} className="w-full" />
+        <FlowSteps label="Sample 웹 개편 마일스톤" steps={RELEASE_STEPS} className="w-full" />
       </Specimen>
 
       <Specimen
@@ -188,7 +188,7 @@ export function DiagramsSection() {
         span
         note="카드 폭은 고정이고 영역 전체가 키보드로 스크롤된다."
       >
-        <StageFlow label="Atlas 웹 개편 마일스톤 카드" stages={MILESTONE_CARDS} />
+        <StageFlow label="Sample 웹 개편 마일스톤 카드" stages={MILESTONE_CARDS} />
       </Specimen>
 
       <Specimen

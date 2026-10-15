@@ -28,7 +28,7 @@ gh issue create --repo bhcha/design-system \
   --label request:component \
   --body "$(cat <<'EOF'
 ### 요청한 곳
-atlas-web /onboarding (Claude Code 세션)
+sample-web /onboarding (Claude Code 세션)
 
 ### 종류
 기존 컴포넌트에 variant 추가

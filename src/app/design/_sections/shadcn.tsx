@@ -273,7 +273,7 @@ export function ShadcnSection() {
           </Card>
           <Card className="w-full">
             <CardHeader>
-              <CardTitle>Atlas 웹 개편</CardTitle>
+              <CardTitle>Sample 웹 개편</CardTitle>
               <CardDescription>마일스톤 5 · 작업 14</CardDescription>
             </CardHeader>
             <CardContent>카드 본문은 그림자 없이 hairline 하나로 나뉜다.</CardContent>
