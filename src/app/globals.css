@@ -1,0 +1,369 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./pretendard.css";
+
+/* ===========================================================================
+   토큰 단일 정본 — shadcn/ui(Base UI, base-nova) 테마 + Ollama 값
+   ---------------------------------------------------------------------------
+   출처와 우선순위
+     1. design.md (getdesign.md Ollama 원문, 2026-10-15 채택) — 값의 정본
+     2. shadcn/ui 테마 규약 — 토큰 **이름**의 정본(background·foreground·primary …)
+     3. AGENTS.md 의 ADS 실측 스펙 — 구조·상태·접근성
+
+   구조 (shadcn 규약)
+     :root            — 시맨틱 CSS 변수. 값은 전부 design.md 원문.
+     @theme inline    — 시맨틱 변수를 Tailwind 색 유틸리티(bg-primary 등)로 노출.
+     @theme           — 타입·곡률·간격·브레이크포인트 + design.md 고유 색.
+
+   design.md → shadcn 이름 대응
+     colors.primary(#000)        → --primary        · on-primary → --primary-foreground
+     colors.ink-deep(#090909)    → --primary-active (눌림)
+     colors.canvas(#fff)         → --background · --card · --popover
+     colors.surface-soft(#fafafa)→ --muted · --secondary
+     colors.body(#737373)        → --muted-foreground
+     colors.charcoal(#525252)    → charcoal          (보조 텍스트)
+     colors.mute(#a3a3a3)        → mute              (비활성 전용 — 적용 차이 4)
+     colors.hairline(#e5e5e5)    → --border · --input
+     colors.hairline-strong      → hairline-strong
+     colors.surface-dark(#171717)→ surface-dark · on-dark · on-dark-mute
+     colors.focus-ring           → --ring (#3b82f6 불투명 — 적용 차이 2)
+
+   타입 스케일
+     design.md typography 는 Tailwind 기본 스케일과 크기·행간이 **정확히 같다**
+     (caption-sm 12/1.33=xs · body-sm 14/1.43=sm · body-md 16/1.5=base ·
+      heading-sm 18/1.56=lg · heading-md 20/1.4=xl · heading-lg 24/1.33=2xl ·
+      display-lg 30/1.2=3xl · display-xl 36/1.11=4xl). 그래서 shadcn 이 쓰는
+      표준 이름(text-sm 등)을 그대로 쓰고, 그 8단계 밖의 크기는 비워 둔다.
+
+   규칙
+     - 이 파일이 색·크기·곡률의 유일한 출처다. 기본 팔레트(red-500 등)는 비운다.
+     - 화면·기능 코드(app/·features/)는 임의값을 쓰지 않는다(lint 가드).
+       components/ui 는 shadcn 원본 코드라 내부 임의값을 허용한다.
+     - 그림자 토큰은 없다(design.md: no drop shadows). shadow-* 는 아무것도 그리지 않는다.
+   =========================================================================== */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 12px; /* design.md {rounded.lg} */
+
+  --background: #ffffff; /* colors.canvas */
+  --foreground: #000000; /* colors.ink */
+  --card: #ffffff; /* colors.surface-card */
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+
+  --primary: #000000; /* colors.primary */
+  --primary-foreground: #ffffff; /* colors.on-primary */
+  --primary-active: #090909; /* colors.ink-deep — 눌림 */
+
+  --secondary: #fafafa; /* colors.surface-soft */
+  --secondary-foreground: #000000;
+  --muted: #fafafa; /* colors.surface-soft */
+  --muted-foreground: #737373; /* colors.body — 흰 면 4.7:1 */
+
+  /* shadcn 의 accent 는 "hover 면"이다. design.md 는 hover 를 문서화하지 않으므로
+     primary 에서 파생한다(검정 6% · 선택은 12%). */
+  --accent: color-mix(in oklab, #000000 6%, #ffffff);
+  --accent-foreground: #000000;
+  --selected: color-mix(in oklab, #000000 12%, #ffffff);
+
+  /* design.md 에 오류 색이 없다 — 상태 팔레트의 danger 를 쓴다(적용 차이 3). */
+  --destructive: #8a3030;
+
+  --border: #e5e5e5; /* colors.hairline */
+  --input: #e5e5e5;
+  --ring: #3b82f6; /* colors.focus-ring 의 불투명 기준색 — 흰 면 3.7:1 */
+}
+
+/* 기본 팔레트를 먼저 비운다. 비우기는 반드시 색 정의보다 **앞**에 둔다 —
+   뒤에 두면 앞의 @theme inline 시맨틱 색(bg-primary 등)까지 함께 지워진다. */
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-active: var(--primary-active);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-selected: var(--selected);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans:
+    var(--font-inter), "Pretendard Variable", ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
+  --font-heading:
+    var(--font-nunito), "Pretendard Variable", ui-rounded, system-ui,
+    -apple-system, sans-serif;
+}
+
+@theme {
+  --color-black: #000000; /* 오버레이(bg-black/10) 전용 */
+  --color-white: #ffffff;
+
+  /* design.md 고유 색 (shadcn 시맨틱에 대응이 없는 것) */
+  --color-charcoal: #525252; /* colors.charcoal — 보조 텍스트, 흰 면 7.8:1 */
+  --color-mute: #a3a3a3; /* colors.mute — 비활성 전용(대비 예외) */
+  --color-hairline-strong: #d4d4d4; /* colors.hairline-strong */
+  --color-surface-dark: #171717; /* colors.surface-dark */
+  --color-nav: #000000; /* 어두운 상단 띠(앱 확장) */
+  --color-on-dark: #ffffff; /* colors.on-dark */
+  --color-on-dark-mute: rgba(255, 255, 255, 0.7); /* colors.on-dark-mute */
+  --color-on-dark-border: #262626; /* 어두운 면 위 구분선 — 2026-10-15 사용자 확인 */
+  --color-terminal-red: #ff5f56; /* terminal-card 전용 */
+  --color-terminal-yellow: #ffbd2e;
+  --color-terminal-green: #27c93f;
+
+  /* 상태 색 — design.md 에 없다(적용 차이 3). 성공·정보·경고·오류 표시 전용. */
+  --color-status-ok: #176b52;
+  --color-status-ok-soft: #e3f2eb;
+  --color-status-info: #255d84;
+  --color-status-info-soft: #e7f1f8;
+  --color-status-warn: #815700;
+  --color-status-warn-soft: #fff3cf;
+  --color-status-danger: #8a3030;
+  --color-status-danger-soft: #f6e9e9;
+
+  /* 타입 스케일 — design.md typography = Tailwind 기본 8단계 */
+  --text-*: initial;
+  --text-xs: 12px; /* caption-sm */
+  --text-xs--line-height: 16px;
+  --text-sm: 14px; /* body-sm · button-md · code-sm */
+  --text-sm--line-height: 20px;
+  --text-base: 16px; /* body-md · code-md — body 기본 */
+  --text-base--line-height: 24px;
+  --text-lg: 18px; /* heading-sm */
+  --text-lg--line-height: 28px;
+  --text-xl: 20px; /* heading-md */
+  --text-xl--line-height: 28px;
+  --text-2xl: 24px; /* heading-lg — font-heading */
+  --text-2xl--line-height: 32px;
+  --text-3xl: 30px; /* display-lg — font-heading */
+  --text-3xl--line-height: 36px;
+  --text-4xl: 36px; /* display-xl — font-heading, 최대 */
+  --text-4xl--line-height: 40px;
+
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --leading-*: initial;
+  --tracking-*: initial;
+
+  /* 곡률 — design.md rounded 원문. xl 이상은 shadcn 컴포넌트가 쓰는 이름이라
+     카드 곡률(lg)로 묶는다. 4xl 은 shadcn 이 pill 자리에 쓰므로 full 과 같다. */
+  --radius-*: initial;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-4xl: 9999px;
+  --radius-full: 9999px;
+
+  /* 그림자 — design.md: 없음 */
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+
+  --blur-*: initial;
+  --blur-frosted: 20px;
+
+  /* 간격 — 4px 배수로 design.md spacing(2·4·8·12·16·24·32·88) 전부 표현 */
+  --spacing: 4px;
+
+  /* 브레이크포인트 — design.md Responsive Behavior */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 850px;
+  --breakpoint-xl: 1024px;
+  --breakpoint-2xl: 1280px;
+
+  /* 컨테이너 — design.md Grid & Container */
+  --container-*: initial;
+  --container-reading: 720px;
+  --container-pricing: 960px;
+  --container-app: 1440px; /* 작업 화면 콘텐츠 락 — 앱 확장 */
+  --container-md: 768px;
+}
+
+/* ===========================================================================
+   층위(z-index) 사다리 — 이 파일이 유일한 정본이다.
+   Tailwind 의 z 유틸리티는 토큰이 아니라 숫자라 값 자체를 여기 결박할 수 없다.
+   대신 **어떤 역할이 몇 층인지**를 여기 한 곳에 적고, 컴포넌트는 자기 층을
+   스펙 시트에 이 표의 이름으로 적는다.
+
+     -10  요소 안쪽 배경 (EnvironmentQuoteCard 의 사진 backdrop)
+      10  패널·폼 안쪽의 sticky 바 (부모가 만든 문맥 안에서만 쌓인다)
+      20  **본문 위 크롬** — 상단 띠 아래에 붙는 고정 레일·띠
+          SubNav(sticky top-14, 가로 띠) 와 SidePanel(fixed 우측 레일) 이
+          같은 층을 **의도적으로** 공유한다. 둘 다 "global-nav 아래 크롬"이고
+          기하학적으로 겹치지 않는다 — SubNav 는 56~108px 띠를, SidePanel 은
+          그 아래(top-27)부터 화면 바닥까지를 차지한다. chrome="nav" 로 두 띠를
+          쓰지 않는 화면에서는 SubNav 자체가 없다. 층을 더 쪼개면 겹치지도 않는
+          두 요소에 순서를 부여하게 되고, 그 순서가 무엇을 뜻하는지 아무도 모른다.
+      30  global-nav (항상 크롬 위)
+      40  화면 위로 떠오르는 것 — 백드롭·팝오버·하단 고정 바
+      50  가장 위 — Dialog 패널, skip-link
+
+   새 층이 필요하면 이 표에 역할을 먼저 적고 그 다음에 값을 쓴다.
+   =========================================================================== */
+
+/* ===========================================================================
+   커스텀 유틸리티
+   env() 처럼 토큰으로 표현할 수 없는 값은 여기서 유틸리티로 감싼다.
+   화면·컴포넌트가 `[env(...)]` 같은 임의값을 쓰지 않게 하기 위한 통로다.
+   =========================================================================== */
+
+/* 전체 화면에 닿는 고정 바의 하단 안전 영역 (노치·홈 인디케이터) */
+@utility pb-safe {
+  padding-bottom: calc(var(--spacing) * 3 + env(safe-area-inset-bottom));
+}
+
+/* global-nav(56px = spacing*14, design.md primary-nav) 아래에 붙어 스스로 스크롤하는 고정 열의 높이 */
+@utility h-below-nav {
+  height: calc(100dvh - calc(var(--spacing) * 14));
+}
+
+/* global-nav(56px) + sub-nav(52px) = 108px(spacing*27) 아래일 때의 높이.
+   두 띠를 모두 쓰는 화면에서 h-below-nav 를 쓰면 열이 화면 아래로 52px 넘친다. */
+@utility h-below-chrome {
+  height: calc(100dvh - calc(var(--spacing) * 27));
+}
+
+/* 모달 패널 — 뷰포트를 넘지 않는 크기. 토큰이 아니라 뷰포트 비율이라 여기서 감싼다. */
+@utility dialog-size {
+  width: 92vw;
+  max-height: 90dvh;
+}
+
+/* Miller Columns 열 격자.
+   열 개수가 자료에 따라 달라져 Tailwind 의 고정 grid-cols-N 로 쓸 수 없다.
+   개수는 `--miller-count` 로 받고, 각 열의 최소 폭은 여기서 한 번만 정의한다.
+   드래그로 폭을 바꾸면 인라인 grid-template-columns 가 이 기본값을 덮고,
+   초기화하면 다시 이 값으로 돌아온다.
+   하한 192px — 4px 그리드의 배수. */
+@utility miller-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--miller-count, 4), minmax(192px, 1fr));
+  align-items: stretch;
+}
+
+
+/* ===========================================================================
+   전역 기본값
+   반드시 @layer base 안에 둔다. 레이어 밖에 두면 utilities 레이어를 이겨서
+   컴포넌트에서 조정이 불가능해진다 (AGENTS.md 함정 2).
+   =========================================================================== */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 본문 크기를 body 에 결박한다.
+     크기를 지정하지 않은 요소가 브라우저 기본 16px 으로 새는 것을 막는다. */
+  body {
+    background-color: var(--background); /* design.md: canvas 가 끝까지 이어진다 */
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    letter-spacing: 0;
+    font-weight: var(--font-weight-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* preflight 가 빠진 구성에서도 UA 기본 배경(#efefef)이 새지 않도록 명시 리셋 */
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    background-color: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+
+  button,
+  a,
+  [role="button"],
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+
+  /* 포커스는 항상 보인다. outline:none 은 대체 표시 없이 쓰지 않는다.
+     outline 은 요소 자신의 border-radius 를 따라가므로 여기서 곡률을 지정하지 않는다.
+     (지정하면 포커스를 받는 순간 요소의 실제 곡률이 바뀐다.) */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* 헤딩은 균형 잡힌 줄바꿈, 앵커 이동 시 상단 여백 확보 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+    scroll-margin-top: calc(var(--spacing) * 20);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--selected);
+    color: var(--foreground);
+  }
+
+  /* 수치 열 정렬 — 표·목록의 숫자는 항상 등폭 */
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
