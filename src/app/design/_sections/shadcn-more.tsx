@@ -21,6 +21,12 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import type { PanelImperativeHandle } from "react-resizable-panels";
 import { Card } from "@/components/ui/card";
 import {
   Combobox,
@@ -222,6 +228,71 @@ function CommandDialogDemo() {
  * shadcn/ui 원본 컴포넌트 2차분(base-nova · Base UI) 전시 — Ollama 테마가 입혀진 상태.
  * 메뉴·선택·피드백·내비게이션·패널 계열 18종.
  */
+/** 워크벤치 분할 표본 — 질문 | (SQL / 분석). 분석 패널은 접고 펼 수 있다. */
+function WorkbenchSplitDemo() {
+  const analysisRef = React.useRef<PanelImperativeHandle | null>(null);
+  const [collapsed, setCollapsed] = React.useState(false);
+
+  return (
+    <div className="flex w-full flex-col gap-3">
+      <div className="flex gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            collapsed ? analysisRef.current?.expand() : analysisRef.current?.collapse()
+          }
+        >
+          {collapsed ? "분석 패널 펼치기" : "분석 패널 접기"}
+        </Button>
+      </div>
+      <Card className="h-80 w-full gap-0 py-0">
+        <ResizablePanelGroup orientation="horizontal">
+          <ResizablePanel id="split-question" defaultSize="35%" minSize="20%">
+            <div className="flex flex-col gap-2 p-4">
+              <p className="text-sm font-semibold text-foreground">질문</p>
+              <p className="text-sm text-charcoal">
+                지난달 주문이 가장 많은 고객 다섯 명을 보여 줘.
+              </p>
+            </div>
+          </ResizablePanel>
+          <ResizableHandle withHandle aria-label="질문과 SQL 사이 크기 조절" />
+          <ResizablePanel id="split-right" minSize="30%">
+            <ResizablePanelGroup orientation="vertical">
+              <ResizablePanel id="split-sql" defaultSize="60%" minSize="25%">
+                <div className="flex flex-col gap-2 p-4">
+                  <p className="text-sm font-semibold text-foreground">생성 SQL</p>
+                  <p className="font-mono text-sm text-charcoal">
+                    SELECT customer_id, COUNT(*) AS orders FROM orders GROUP BY customer_id
+                    ORDER BY orders DESC LIMIT 5;
+                  </p>
+                </div>
+              </ResizablePanel>
+              <ResizableHandle aria-label="SQL 과 분석 사이 크기 조절" />
+              <ResizablePanel
+                id="split-analysis"
+                panelRef={analysisRef}
+                defaultSize="40%"
+                minSize="20%"
+                collapsible
+                collapsedSize="0%"
+                onResize={(size) => setCollapsed(size.asPercentage === 0)}
+              >
+                <div className="flex flex-col gap-2 p-4">
+                  <p className="text-sm font-semibold text-foreground">분석</p>
+                  <p className="text-sm text-charcoal">
+                    핸들에 포커스를 두고 화살표로 크기를 바꾼다. 이 패널은 위 버튼으로 접고 편다.
+                  </p>
+                </div>
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </Card>
+    </div>
+  );
+}
+
 export function ShadcnMoreSection() {
   const [date, setDate] = React.useState<Date | undefined>(
     () => new Date(2026, 9, 15),
@@ -694,6 +765,15 @@ export function ShadcnMoreSection() {
               </div>
             </DrawerContent>
           </Drawer>
+        </Specimen>
+
+        <Specimen
+          name="resizable.tsx"
+          state="가로·세로 분할 / 손잡이 / 최소 크기 / 접기·복원"
+          span
+          note="834px 미만에서는 orientation=&quot;vertical&quot; 로 쌓고, 패널이 셋 이상이면 Tabs 로 바꾼다. 패널 안에서만 스크롤한다."
+        >
+          <WorkbenchSplitDemo />
         </Specimen>
       </Grid>
     </Section>

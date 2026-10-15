@@ -1345,6 +1345,24 @@
       ]
     },
     {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "resizable",
+      "description": "shadcn/ui resizable (react-resizable-panels v4) — Ollama 테마. 이슈 #2 의 SplitPane.",
+      "dependencies": [
+        "react-resizable-panels@^4.14.5"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "result-callout",
       "type": "registry:ui",
       "title": "result-callout",
@@ -1996,6 +2014,7 @@
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/quote-block.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/radio-card.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/radio-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/resizable.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/result-callout.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/rich-text-editor.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/roving-focus.json",

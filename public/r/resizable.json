@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "title": "resizable",
+  "description": "shadcn/ui resizable (react-resizable-panels v4) — Ollama 테마. 이슈 #2 의 SplitPane.",
+  "dependencies": [
+    "react-resizable-panels@^4.14.5"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport * as ResizablePrimitive from \"react-resizable-panels\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * shadcn/ui resizable (react-resizable-panels v4) — Ollama 테마. 이슈 #2 의 SplitPane.\n *\n * 해부도\n *   ResizablePanelGroup(orientation horizontal | vertical)\n *     ResizablePanel ─ ResizableHandle ─ ResizablePanel [─ ResizableHandle ─ ResizablePanel …]\n *   핸들 = 1px 선 + 보이지 않는 8px 잡는 영역(after) [+ withHandle 이면 가운데 손잡이]\n *\n * 토큰\n *   선 --color-border · hover --color-hairline-strong · 드래그 중 --color-foreground\n *   손잡이 --color-hairline-strong rounded-full · 포커스 ring-2 --color-ring(불투명 파랑)\n *   그림자 없음. 패널 크기·최소 크기는 호출부가 % 또는 px 문자열로 준다(defaultSize · minSize).\n *\n * 상태\n *   기본 / hover / focus-visible / 드래그(data-separator=\"active\") / 비활성(disabled)\n *   접기: ResizablePanel collapsible + collapsedSize. panelRef 의 collapse()·expand() 로 복원한다.\n *\n * 키보드·ARIA\n *   핸들은 role=\"separator\" · tabIndex 0 · aria-orientation · aria-valuenow/min/max ·\n *   aria-controls(앞 패널) 를 라이브러리가 단다. aria-label 은 필수 prop 이다\n *   (예: \"질문과 SQL 사이 크기 조절\").\n *   ←→(세로 핸들) · ↑↓(가로 핸들) 로 크기 조절, Home·End 로 최소·최대.\n *   Enter 는 핸들 **앞** 패널이 collapsible 일 때만 접고 편다. 뒤 패널을 접으려면 버튼을 두고\n *   panelRef.collapse()·expand() 를 부른다(표본의 \"분석 패널 접기\").\n *\n * 좁은 화면\n *   이 컴포넌트는 스스로 쌓지 않는다. 834px 미만에서는 orientation=\"vertical\" 로 바꿔\n *   위에서 아래로 쌓는다(DOM 순서 = 읽기 순서). 패널이 셋 이상이면 Tabs 로 전환한다.\n *\n * 수용 기준\n *   - 패널 안 내용은 패널 안에서 스크롤한다(ResizablePanel 에 overflow-auto). 문서 전체가 늘지 않는다.\n *   - minSize 아래로 줄지 않는다. 키보드만으로 크기를 바꾸고 접고 펼 수 있다.\n *   - 핸들에 접근 가능한 이름이 있다.\n */\n\nfunction ResizablePanelGroup({\n  className,\n  ...props\n}: ResizablePrimitive.GroupProps) {\n  return (\n    <ResizablePrimitive.Group\n      data-slot=\"resizable-panel-group\"\n      className={cn(\n        \"flex h-full w-full aria-[orientation=vertical]:flex-col\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction ResizablePanel({ className, ...props }: ResizablePrimitive.PanelProps) {\n  return (\n    <ResizablePrimitive.Panel\n      data-slot=\"resizable-panel\"\n      className={cn(\"min-h-0 min-w-0 overflow-auto\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction ResizableHandle({\n  withHandle,\n  className,\n  ...props\n}: ResizablePrimitive.SeparatorProps & {\n  withHandle?: boolean\n  /** 무엇과 무엇 사이인지 — 예: \"질문과 SQL 사이 크기 조절\". */\n  \"aria-label\": string\n}) {\n  return (\n    <ResizablePrimitive.Separator\n      data-slot=\"resizable-handle\"\n      className={cn(\n        \"relative flex w-px shrink-0 items-center justify-center bg-border transition-colors outline-none\",\n        \"after:absolute after:inset-y-0 after:left-1/2 after:w-2 after:-translate-x-1/2\",\n        \"data-[separator=hover]:bg-hairline-strong data-[separator=active]:bg-foreground\",\n        \"focus-visible:ring-2 focus-visible:ring-ring\",\n        \"data-disabled:bg-border\",\n        \"aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-2 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 [&[aria-orientation=horizontal]>div]:rotate-90\",\n        className\n      )}\n      {...props}\n    >\n      {withHandle && (\n        <div\n          aria-hidden=\"true\"\n          className=\"z-10 flex h-6 w-1 shrink-0 rounded-full bg-hairline-strong\"\n        />\n      )}\n    </ResizablePrimitive.Separator>\n  )\n}\n\nexport { ResizableHandle, ResizablePanel, ResizablePanelGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
