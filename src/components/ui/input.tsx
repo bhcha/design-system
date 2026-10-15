@@ -1,3 +1,7 @@
+import * as React from "react"
+import { Input as InputPrimitive } from "@base-ui/react/input"
+import { cn } from "@/lib/utils"
+
 /**
  * shadcn/ui input (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -17,9 +21,6 @@
  *   - 높이 40px · 곡률 9999px · 16px
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import * as React from "react"
-import { Input as InputPrimitive } from "@base-ui/react/input"
-import { cn } from "@/lib/utils"
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (

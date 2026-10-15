@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils"
+
 /**
  * shadcn/ui skeleton (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -18,7 +20,6 @@
  *   - 모양(곡률)은 토큰에서만 나온다.
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import { cn } from "@/lib/utils"
 
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "title": "badge",
+  "description": "shadcn/ui badge (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/badge-variants.ts",
+      "content": "import { cva } from \"class-variance-authority\";\n\n/**\n * shadcn Badge 의 스타일 정의 — 서버에서도 부를 수 있도록 badge.tsx(\"use client\")에서 분리했다.\n * 서버 컴포넌트에서 배지 클래스만 필요하면 여기서 가져온다(lozenge · count-badge · command-tag).\n */\nexport const badgeVariants = cva(\n  \"group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground [a]:hover:bg-primary/80\",\n        secondary:\n          \"bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80\",\n        destructive:\n          \"bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20\",\n        outline:\n          \"border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground\",\n        ghost:\n          \"hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n        // 상태 표시 — design.md 적용 차이 3 의 상태 팔레트. 상호작용 신호로 쓰지 않는다.\n        success: \"bg-status-ok-soft text-status-ok\",\n        info: \"bg-status-info-soft text-status-info\",\n        warning: \"bg-status-warn-soft text-status-warn\",\n        danger: \"bg-status-danger-soft text-status-danger\",\n        muted: \"bg-muted text-charcoal\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/badge.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui badge (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   짧은 상태·수치 라벨\n *\n * 토큰\n *   rounded-full · text-xs font-medium · variant default/secondary/outline/destructive/ghost/link\n *\n * 상태\n *   정적 / 링크로 렌더 시 hover\n *\n * 키보드·ARIA\n *   장식이 아니면 텍스트로 읽힌다. 상태는 lozenge 가 감싼다\n *\n * 수용 기준\n *   - 한 줄을 넘지 않는다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { mergeProps } from \"@base-ui/react/merge-props\"\nimport { useRender } from \"@base-ui/react/use-render\"\nimport { type VariantProps } from \"class-variance-authority\"\nimport { badgeVariants } from \"@/components/ui/badge-variants\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Badge({\n  className,\n  variant = \"default\",\n  render,\n  ...props\n}: useRender.ComponentProps<\"span\"> & VariantProps<typeof badgeVariants>) {\n  return useRender({\n    defaultTagName: \"span\",\n    props: mergeProps<\"span\">(\n      {\n        className: cn(badgeVariants({ variant }), className),\n      },\n      props\n    ),\n    render,\n    state: {\n      slot: \"badge\",\n      variant,\n    },\n  })\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

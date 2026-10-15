@@ -1,3 +1,5 @@
+import type * as React from "react";
+
 /**
  * HiddenField — 폼과 함께 실려가는 숨은 값.
  *
@@ -29,6 +31,6 @@
  * 수용 기준
  *   - name 과 value 없이 컴파일되지 않는다.
  */
-export function HiddenField({ name, value }: { name: string; value: string }) {
+export function HiddenField({ name, value }: { name: string; value: string }): React.JSX.Element {
   return <input type="hidden" name={name} value={value} />;
 }

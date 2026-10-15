@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "quote-block",
+  "title": "quote-block",
+  "description": "QuoteBlock — 인용과 출처 위치",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/quote-block.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * QuoteBlock — 인용과 출처 위치\n *\n * 근거: ADS 인용 해부도(좌측 강조선 + 본문 + 출처). 시각 값은 design.md 토큰.\n *\n * 규칙 — 왜 출처가 필수인가\n *   인용은 **출처 위치**(문서·회의록·녹취의 위치나 시각)를 달고 다녀야 한다. 인용은 장식이\n *   아니라 \"이 문장이 어디서 나왔는가\"의 증거다. 그래서 출처(`source`)를 선택이\n *   아니라 필수 prop 으로 둔다.\n *\n * 구현 — shadcn primitive 없이 네이티브 <figure>/<blockquote>/<figcaption> 으로 둔다(의도)\n *   인용 블록은 카드가 아니라 좌측 강조선이 있는 가라앉은 면이다. Card(곡률 12px · ring ·\n *   안쪽 여백)는 맞지 않고, Separator 로 좌측 선을 그리면 role=\"separator\" 가 인용 앞에\n *   끼어 스크린 리더가 의미 없는 구분선을 읽는다. 그래서 border-l 로 그린다.\n *\n * 해부도\n *   ┃ [인용문]\n *   ┃ [출처 · 타임스탬프]\n *\n * 토큰\n *   좌측 선 2px --color-primary · 배경 --color-muted · 곡률 --radius-sm\n *   인용문 --text-base + --color-foreground · 출처 --text-xs + --color-charcoal\n *\n * 상태\n *   상태 없음(표시용).\n *\n * 키보드·ARIA\n *   <figure> + <blockquote> + <figcaption>. 인용과 출처가 시맨틱으로 묶인다.\n *   타임스탬프는 등폭으로 정렬한다.\n *\n * 수용 기준\n *   - 출처 없이 컴파일되지 않는다.\n *   - 긴 인용문이 넘치지 않는다.\n */\nexport function QuoteBlock({\n  children,\n  source,\n  className,\n}: {\n  children: React.ReactNode;\n  /** 출처 위치. 예: \"리뷰 회의록 · 10:33~11:04\" */\n  source: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <figure\n      className={cn(\n        \"rounded-sm border-l-2 border-primary bg-muted px-3 py-2\",\n        className,\n      )}\n    >\n      <blockquote className=\"text-base break-words text-foreground\">\n        {children}\n      </blockquote>\n      <figcaption className=\"mt-1 text-xs text-charcoal tabular-nums\">\n        {source}\n      </figcaption>\n    </figure>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

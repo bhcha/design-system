@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "title": "button-group",
+  "description": "shadcn/ui button-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/button-group.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui button-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   버튼을 이어 붙인 묶음\n *\n * 토큰\n *   pill 묶음 · 구분선 border\n *\n * 상태\n *   기본\n *\n * 키보드·ARIA\n *   role=\"group\" + aria-label 권장\n *\n * 수용 기준\n *   - 이어 붙은 모서리만 곡률이 사라진다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { mergeProps } from \"@base-ui/react/merge-props\"\nimport { useRender } from \"@base-ui/react/use-render\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nimport { Separator } from \"@/components/ui/separator\"\n\nconst buttonGroupVariants = cva(\n  \"flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1\",\n  {\n    variants: {\n      orientation: {\n        horizontal:\n          \"*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-full! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0\",\n        vertical:\n          \"flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0\",\n      },\n    },\n    defaultVariants: {\n      orientation: \"horizontal\",\n    },\n  }\n)\n\nfunction ButtonGroup({\n  className,\n  orientation,\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>) {\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(buttonGroupVariants({ orientation }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction ButtonGroupText({\n  className,\n  render,\n  ...props\n}: useRender.ComponentProps<\"div\">) {\n  return useRender({\n    defaultTagName: \"div\",\n    props: mergeProps<\"div\">(\n      {\n        className: cn(\n          \"flex items-center gap-2 rounded-lg border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4\",\n          className\n        ),\n      },\n      props\n    ),\n    render,\n    state: {\n      slot: \"button-group-text\",\n    },\n  })\n}\n\nfunction ButtonGroupSeparator({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: React.ComponentProps<typeof Separator>) {\n  return (\n    <Separator\n      data-slot=\"button-group-separator\"\n      orientation={orientation}\n      className={cn(\n        \"relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport {\n  ButtonGroup,\n  ButtonGroupSeparator,\n  ButtonGroupText,\n  buttonGroupVariants,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

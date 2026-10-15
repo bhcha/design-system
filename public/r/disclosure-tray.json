@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "disclosure-tray",
+  "title": "disclosure-tray",
+  "description": "DisclosureTray — 접이식 트레이",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/disclosure-tray.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * DisclosureTray — 접이식 트레이\n *\n * shadcn 기반 — 네이티브 유지\n *   shadcn `Collapsible`(Base UI) 로 옮기지 **않는다**. 이유:\n *   1. props 계약이 `React.ComponentProps<\"details\">` 이고 호출부가 `open` 을 그대로\n *      넘긴다(/design 표본의 펼침 상태). Collapsible 로 바꾸면 계약이 바뀐다.\n *   2. 서버 컴포넌트 화면에서 좁은 폭 사이드바 메뉴 등을 감싼다.\n *      Collapsible 은 클라이언트 컴포넌트라 하이드레이션 전에는 열리지 않는다 —\n *      \"JS 없이 동작\" 수용 기준을 잃는다.\n *   3. 요약 줄 클릭 = 토글 이라는 동작은 어느 쪽도 같으므로 1·2 를 깨면서 얻는 것이\n *      없다.\n *   그래서 <details>/<summary> 를 유지하고 시각만 design.md 토큰으로 맞춘다.\n *\n * 근거: ADS 디스클로저 해부도(요약 줄 + 펼침 화살표 + 본문). 네이티브\n * `<details>/<summary>` 로 구현해 클라이언트 JS 없이 서버 컴포넌트로 남긴다.\n * 시각 값은 전부 design.md 토큰.\n *\n * 해부도\n *   ▸ [요약] [보조 정보]        ← summary, 클릭 대상\n *     [본문]                    ← 펼쳐졌을 때만\n *\n * 토큰\n *   배경 --color-background · 테두리 --color-border · 곡률 --radius-lg\n *   요약 --text-base + font-medium · 보조 --text-xs + ink-subtle\n *   화살표는 CSS 회전(transform)만 애니메이션한다 — prefers-reduced-motion 은 전역 처리.\n *\n * 상태\n *   접힘 / 펼침 / hover / focus-visible\n *\n * 키보드·ARIA\n *   `<summary>` 는 기본으로 포커스를 받고 Enter·Space 로 토글되며 `aria-expanded` 가\n *   브라우저에서 자동 노출된다. 직접 ARIA 를 쓰지 않는 편이 더 정확하다.\n *\n * 수용 기준\n *   - JS 없이 동작한다.\n *   - 기본 삼각형 마커가 사라지고 우리 화살표만 보인다.\n */\nexport type DisclosureTrayProps = React.ComponentProps<\"details\"> & {\n  summary: React.ReactNode;\n  /** 요약 오른쪽 보조 정보(개수·상태 등). */\n  meta?: React.ReactNode;\n};\n\nexport function DisclosureTray({\n  className,\n  summary,\n  meta,\n  children,\n  ...props\n}: DisclosureTrayProps) {\n  return (\n    <details\n      className={cn(\n        \"group rounded-lg border border-border bg-background\",\n        className,\n      )}\n      {...props}\n    >\n      <summary className=\"flex cursor-pointer list-none items-center gap-2 p-3 select-none hover:bg-accent [&::-webkit-details-marker]:hidden\">\n        <span\n          aria-hidden=\"true\"\n          className=\"inline-block text-xs text-charcoal transition-transform duration-150 group-open:rotate-90\"\n        >\n          ▶\n        </span>\n        <span className=\"min-w-0 flex-1 text-base font-medium text-foreground\">\n          {summary}\n        </span>\n        {meta ? (\n          <span className=\"shrink-0 text-xs text-charcoal\">{meta}</span>\n        ) : null}\n      </summary>\n\n      <div className=\"border-t border-border p-3\">{children}</div>\n    </details>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

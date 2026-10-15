@@ -6,7 +6,7 @@ import { expect, test } from "@playwright/test";
  * 라우트가 늘어나면 여기에 경로를 추가한다. `/design` 카탈로그가
  * 컴포넌트 상태 매트릭스 전체를 이 게이트에 태운다.
  */
-const ROUTES = ["/design", "/design/ollama"];
+const ROUTES = ["/design"];
 
 for (const route of ROUTES) {
   test(`${route} 은 axe 위반이 없다`, async ({ page }) => {

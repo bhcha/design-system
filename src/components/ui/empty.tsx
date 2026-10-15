@@ -1,3 +1,6 @@
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
 /**
  * shadcn/ui empty (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -17,8 +20,6 @@
  *   - 빈 상태가 다음 행동을 말한다
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
 
 function Empty({ className, ...props }: React.ComponentProps<"div">) {
   return (

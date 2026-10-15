@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "collapsible",
+  "description": "shadcn/ui collapsible (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui collapsible (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   Collapsible·Trigger·Content\n *\n * 토큰\n *   시각 없음 — 호출부가 입힌다\n *\n * 상태\n *   접힘 / 펼침\n *\n * 키보드·ARIA\n *   Base UI Collapsible — 트리거 aria-expanded\n *\n * 수용 기준\n *   - 펼침 상태가 트리거에 표시된다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\"\n\nfunction Collapsible({ ...props }: CollapsiblePrimitive.Root.Props) {\n  return <CollapsiblePrimitive.Root data-slot=\"collapsible\" {...props} />\n}\n\nfunction CollapsibleTrigger({ ...props }: CollapsiblePrimitive.Trigger.Props) {\n  return (\n    <CollapsiblePrimitive.Trigger data-slot=\"collapsible-trigger\" {...props} />\n  )\n}\n\nfunction CollapsibleContent({ ...props }: CollapsiblePrimitive.Panel.Props) {\n  return (\n    <CollapsiblePrimitive.Panel data-slot=\"collapsible-content\" {...props} />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

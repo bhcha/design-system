@@ -1,0 +1,2033 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "bhcha",
+  "homepage": "https://github.com/bhcha/design-system",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "utils",
+      "description": "shadcn/ui 표준 클래스 결합 함수.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-mobile",
+      "type": "registry:hook",
+      "title": "use-mobile",
+      "description": "뷰포트가 모바일 폭(768px 미만)인지 돌려준다.",
+      "files": [
+        {
+          "path": "src/hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "theme",
+      "type": "registry:item",
+      "title": "theme",
+      "description": "토큰(globals.css)·서체(Inter·Nunito·Pretendard)·theme-color 값. 컴포넌트보다 먼저 설치한다.",
+      "dependencies": [
+        "pretendard@^1.3.9",
+        "shadcn@^4.21.5",
+        "tw-animate-css@^1.4.0"
+      ],
+      "devDependencies": [
+        "@tailwindcss/postcss@^4",
+        "tailwindcss@^4"
+      ],
+      "files": [
+        {
+          "path": "src/app/globals.css",
+          "type": "registry:file",
+          "target": "src/app/globals.css"
+        },
+        {
+          "path": "src/lib/fonts.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/lib/design-tokens.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "accordion",
+      "description": "shadcn/ui accordion (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "action-footer",
+      "type": "registry:ui",
+      "title": "action-footer",
+      "description": "ActionFooter — 폼·패널 하단의 액션 줄 (저장·취소 버튼 묶음)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/action-footer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "alert-dialog",
+      "description": "shadcn/ui alert-dialog (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "alert",
+      "description": "shadcn/ui alert (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "app-shell",
+      "description": "AppShell — 사이드바 + 작업 영역 2열 셸",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/app-shell.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "avatar",
+      "description": "shadcn/ui avatar (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "badge",
+      "description": "shadcn/ui badge (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/badge-variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "breadcrumb",
+      "description": "shadcn/ui breadcrumb (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "button-group",
+      "description": "shadcn/ui button-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button-link",
+      "type": "registry:ui",
+      "title": "button-link",
+      "description": "ButtonLink — 버튼처럼 보이는 **이동** (shadcn Button + next/link)",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button-link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "button",
+      "description": "shadcn/ui Button (base-nova) — Ollama 테마 적용본",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "calendar",
+      "description": "shadcn/ui calendar (base-nova, react-day-picker) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "lucide-react@^1.57.0",
+        "react-day-picker@^10.0.2"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "card",
+      "description": "shadcn/ui card (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-list",
+      "type": "registry:ui",
+      "title": "checkbox-list",
+      "description": "CheckboxList — 다중 선택 목록",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/checkbox.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "checkbox",
+      "description": "shadcn/ui checkbox (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "choice-card",
+      "type": "registry:ui",
+      "title": "choice-card",
+      "description": "ChoiceCard — 설명이 붙은 선택지",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/choice-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "code-avatar",
+      "type": "registry:ui",
+      "title": "code-avatar",
+      "description": "CodeAvatar — 작업 공간·프로젝트 코드(PR · MS · WS)를 보여주는 마크 (shadcn Avatar 조립)",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/avatar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/code-avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "collapsible",
+      "description": "shadcn/ui collapsible (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "combobox",
+      "description": "shadcn/ui combobox (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command-tag",
+      "type": "registry:ui",
+      "title": "command-tag",
+      "description": "{component.command-tag} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/command-tag.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "command",
+      "description": "shadcn/ui command (base-nova, cmdk) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "cmdk@^1.1.1",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "confirm-submit",
+      "type": "registry:ui",
+      "title": "confirm-submit",
+      "description": "ConfirmSubmit — 되돌리기 어려운 제출 앞의 확인 (`window.confirm` 대체)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/alert-dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/confirm-submit.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "count-badge",
+      "type": "registry:ui",
+      "title": "count-badge",
+      "description": "CountBadge — 숫자 배지",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/count-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "cta-strip",
+      "type": "registry:ui",
+      "title": "cta-strip",
+      "description": "{component.cta-strip-dark} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/cta-strip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "data-grid-selectable",
+      "type": "registry:ui",
+      "title": "data-grid-selectable",
+      "description": "SelectableDataGrid — 이동하지 않고 **그 자리에서 고르는** 목록.",
+      "files": [
+        {
+          "path": "src/components/ui/data-grid-selectable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "data-grid",
+      "type": "registry:ui",
+      "title": "data-grid",
+      "description": "DataGrid — 행 클릭형 목록 (**이 저장소에서 유일하다**)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/data-grid.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "data-table",
+      "description": "DataTable — 정적 표 (읽기 전용)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/table.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/data-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "definition-list",
+      "type": "registry:ui",
+      "title": "definition-list",
+      "description": "DefinitionList — 키-값 목록",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/definition-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "dialog",
+      "description": "shadcn/ui dialog (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "disclosure-tray",
+      "type": "registry:ui",
+      "title": "disclosure-tray",
+      "description": "DisclosureTray — 접이식 트레이",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/disclosure-tray.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "drawer",
+      "description": "shadcn/ui drawer (base-nova, Base UI Drawer) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "dropdown-menu",
+      "description": "shadcn/ui dropdown-menu (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "empty-state",
+      "description": "EmptyState — 빈 상태 · 오류 상태 · 목록 각주",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/empty.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "empty",
+      "description": "shadcn/ui empty (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/empty.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "faq-row",
+      "type": "registry:ui",
+      "title": "faq-row",
+      "description": "{component.faq-row} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/faq-row.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "field",
+      "description": "shadcn/ui field (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/label.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "figure",
+      "type": "registry:ui",
+      "title": "figure",
+      "description": "Figure — 그림과 출처 캡션",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/figure.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "floating-sticky-bar",
+      "type": "registry:ui",
+      "title": "floating-sticky-bar",
+      "description": "{component.floating-sticky-bar} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/floating-sticky-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "flow-steps",
+      "type": "registry:ui",
+      "title": "flow-steps",
+      "description": "FlowSteps — 구분자로 이어지는 가로 흐름",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/count-badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/flow-steps.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "focus-restorer",
+      "type": "registry:ui",
+      "title": "focus-restorer",
+      "description": "FocusRestorer — 검색 뒤 포커스를 원래 자리로 되돌린다",
+      "files": [
+        {
+          "path": "src/components/ui/focus-restorer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form-field",
+      "type": "registry:ui",
+      "title": "form-field",
+      "description": "FormField — 라벨·도움말·오류를 한 번에 받는 폼 행 (shadcn Field 조립)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gap-checklist",
+      "type": "registry:ui",
+      "title": "gap-checklist",
+      "description": "GapChecklist — 빈 항목(확인 필요) 점검 목록",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/gap-checklist.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "global-nav",
+      "type": "registry:ui",
+      "title": "global-nav",
+      "description": "{component.primary-nav} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/global-nav.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hidden-field",
+      "type": "registry:ui",
+      "title": "hidden-field",
+      "description": "HiddenField — 폼과 함께 실려가는 숨은 값.",
+      "files": [
+        {
+          "path": "src/components/ui/hidden-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "history-list",
+      "type": "registry:ui",
+      "title": "history-list",
+      "description": "HistoryList — 변경 이력",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/history-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "hover-card",
+      "description": "shadcn/ui hover-card (base-nova, Base UI PreviewCard) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "icon-button",
+      "type": "registry:ui",
+      "title": "icon-button",
+      "description": "{component.button-icon-circular} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/icon-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "info-popover",
+      "type": "registry:ui",
+      "title": "info-popover",
+      "description": "InfoPopover — 트리거·제목·본문을 props 로 받는 보충 설명 팝오버 (shadcn Popover 조립)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/popover.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/info-popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "input-group",
+      "description": "shadcn/ui input-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/textarea.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "input-otp",
+      "description": "shadcn/ui input-otp (base-nova, input-otp) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "input-otp@^1.5.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "input",
+      "description": "shadcn/ui input (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "install-snippet",
+      "type": "registry:ui",
+      "title": "install-snippet",
+      "description": "{component.install-snippet} — 스펙 시트",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/install-snippet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "item",
+      "description": "shadcn/ui item (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/item.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "kbd",
+      "description": "shadcn/ui kbd (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "label",
+      "description": "shadcn/ui label (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "link-tabs",
+      "type": "registry:ui",
+      "title": "link-tabs",
+      "description": "LinkTabs · TabPanel — 주소(?tab=)로 상태를 갖는 라인 탭 (shadcn tabs 라인 변형)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/tabs.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/link-tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "lozenge",
+      "type": "registry:ui",
+      "title": "lozenge",
+      "description": "Lozenge — 상태 표시",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/lozenge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "miller-columns",
+      "type": "registry:ui",
+      "title": "miller-columns",
+      "description": "MillerColumns — 계층 탐색기",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/miller-columns.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "miller-navigator",
+      "type": "registry:ui",
+      "title": "miller-navigator",
+      "description": "MillerNavigator — 계층 탐색기의 상호작용 껍데기",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/miller-navigator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "modal-dialog",
+      "type": "registry:ui",
+      "title": "modal-dialog",
+      "description": "ModalDialog — 트리거·제목·본문·하단 액션을 props 로 받는 모달 (shadcn Dialog 조립)",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/modal-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "native-select",
+      "description": "shadcn/ui native-select (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/native-select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "navigation-menu",
+      "description": "shadcn/ui navigation-menu (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/navigation-menu-variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "numbered-steps",
+      "type": "registry:ui",
+      "title": "numbered-steps",
+      "description": "NumberedSteps — 번호가 붙은 설명 단계",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/numbered-steps.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "option-chip",
+      "type": "registry:ui",
+      "title": "option-chip",
+      "description": "{component.configurator-option-chip} / -selected — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/toggle.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/option-chip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "order-list",
+      "type": "registry:ui",
+      "title": "order-list",
+      "description": "OrderList — 순서 편집 목록 + 이음매 검사",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/order-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:ui",
+      "title": "page-header",
+      "description": "PageHeader — 화면 제목 골격",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/page-header.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "pagination",
+      "description": "shadcn/ui pagination (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "path-breadcrumb",
+      "type": "registry:ui",
+      "title": "path-breadcrumb",
+      "description": "PathBreadcrumb — 항목 배열과 관계 라벨을 받는 탐색 경로 (shadcn Breadcrumb 조립)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/breadcrumb.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/path-breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "popover",
+      "description": "shadcn/ui popover (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pricing-card",
+      "type": "registry:ui",
+      "title": "pricing-card",
+      "description": "{component.pricing-card} · {component.pricing-card-dark} · {component.feature-bullet} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/pricing-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "progress",
+      "description": "shadcn/ui progress (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "quote-block",
+      "type": "registry:ui",
+      "title": "quote-block",
+      "description": "QuoteBlock — 인용과 출처 위치",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/quote-block.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-card",
+      "type": "registry:ui",
+      "title": "radio-card",
+      "description": "RadioCard — 폼으로 제출되는 선택 카드",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/choice-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/radio-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "radio-group",
+      "description": "shadcn/ui radio-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "result-callout",
+      "type": "registry:ui",
+      "title": "result-callout",
+      "description": "ResultCallout — 결과·알림 블록",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/alert.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/result-callout.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "rich-text-editor",
+      "type": "registry:ui",
+      "title": "rich-text-editor",
+      "description": "RichTextEditor — 문서 본문 편집기",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/rich-text-editor.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "roving-focus",
+      "type": "registry:ui",
+      "title": "roving-focus",
+      "description": "RovingFocus — 목록 안에서 방향키로 포커스를 옮기는 껍데기",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/roving-focus.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "scroll-area",
+      "description": "shadcn/ui scroll-area (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "search-input",
+      "type": "registry:ui",
+      "title": "search-input",
+      "description": "{component.search-pill} — 스펙 시트",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/search-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "section-panel",
+      "type": "registry:ui",
+      "title": "section-panel",
+      "description": "SectionPanel — 구획 패널",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/section-panel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "select",
+      "description": "shadcn/ui select (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "separator",
+      "description": "shadcn/ui separator (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "sheet",
+      "description": "shadcn/ui sheet (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "side-nav",
+      "type": "registry:ui",
+      "title": "side-nav",
+      "description": "SideNav — 사이드바 내비게이션",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/side-nav.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "side-panel",
+      "type": "registry:ui",
+      "title": "side-panel",
+      "description": "SidePanel — 우측 상세 패널",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button-link.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/side-panel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "sidebar",
+      "description": "shadcn/ui sidebar (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/sheet.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/skeleton.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/tooltip.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/use-mobile.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "site-footer",
+      "type": "registry:ui",
+      "title": "site-footer",
+      "description": "{component.footer-section} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/text-link.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/site-footer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "skeleton",
+      "description": "shadcn/ui skeleton (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skip-link",
+      "type": "registry:ui",
+      "title": "skip-link",
+      "description": "SkipLink — 본문 바로가기",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/skip-link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "slider",
+      "description": "shadcn/ui slider (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "sonner",
+      "description": "shadcn/ui sonner (base-nova, sonner) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "lucide-react@^1.57.0",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "spinner",
+      "description": "shadcn/ui spinner (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "stage-flow",
+      "type": "registry:ui",
+      "title": "stage-flow",
+      "description": "StageFlow — 단계 카드 흐름",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/stage-flow.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "switch",
+      "description": "shadcn/ui switch (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "table",
+      "description": "shadcn/ui table (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "tabs",
+      "description": "shadcn/ui tabs (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tabs-variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "terminal-card",
+      "type": "registry:ui",
+      "title": "terminal-card",
+      "description": "{component.terminal-card} · {component.terminal-traffic-lights} — 스펙 시트",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/terminal-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-input",
+      "type": "registry:ui",
+      "title": "text-input",
+      "description": "TextInput · Textarea · Select — 기본 폼 컨트롤",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/native-select.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/textarea.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/text-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-link",
+      "type": "registry:ui",
+      "title": "text-link",
+      "description": "{component.link-inline} / {component.link-mute} — 스펙 시트",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/text-link.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "textarea",
+      "description": "shadcn/ui textarea (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "toggle-group",
+      "description": "shadcn/ui toggle-group (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/toggle.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "toggle",
+      "description": "shadcn/ui toggle (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "token-sample",
+      "type": "registry:ui",
+      "title": "token-sample",
+      "description": "TokenSample — 디자인 토큰 견본 (색 · 간격 · 곡률). 문서·카탈로그 전용 컴포넌트.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/token-sample.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "tooltip",
+      "description": "shadcn/ui tooltip (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "lint",
+      "type": "registry:item",
+      "title": "lint",
+      "description": "토큰 밖의 값과 컴포넌트 밖에서 새로 만든 UI 를 오류로 막는 ESLint 묶음.",
+      "devDependencies": [
+        "@shadcn/lint@^0.2.1",
+        "@typescript-eslint/parser@^8.40.0",
+        "eslint@^9"
+      ],
+      "files": [
+        {
+          "path": "tools/design-system-lint/index.d.mts",
+          "type": "registry:file",
+          "target": "~/tools/design-system-lint/index.d.mts"
+        },
+        {
+          "path": "tools/design-system-lint/index.mjs",
+          "type": "registry:file",
+          "target": "~/tools/design-system-lint/index.mjs"
+        },
+        {
+          "path": "tools/design-system-lint/next.d.mts",
+          "type": "registry:file",
+          "target": "~/tools/design-system-lint/next.d.mts"
+        },
+        {
+          "path": "tools/design-system-lint/next.mjs",
+          "type": "registry:file",
+          "target": "~/tools/design-system-lint/next.mjs"
+        },
+        {
+          "path": "tools/eslint-rules/index.mjs",
+          "type": "registry:file",
+          "target": "~/tools/eslint-rules/index.mjs"
+        }
+      ]
+    },
+    {
+      "name": "all",
+      "type": "registry:item",
+      "title": "all",
+      "description": "theme 과 모든 컴포넌트.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/theme.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/accordion.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/action-footer.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/alert-dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/alert.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/app-shell.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/avatar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/breadcrumb.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button-link.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/calendar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/checkbox-list.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/checkbox.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/choice-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/code-avatar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/collapsible.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/combobox.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/command-tag.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/command.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/confirm-submit.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/count-badge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/cta-strip.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/data-grid-selectable.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/data-grid.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/data-table.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/definition-list.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/disclosure-tray.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/drawer.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dropdown-menu.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/empty-state.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/empty.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/faq-row.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/field.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/figure.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/floating-sticky-bar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/flow-steps.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/focus-restorer.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/form-field.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/gap-checklist.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/global-nav.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/hidden-field.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/history-list.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/hover-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/icon-button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/info-popover.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-otp.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/install-snippet.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/kbd.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/label.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/link-tabs.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/lozenge.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/miller-columns.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/miller-navigator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/modal-dialog.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/native-select.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/navigation-menu.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/numbered-steps.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/option-chip.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/order-list.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/page-header.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/pagination.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/path-breadcrumb.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/popover.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/pricing-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/progress.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/quote-block.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/radio-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/radio-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/result-callout.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/rich-text-editor.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/roving-focus.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/scroll-area.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/search-input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/section-panel.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/select.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/sheet.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/side-nav.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/side-panel.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/sidebar.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/site-footer.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/skeleton.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/skip-link.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/slider.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/sonner.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/spinner.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/stage-flow.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/switch.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/table.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/tabs.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/terminal-card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/text-input.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/text-link.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/textarea.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/toggle-group.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/toggle.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/token-sample.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/tooltip.json"
+      ],
+      "files": []
+    }
+  ]
+}

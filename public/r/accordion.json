@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "accordion",
+  "description": "shadcn/ui accordion (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/accordion.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui accordion (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   Root ─ Item(아래 hairline) ─ Header ─ Trigger(제목 + ▾/▴) · Panel(내용)\n *\n * 토큰\n *   항목 경계 border-b(hairline) · 트리거 text-sm font-medium rounded-lg · 내용 text-sm\n *   포커스 ring-2 ring-ring · 그림자 없음\n *\n * 상태\n *   접힘 / 펼침 / focus-visible / 비활성(text-mute)\n *\n * 키보드·ARIA\n *   Base UI Accordion — 트리거 button · aria-expanded · aria-controls. Enter·Space 로 토글, ↑↓ 로 트리거 사이 이동.\n *   design.md faq-row 는 항상 펼침이라 FAQ 에는 faq-row.tsx 를 쓴다.\n *\n * 수용 기준\n *   - 트리거가 펼침 상태를 aria-expanded 로 알린다.\n *   - 비활성은 opacity 가 아니라 text-mute 다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\"\nimport { cn } from \"@/lib/utils\"\nimport { ChevronDownIcon, ChevronUpIcon } from \"lucide-react\"\n\nfunction Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {\n  return (\n    <AccordionPrimitive.Root\n      data-slot=\"accordion\"\n      className={cn(\"flex w-full flex-col\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {\n  return (\n    <AccordionPrimitive.Item\n      data-slot=\"accordion-item\"\n      className={cn(\"not-last:border-b\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: AccordionPrimitive.Trigger.Props) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"group/accordion-trigger relative flex flex-1 items-start justify-between rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:after:border-ring aria-disabled:pointer-events-none aria-disabled:text-mute **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <ChevronDownIcon data-slot=\"accordion-trigger-icon\" className=\"pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden\" />\n        <ChevronUpIcon data-slot=\"accordion-trigger-icon\" className=\"pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline\" />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: AccordionPrimitive.Panel.Props) {\n  return (\n    <AccordionPrimitive.Panel\n      data-slot=\"accordion-content\"\n      className=\"overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up\"\n      {...props}\n    >\n      <div\n        className={cn(\n          \"h-(--accordion-panel-height) pt-0 pb-2.5 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4\",\n          className\n        )}\n      >\n        {children}\n      </div>\n    </AccordionPrimitive.Panel>\n  )\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

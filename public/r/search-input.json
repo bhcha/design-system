@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "search-input",
+  "title": "search-input",
+  "description": "{component.search-pill} — 스펙 시트",
+  "dependencies": [
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/search-input.tsx",
+      "content": "import { SearchIcon } from \"lucide-react\";\nimport {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupInput,\n} from \"@/components/ui/input-group\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * {component.search-pill} — 스펙 시트\n *\n * 바탕 primitive (shadcn/ui base-nova)\n *   `InputGroup` + `InputGroupAddon`(돋보기) + `InputGroupInput`(Base UI Input 의 네이티브\n *   `<input type=\"search\">`). 바깥의 `<label>` 은 유지한다 — 라벨이 컨트롤을 감싸\n *   id 없이도 접근 가능한 이름(searchbox 의 name)이 생기고 라벨이 클릭 대상이 된다.\n *\n * 해부도\n *   <label>\n *     [ 라벨 텍스트 (labelHidden 이면 시각적으로 숨김) ]\n *     <InputGroup>\n *       [ InputGroupAddon: 돋보기 아이콘 ][ InputGroupInput ]\n *     </InputGroup>\n *   </label>\n *\n * 토큰 — design.md {component.search-pill} / {component.search-pill-focused}\n *   높이 36px(h-9) · 곡률 --radius-full · 테두리 없음(border-transparent)\n *   배경 --color-muted(soft) → 포커스 시 --color-background(canvas) + ring-3 --color-ring/50\n *   텍스트 --text-sm + --color-foreground · placeholder --color-muted-foreground(body)\n *   돋보기 아이콘 --color-charcoal\n *\n * primitive 와 다르게 둔 점\n *   - InputGroup 기본은 1px hairline 테두리 + canvas 배경 + 40px 이다. search pill 은\n *     테두리 없는 soft 면 36px 이므로 className 으로 덮는다. 포커스 때도 테두리는 투명.\n *   - InputGroup 의 비활성 표현(opacity-50)은 쓰지 않는다 — 앱 규칙상 비활성은 토큰\n *     (--color-mute 글자)으로만 표시한다.\n *   - InputGroup·InputGroupAddon 은 `role=\"group\"` 을 가진 div 다. 이름이 없는 그룹이라\n *     접근성 트리에서 이름 있는 그룹 질의와 겹치지 않는다.\n *\n * --color-mute 를 쓰지 않는 이유\n *   #a3a3a3 은 \"비활성 컨트롤 전용(WCAG 대비 예외)\"으로 결박한 값이다.\n *   돋보기와 placeholder 는 활성 상태의 콘텐츠라 쓰지 않고, 비활성일 때만 내려간다.\n *\n * 상태\n *   기본 / focus-visible(canvas 배경 + ring) / disabled / 값 있음\n *\n * 키보드·ARIA\n *   - 라벨이 컨트롤을 감싸므로 접근 가능한 이름이 항상 존재한다(타입 필수).\n *   - type=\"search\" 로 searchbox 역할과 브라우저 지우기 어포던스를 얻는다.\n *   - autoComplete=\"off\": 인증 필드가 아니라 비밀번호 관리자가 끼어들지 않게 한다.\n *   - 돋보기는 aria-hidden 장식이다. Addon 을 눌러도 입력으로 포커스가 간다(primitive).\n *   - 붙여넣기를 막지 않는다.\n *\n * 수용 기준\n *   - 높이 36px · 곡률 9999px · soft surface 배경.\n *   - label 없이 컴파일되지 않는다.\n *   - --color-mute 는 비활성 상태에서만 나타난다.\n */\nexport type SearchInputProps = Omit<\n  React.ComponentProps<\"input\">,\n  \"type\" | \"className\"\n> & {\n  /** 접근 가능한 이름. 비워둘 수 없다. */\n  label: string;\n  /** true 면 라벨을 시각적으로만 숨긴다(스크린 리더에는 남는다). */\n  labelHidden?: boolean;\n  className?: string;\n};\n\nexport function SearchInput({\n  label,\n  labelHidden = false,\n  className,\n  ...props\n}: SearchInputProps) {\n  return (\n    <label className={cn(\"flex flex-col gap-1\", className)}>\n      <span\n        className={cn(\n          \"text-xs font-medium text-charcoal\",\n          labelHidden ? \"sr-only\" : undefined,\n        )}\n      >\n        {label}\n      </span>\n      <InputGroup\n        className={cn(\n          \"h-9 border-transparent bg-muted\",\n          \"has-[[data-slot=input-group-control]:focus-visible]:border-transparent\",\n          \"has-[[data-slot=input-group-control]:focus-visible]:bg-background\",\n          \"has-disabled:bg-muted has-disabled:opacity-100\",\n        )}\n      >\n        <InputGroupAddon className=\"text-charcoal group-has-disabled/input-group:text-mute\">\n          <SearchIcon aria-hidden=\"true\" />\n        </InputGroupAddon>\n        <InputGroupInput\n          type=\"search\"\n          autoComplete=\"off\"\n          className={cn(\n            \"h-full text-sm text-foreground\",\n            \"disabled:text-mute disabled:placeholder:text-mute\",\n          )}\n          {...props}\n        />\n      </InputGroup>\n    </label>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

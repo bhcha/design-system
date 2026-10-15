@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-strip",
+  "title": "cta-strip",
+  "description": "{component.cta-strip-dark} — 스펙 시트",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/cta-strip.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\nimport { Card } from \"@/components/ui/card\";\n\n/**\n * {component.cta-strip-dark} — 스펙 시트\n *\n * 구현 — shadcn/ui Card 위에 조립한다\n *   Card(어두운 면) > <section>(랜드마크). Card 는 div 만 그리므로 <section> 을 안쪽에\n *   한 겹 둔다. 호출부의 className 은 Card(보이는 띠)에 붙는다.\n *   Card 기본값(ring · rounded-xl · bg-card · py-4)은 design.md 값으로 덮는다.\n *\n * 해부도\n *   [ 제목 — heading-lg ........................ ][ 액션 슬롯 ]\n *   좁은 폭에서는 두 줄로 감긴다.\n *\n * 토큰 — design.md {component.cta-strip-dark}\n *   배경 --color-surface-dark(#171717) · 글자 --color-on-dark · ring/테두리 없음\n *   제목 --text-2xl + font-heading + font-semibold\n *   padding 24px 32px(py-6 px-8) · 곡률 --radius-lg(12px)\n *\n * 상태\n *   정적 하나뿐이다. 액션은 on-dark 버튼을 쓴다(호출부).\n *\n * 키보드·ARIA\n *   <section aria-labelledby=제목>. 포커스는 액션 버튼만 받는다.\n *\n * 수용 기준\n *   - design.md: 섹션 사이에 드물게 쓴다. 어두운 면은 한 화면에 한 번만.\n *   - 곡률 12px · 그림자·ring 없음.\n */\nexport function CtaStripDark({\n  id,\n  title,\n  action,\n  className,\n}: {\n  id: string;\n  title: React.ReactNode;\n  action?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <Card\n      variant=\"dark\"\n      render={<section aria-labelledby={id} />}\n      className={cn(\n        \"flex-row flex-wrap items-center justify-between gap-4 rounded-lg px-8 py-6 text-base\",\n        className,\n      )}\n    >\n      <h2 id={id} className=\"font-heading text-2xl font-semibold\">\n        {title}\n      </h2>\n      {action}\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -33,7 +33,8 @@ import guards from "../eslint-rules/index.mjs";
 
 const NOTE =
   "디자인 시스템 규칙 — 값은 src/app/globals.css 토큰, 모양은 components/ui 컴포넌트에서만 나온다. " +
-  "카탈로그(/design)와 design.md 를 본다. 맞는 것이 없으면 화면에서 만들지 말고 components/ui 에 컴포넌트·variant 를 추가한다.";
+  "컴포넌트 머리 주석과 design.md 를 본다. 맞는 것이 없으면 화면에서 만들지 말고 디자인 시스템에 추가한다 — " +
+  "디자인 시스템 저장소 밖이면 https://github.com/bhcha/design-system/issues/new/choose 에 요청한다.";
 
 /** 화면이 컴포넌트에 줄 수 있는 className — 배치(layout)만. 컴포넌트별 예외는 contracts. */
 const RESTYLE = {
@@ -55,6 +56,7 @@ export function designSystemLint({
   uiDir = "src/components/ui",
   files = ["src/**/*.{ts,tsx}"],
   screens = ["src/app/**/*.{ts,tsx}", "src/features/**/*.{ts,tsx}"],
+  tokenMirror = "src/lib/design-tokens.ts",
 } = {}) {
   if (!enabled || process.env.DESIGN_SYSTEM_LINT === "off") return [];
 
@@ -105,6 +107,14 @@ export function designSystemLint({
         "guards/no-arbitrary-class": "off",
         "guards/ui-only-elements": "off",
         "guards/no-surface-styling": "off",
+      },
+    },
+    // 4) 토큰 JS 미러 — 색 리터럴이 있어야 하는 단 하나의 예외 파일(<meta name="theme-color"> 등)
+    {
+      name: "design-system/token-mirror",
+      files: [tokenMirror],
+      rules: {
+        "guards/no-style-literal": "off",
       },
     },
   ];

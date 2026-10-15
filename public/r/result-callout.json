@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "result-callout",
+  "title": "result-callout",
+  "description": "ResultCallout — 결과·알림 블록",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/alert.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/result-callout.tsx",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\nimport { Alert, AlertDescription, AlertTitle } from \"@/components/ui/alert\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * ResultCallout — 결과·알림 블록\n *\n * 기반 primitive: shadcn Alert (Alert · AlertTitle · AlertDescription)\n *   Alert 의 해부도(제목 + 본문)를 쓰고, 테두리 상자 대신 좌측 2px 강조선 + 톤 배경으로\n *   덮어쓴다. 시각 값은 design.md 토큰.\n *\n * 해부도\n *   ┃ [AlertTitle (선택)]\n *   ┃ [AlertDescription]\n *\n * 토큰\n *   info    --color-status-info-soft / --color-status-info\n *   ok      --color-status-ok-soft / --color-status-ok\n *   warn    --color-status-warn-soft / --color-status-warn\n *   danger  --color-status-danger-soft / --color-status-danger\n *   neutral --color-muted / --color-charcoal\n *   좌측 2px 강조선 + --radius-sm + p-3 · 제목 font-semibold · 본문은 톤 글자색을 물려받는다\n *\n * 상태\n *   상태 없음. `tone` 으로 성격만 바뀐다.\n *\n * 키보드·ARIA\n *   Alert primitive 의 기본 `role=\"alert\"`(assertive)는 **쓰지 않는다** — 항상 끈다.\n *   **동작의 결과로 나타나는** 알림에는 `live` 를 켠다 — `role=\"status\"` +\n *   `aria-live=\"polite\"` 가 붙는다. 처음부터 있던 안내문에는 켜지 않는다\n *   (불필요한 낭독을 만들지 않기 위해).\n *   톤은 색이지만 의미는 제목·본문 텍스트가 전달한다.\n *\n * 수용 기준\n *   - 색만으로 성격을 전달하지 않는다.\n *   - live 를 켠 경우에만 스크린 리더가 자동으로 읽는다(role=\"alert\" 가 남지 않는다).\n */\nconst calloutVariants = cva(\n  \"flex w-auto flex-col gap-1 rounded-sm border-0 border-l-2 p-3 text-base\",\n  {\n    variants: {\n      tone: {\n        neutral: \"border-border bg-muted text-charcoal\",\n        info: \"border-status-info bg-status-info-soft text-status-info\",\n        ok: \"border-status-ok bg-status-ok-soft text-status-ok\",\n        warn: \"border-status-warn bg-status-warn-soft text-status-warn\",\n        danger: \"border-status-danger bg-status-danger-soft text-status-danger\",\n      },\n    },\n    defaultVariants: { tone: \"neutral\" },\n  },\n);\n\nexport type ResultCalloutProps = React.ComponentProps<\"div\"> &\n  VariantProps<typeof calloutVariants> & {\n    title?: React.ReactNode;\n    /** 동작의 결과로 나타나는 알림이면 켠다. */\n    live?: boolean;\n  };\n\nexport function ResultCallout({\n  className,\n  tone,\n  title,\n  live = false,\n  children,\n  ...props\n}: ResultCalloutProps) {\n  return (\n    <Alert\n      // Alert 는 role=\"alert\" 를 기본으로 붙인다. 명시적으로 덮어 live 일 때만 status 가 된다.\n      role={live ? \"status\" : undefined}\n      aria-live={live ? \"polite\" : undefined}\n      className={cn(calloutVariants({ tone }), className)}\n      {...props}\n    >\n      {title ? <AlertTitle className=\"font-semibold\">{title}</AlertTitle> : null}\n      <AlertDescription className=\"text-base text-current text-wrap md:text-wrap [&_p:not(:last-child)]:mb-0\">\n        {children}\n      </AlertDescription>\n    </Alert>\n  );\n}\n\nexport { calloutVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

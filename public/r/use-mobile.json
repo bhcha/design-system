@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-mobile",
+  "title": "use-mobile",
+  "description": "뷰포트가 모바일 폭(768px 미만)인지 돌려준다.",
+  "files": [
+    {
+      "path": "src/hooks/use-mobile.ts",
+      "content": "import * as React from \"react\"\n\nconst MOBILE_BREAKPOINT = 768\nconst QUERY = `(max-width: ${MOBILE_BREAKPOINT - 1}px)`\n\nfunction subscribe(onChange: () => void) {\n  const mql = window.matchMedia(QUERY)\n  mql.addEventListener(\"change\", onChange)\n  return () => mql.removeEventListener(\"change\", onChange)\n}\n\nfunction getSnapshot() {\n  return window.matchMedia(QUERY).matches\n}\n\n/** 서버 렌더에서는 데스크톱으로 가정한다(하이드레이션 뒤 실제 값으로 바뀐다). */\nfunction getServerSnapshot() {\n  return false\n}\n\n/**\n * 뷰포트가 모바일 폭(768px 미만)인지 돌려준다.\n * effect 안에서 setState 하지 않도록 useSyncExternalStore 로 matchMedia 를 구독한다.\n */\nexport function useIsMobile() {\n  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)\n}\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

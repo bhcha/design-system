@@ -25,8 +25,10 @@
 
 ## 다른 프로젝트에서 켜기
 
-1. 의존성: `npm i -D @shadcn/lint @typescript-eslint/parser eslint`
-2. 이 폴더(`tools/design-system-lint`)와 `tools/eslint-rules` 를 복사한다.
+1. 레지스트리에서 받는다: `npx shadcn@latest add @bhcha/lint`
+   (레지스트리 등록은 저장소 README 의 "다른 프로젝트에서 쓰기"). 이 폴더와 `tools/eslint-rules`,
+   의존성(`@shadcn/lint` · `@typescript-eslint/parser` · `eslint`)이 함께 들어온다.
+2. 토큰 JS 미러(`src/lib/design-tokens.ts`)는 색 리터럴을 허용한다. 다른 경로면 `tokenMirror` 옵션으로 바꾼다.
 3. `eslint.config.mjs`
 
 ```js

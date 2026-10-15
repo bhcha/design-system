@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-header",
+  "title": "page-header",
+  "description": "PageHeader — 화면 제목 골격",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/page-header.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * PageHeader — 화면 제목 골격\n *\n * shadcn 기반\n *   대응하는 shadcn 프리미티브가 없다(shadcn 은 페이지 헤더를 컴포넌트로 두지 않는다).\n *   Card 의 CardHeader/CardTitle 은 \"카드 안 머리\"라 랜드마크 <header>·h1 과 역할이\n *   다르고, 덮어야 할 기본값(grid · px · 곡률 맥락)이 더 많아 쓰지 않는다.\n *   네이티브 <header> + 토큰 유틸리티로 남기고, 액션 슬롯에는 호출부가 shadcn\n *   Button/ButtonLink 를 넣는다.\n *\n * 근거: ADS 페이지 헤더 해부도(overline → 제목 → 설명 → 우측 액션). 제목 크기는\n * ADS 제목 20/24(--text-xl). 시각 값은 design.md 토큰.\n *\n * 해부도\n *   [ eyebrow (overline) ]                  [ 액션 슬롯 ]\n *   [ 제목 h1 ]                             [ 상태 슬롯 ]\n *   [ 설명 ]\n *\n * 토큰\n *   eyebrow --text-xs + uppercase + --color-charcoal\n *   제목    --text-xl + font-semibold + --color-foreground\n *   설명    --text-base + --color-charcoal\n *   간격    안쪽 gap-1(세로) · gap-x-6/gap-y-3(제목 ↔ 액션)\n *\n * 바깥 여백은 이 컴포넌트가 갖지 않는다\n *   헤더가 스스로 mb 를 들면 화면마다 그 값을 다시 상쇄해야 하고, 결국 화면 파일에\n *   `-mt-*` 같은 보정이 생긴다. 위아래 간격은 헤더를 담은 레이아웃의 flex gap 이\n *   정한다(현재 화면들은 gap-6). 예외가 필요하면 호출부가 className 으로 준다.\n *\n * 상태\n *   상태 없음(표시용 컨테이너).\n *\n * 키보드·ARIA\n *   제목 요소는 `as` 로 지정한다(화면당 h1 하나, 패널 안에서는 h2).\n *\n * 수용 기준\n *   - 액션이 길어져도 제목이 밀리지 않는다(min-w-0 + flex-wrap).\n *   - eyebrow·설명이 없어도 레이아웃이 무너지지 않는다.\n */\nexport type PageHeaderProps = {\n  /** overline. 화면의 분류를 짧게 적는다. */\n  eyebrow?: React.ReactNode;\n  title: React.ReactNode;\n  /** 제목 태그. 화면 최상위는 h1, 패널 안은 h2. */\n  as?: \"h1\" | \"h2\";\n  /** 제목 id — aria-labelledby 대상으로 쓴다. */\n  titleId?: string;\n  description?: React.ReactNode;\n  /** 우측 액션 슬롯(Button 등). */\n  actions?: React.ReactNode;\n  className?: string;\n};\n\nexport function PageHeader({\n  eyebrow,\n  title,\n  as: Heading = \"h1\",\n  titleId,\n  description,\n  actions,\n  className,\n}: PageHeaderProps) {\n  return (\n    <header\n      className={cn(\"flex flex-wrap items-start gap-x-6 gap-y-3\", className)}\n    >\n      <div className=\"flex min-w-0 flex-1 flex-col gap-1\">\n        {eyebrow ? (\n          <p className=\"text-xs font-medium text-charcoal uppercase\">\n            {eyebrow}\n          </p>\n        ) : null}\n\n        <Heading\n          id={titleId}\n          className=\"text-xl font-semibold break-words text-foreground\"\n        >\n          {title}\n        </Heading>\n\n        {description ? (\n          <p className=\"max-w-reading text-base text-charcoal\">{description}</p>\n        ) : null}\n      </div>\n\n      {actions ? (\n        <div className=\"flex shrink-0 flex-wrap items-center gap-2\">{actions}</div>\n      ) : null}\n    </header>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

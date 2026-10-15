@@ -39,15 +39,6 @@ const eslintConfig = defineConfig([
     },
   },
 
-  // 토큰 JS 미러는 색 리터럴이 존재해야 하는 단 하나의 예외 파일이다.
-  // globals.css 와 짝이 맞는지는 단위 테스트가 검사한다.
-  {
-    files: ["src/lib/design-tokens.ts"],
-    rules: {
-      "guards/no-style-literal": "off",
-    },
-  },
-
   // 테스트는 토큰 값 자체를 단언해야 하므로 리터럴 금지에서 제외한다.
   // 화면에 실려 나가는 코드가 아니다.
   {

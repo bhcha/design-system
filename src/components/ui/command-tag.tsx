@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  * 바탕 primitive (shadcn/ui base-nova)
  *   shadcn `badgeVariants({ variant: "secondary" })` 클래스를 네이티브 `<code>` 에 쓴다.
  *   Badge 컴포넌트(useRender)는 서버 컴포넌트에서 렌더할 수 없는 훅을 쓰고, 이 태그는
- *   서버 화면(/design·/design/ollama)에서 쓰이므로 cva 만 빌린다. `<code>` 시맨틱은 그대로다.
+ *   서버 화면(/design 카탈로그 등)에서 쓰이므로 cva 만 빌린다. `<code>` 시맨틱은 그대로다.
  *
  * 해부도
  *   [ 명령 ]  — 본문 흐름 안에 놓이는 작은 코드 pill

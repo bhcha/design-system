@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "slider",
+  "description": "shadcn/ui slider (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/slider.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui slider (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   Root ─ Control ─ Track(pill) ─ Indicator(채움) + Thumb(원) × 값 개수\n *\n * 토큰\n *   트랙 h-1 rounded-full bg-border(hairline) · 채움 bg-primary\n *   썸 size-4 rounded-full bg-background border-primary · 포커스 ring-2 ring-ring · 그림자 없음\n *\n * 상태\n *   기본 / 드래그 / focus-visible / disabled(채움 bg-mute · 썸 테두리 mute — opacity 아님)\n *\n * 키보드·ARIA\n *   Base UI Slider — 썸마다 input[type=range]. 화살표 ±step, PageUp/Down, Home/End.\n *   접근 가능한 이름은 `getAriaLabel={(i) => \"…\"}` 로 썸마다 준다(범위 슬라이더는 시작·끝을 구분).\n *\n * 수용 기준\n *   - 썸 하나하나에 이름이 있다.\n *   - 비활성은 opacity 가 아니라 토큰 색이다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Slider({\n  className,\n  defaultValue,\n  value,\n  min = 0,\n  max = 100,\n  getAriaLabel,\n  ...props\n}: SliderPrimitive.Root.Props &\n  Pick<SliderPrimitive.Thumb.Props, \"getAriaLabel\">) {\n  const _values = Array.isArray(value)\n    ? value\n    : Array.isArray(defaultValue)\n      ? defaultValue\n      : [min, max]\n\n  return (\n    <SliderPrimitive.Root\n      className={cn(\"data-horizontal:w-full data-vertical:h-full\", className)}\n      data-slot=\"slider\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      thumbAlignment=\"edge\"\n      {...props}\n    >\n      <SliderPrimitive.Control className=\"group/slider-control relative flex w-full touch-none items-center select-none data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col\">\n        <SliderPrimitive.Track\n          data-slot=\"slider-track\"\n          className=\"relative grow overflow-hidden rounded-full bg-border select-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1\"\n        >\n          <SliderPrimitive.Indicator\n            data-slot=\"slider-range\"\n            className=\"bg-primary select-none group-data-disabled/slider-control:bg-mute data-horizontal:h-full data-vertical:w-full\"\n          />\n        </SliderPrimitive.Track>\n        {Array.from({ length: _values.length }, (_, index) => (\n          <SliderPrimitive.Thumb\n            data-slot=\"slider-thumb\"\n            key={index}\n            index={index}\n            getAriaLabel={getAriaLabel}\n            className=\"relative block size-4 shrink-0 rounded-full border border-primary bg-background transition-colors select-none after:absolute after:-inset-2 has-focus-visible:ring-2 has-focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:border-mute\"\n          />\n        ))}\n      </SliderPrimitive.Control>\n    </SliderPrimitive.Root>\n  )\n}\n\nexport { Slider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

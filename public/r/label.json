@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "title": "label",
+  "description": "shadcn/ui label (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/label.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui label (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   라벨 텍스트\n *\n * 토큰\n *   text-sm font-medium\n *\n * 상태\n *   기본 / 비활성 그룹\n *\n * 키보드·ARIA\n *   네이티브 <label>\n *\n * 수용 기준\n *   - 컨트롤과 연결된다(htmlFor 또는 감싸기)\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Label({ className, ...props }: React.ComponentProps<\"label\">) {\n  return (\n    <label\n      data-slot=\"label\"\n      className={cn(\n        \"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Label }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

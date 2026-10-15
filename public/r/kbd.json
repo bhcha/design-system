@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "title": "kbd",
+  "description": "shadcn/ui kbd (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/kbd.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n/**\n * shadcn/ui kbd (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   키보드 키 표시\n *\n * 토큰\n *   rounded-sm(6px) · bg-muted · text-xs font-mono\n *\n * 상태\n *   정적\n *\n * 키보드·ARIA\n *   <kbd> 시맨틱\n *\n * 수용 기준\n *   - 한 줄\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nfunction Kbd({ className, ...props }: React.ComponentProps<\"kbd\">) {\n  return (\n    <kbd\n      data-slot=\"kbd\"\n      className={cn(\n        \"pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground select-none in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background dark:in-data-[slot=tooltip-content]:bg-background/10 [&_svg:not([class*='size-'])]:size-3\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction KbdGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <kbd\n      data-slot=\"kbd-group\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Kbd, KbdGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

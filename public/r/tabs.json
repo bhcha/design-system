@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "tabs",
+  "description": "shadcn/ui tabs (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/tabs-variants.ts",
+      "content": "import { cva } from \"class-variance-authority\"\n\n/**\n * shadcn Tabs 의 목록 스타일 — 서버에서도 부를 수 있도록 tabs.tsx(\"use client\")에서 분리했다.\n * 주소 기반 탭(link-tabs)이 서버 컴포넌트에서 이 클래스를 쓴다.\n */\nexport const tabsListVariants = cva(\n  \"group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-muted\",\n        line: \"gap-1 bg-transparent\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tabs.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui tabs (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   Tabs·TabsList·TabsTrigger·TabsContent\n *\n * 토큰\n *   line 변형: 선택 = 하단 2px foreground 언더라인 · text-sm font-medium\n *\n * 상태\n *   선택 / 비선택 / hover / focus / disabled\n *\n * 키보드·ARIA\n *   Base UI Tabs — role=tablist/tab/tabpanel, 화살표 키 이동. 주소 기반 탭은 link-tabs 사용\n *\n * 수용 기준\n *   - 선택 상태가 색만이 아니라 언더라인으로도 보인다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\nimport { type VariantProps } from \"class-variance-authority\"\nimport { tabsListVariants } from \"@/components/ui/tabs-variants\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Tabs({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: TabsPrimitive.Root.Props) {\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      data-orientation={orientation}\n      className={cn(\n        \"group/tabs flex gap-2 data-horizontal:flex-col\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsList({\n  className,\n  variant = \"default\",\n  ...props\n}: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      data-variant={variant}\n      className={cn(tabsListVariants({ variant }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        \"group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent\",\n        \"data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground\",\n        \"after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={cn(\"flex-1 text-sm outline-none\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

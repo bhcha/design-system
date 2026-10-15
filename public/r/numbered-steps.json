@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "numbered-steps",
+  "title": "numbered-steps",
+  "description": "NumberedSteps — 번호가 붙은 설명 단계",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/item.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/numbered-steps.tsx",
+      "content": "import { ItemContent, ItemMedia } from \"@/components/ui/item\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * NumberedSteps — 번호가 붙은 설명 단계\n *\n * 근거: ADS 단계 목록 해부도(원형 번호 + 제목 + 본문). 시각 값은 design.md 토큰.\n *\n * 기반 primitive: shadcn Separator(단계 사이 구분선) + Item 의 하위 조각(ItemMedia 번호 원 ·\n *   ItemContent 본문). 목록은 네이티브 <ol>/<li> 다 — ItemGroup 은 div[role=list] 라 순서\n *   시맨틱을 잃고, Item 루트는 Base UI `useRender`(내부 useRef)라 서버 컴포넌트에서 호출할\n *   수 없다. 제목은 ItemTitle(div) 대신 <h3> 를 유지해 문서 제목 구조를 지킨다.\n *\n * FlowSteps 와의 차이\n *   FlowSteps 는 가로로 진행을 보여주는 **상태 표시**다. NumberedSteps 는 세로로 읽는\n *   **설명 문서**다(온보딩의 \"입력 권장 순서\" 같은 자리).\n *\n * 해부도\n *   (1) [제목]            ← ItemMedia 번호 원 + ItemContent(h3 + 본문)\n *       [본문]\n *   ──────────────── ← Separator (첫 단계 위에는 없음)\n *   (2) [제목]\n *       [본문]\n *\n * 토큰\n *   번호 --color-primary 배경 + --color-primary-foreground · 원형 size-8\n *   흐린 단계 --color-border 배경 + --color-charcoal\n *   구분선 --color-border · 제목 --text-base + font-semibold\n *\n * 상태\n *   기본 / 흐림(dim — 지금 필요 없는 단계)\n *\n * 키보드·ARIA\n *   <ol>/<li> 로 순서를 시맨틱하게 남긴다. 번호 원은 `aria-hidden` —\n *   순서는 목록 시맨틱이 이미 전달한다. 구분선은 Separator(role=\"separator\")로\n *   <li> 안 첫머리에 둔다 — <ol> 의 직계 자식은 <li> 뿐이어야 한다.\n *\n * 수용 기준\n *   - 첫 단계 위에 구분선이 생기지 않는다.\n *   - 흐린 단계도 읽을 수 있는 대비를 유지한다.\n */\nexport type NumberedStep = {\n  id: string;\n  title: React.ReactNode;\n  children: React.ReactNode;\n  dim?: boolean;\n};\n\nexport function NumberedSteps({\n  steps,\n  className,\n}: {\n  steps: readonly NumberedStep[];\n  className?: string;\n}) {\n  return (\n    <ol className={cn(\"flex flex-col\", className)}>\n      {steps.map((step, index) => (\n        <li key={step.id} className=\"flex flex-col\">\n          {index > 0 ? <Separator /> : null}\n\n          <div className=\"flex gap-3 py-4\">\n            <ItemMedia\n              aria-hidden=\"true\"\n              className={cn(\n                \"size-8 rounded-full text-base font-semibold tabular-nums\",\n                step.dim\n                  ? \"bg-border text-charcoal\"\n                  : \"bg-primary text-primary-foreground\",\n              )}\n            >\n              {index + 1}\n            </ItemMedia>\n\n            <ItemContent className=\"min-w-0 gap-2\">\n              <h3\n                className={cn(\n                  \"text-base font-semibold\",\n                  step.dim ? \"text-charcoal\" : \"text-foreground\",\n                )}\n              >\n                {step.title}\n              </h3>\n              <div className=\"flex flex-col gap-2 text-base text-charcoal\">\n                {step.children}\n              </div>\n            </ItemContent>\n          </div>\n        </li>\n      ))}\n    </ol>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

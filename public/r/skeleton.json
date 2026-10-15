@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "skeleton",
+  "description": "shadcn/ui skeleton (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n/**\n * shadcn/ui skeleton (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   자리 표시 블록 하나 — 크기는 화면이 정한다\n *\n * 토큰\n *   bg-accent(6% ink) · rounded-md(8px) · animate-pulse\n *\n * 상태\n *   로딩 중(맥동)\n *\n * 키보드·ARIA\n *   장식이다. 로딩 중인 영역에는 aria-busy 를 두고, 스켈레톤 자체는 읽히지 않게 한다.\n *\n * 수용 기준\n *   - 흰 면 위에서 보인다.\n *   - 모양(곡률)은 토큰에서만 나온다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-accent\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

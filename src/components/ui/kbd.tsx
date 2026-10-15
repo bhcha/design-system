@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils"
+
 /**
  * shadcn/ui kbd (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -17,7 +19,6 @@
  *   - 한 줄
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import { cn } from "@/lib/utils"
 
 function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
   return (

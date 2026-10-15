@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "title": "input-otp",
+  "description": "shadcn/ui input-otp (base-nova, input-otp) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "input-otp@^1.5.0",
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/input-otp.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui input-otp (base-nova, input-otp) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   InputOTP(숨은 input) ─ Group(pill 묶음) ─ Slot × n · Separator(–)\n *\n * 토큰\n *   슬롯 size-10 · 1px border-input · bg-background · text-base · 묶음 양 끝 rounded-full\n *   활성 슬롯 border-foreground + ring-2 ring-ring\n *\n * 상태\n *   빈칸 / 입력됨 / 활성(가짜 캐럿) / aria-invalid / disabled(bg-muted text-mute)\n *\n * 키보드·ARIA\n *   input-otp — 실제 입력은 하나의 input 이다. 이름은 InputOTP 에 aria-label 로 준다.\n *   붙여넣기·자동완성(one-time-code)을 지원한다. Separator 는 role=separator.\n *\n * 수용 기준\n *   - 슬롯 하나가 한 글자다.\n *   - 비활성은 opacity 가 아니라 bg-muted · text-mute 다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\nimport { MinusIcon } from \"lucide-react\"\n\nfunction InputOTP({\n  className,\n  containerClassName,\n  ...props\n}: React.ComponentProps<typeof OTPInput> & {\n  containerClassName?: string\n}) {\n  return (\n    <OTPInput\n      data-slot=\"input-otp\"\n      containerClassName={cn(\n        \"flex items-center gap-2 has-disabled:[&_[data-slot=input-otp-slot]]:bg-muted has-disabled:[&_[data-slot=input-otp-slot]]:text-mute\",\n        containerClassName\n      )}\n      spellCheck={false}\n      className={cn(\"disabled:cursor-not-allowed\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"input-otp-group\"\n      className={cn(\n        \"flex items-center rounded-full has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPSlot({\n  index,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  index: number\n}) {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}\n\n  return (\n    <div\n      data-slot=\"input-otp-slot\"\n      data-active={isActive}\n      className={cn(\n        \"relative flex size-10 items-center justify-center border-y border-r border-input bg-background text-base transition-all outline-none first:rounded-l-full first:border-l last:rounded-r-full aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-foreground data-[active=true]:ring-2 data-[active=true]:ring-ring data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-4 w-px animate-caret-blink bg-foreground duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n}\n\nfunction InputOTPSeparator({ ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"input-otp-separator\"\n      className=\"flex items-center [&_svg:not([class*='size-'])]:size-4\"\n      role=\"separator\"\n      {...props}\n    >\n      <MinusIcon\n      />\n    </div>\n  )\n}\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,3 +1,6 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
 /**
  * shadcn/ui textarea (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -17,8 +20,6 @@
  *   - pill 이 아니라 12px 곡률
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import * as React from "react"
-import { cn } from "@/lib/utils"
 
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (

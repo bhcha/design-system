@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-row",
+  "title": "faq-row",
+  "description": "{component.faq-row} — 스펙 시트",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/faq-row.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * {component.faq-row} — 스펙 시트\n *\n * 기반 primitive: 없음 — 네이티브 <dl>/<div>/<dt>/<dd> 를 의도적으로 유지한다.\n *   행 아래 hairline 은 Separator 와 같은 토큰(--color-border 1px)이지만 Separator 요소를\n *   끼울 수 없다: <dl> 의 직계 자식과 묶음 div 의 자식은 <dt>/<dd>(와 div 묶음)뿐이어야\n *   한다. 그래서 묶음 div 의 border-b 로 그린다.\n *\n * 해부도\n *   [ 질문 — heading-sm ]\n *   [ 답 — body-md, body 색 ]\n *   ───────────────────── (아래 1px hairline)\n *   항상 펼쳐져 있다 — 아코디언으로 접지 않는다(design.md).\n *\n * 토큰 — design.md {component.faq-row}\n *   배경 --color-background · padding 16px 0(py-4) · 아래 1px --color-border · 곡률 none\n *   질문 --text-lg + font-medium + --color-foreground\n *   답   --text-base + --color-muted-foreground · 질문과 답 사이 4px(gap-1)\n *\n * 상태\n *   정적 하나뿐이다.\n *\n * 키보드·ARIA\n *   <dl> 안의 <dt>/<dd> 쌍. 포커스를 받지 않는다.\n *\n * 수용 기준\n *   - 접기 장치가 없다.\n *   - 행 사이 구분은 hairline 하나뿐이다(카드·배경 없음).\n */\nexport type FaqItem = { question: React.ReactNode; answer: React.ReactNode };\n\nexport function FaqRow({ question, answer }: FaqItem) {\n  return (\n    <div className=\"flex flex-col gap-1 border-b border-border bg-background py-4\">\n      <dt className=\"text-lg font-medium text-foreground\">{question}</dt>\n      <dd className=\"text-base text-muted-foreground\">{answer}</dd>\n    </div>\n  );\n}\n\nexport function FaqList({\n  items,\n  className,\n}: {\n  items: readonly FaqItem[];\n  className?: string;\n}) {\n  return (\n    <dl className={cn(\"flex flex-col\", className)}>\n      {items.map((item, index) => (\n        <FaqRow key={index} question={item.question} answer={item.answer} />\n      ))}\n    </dl>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

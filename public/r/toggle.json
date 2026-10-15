@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "toggle",
+  "description": "shadcn/ui toggle (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/toggle.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui toggle (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   누름 상태가 있는 버튼\n *\n * 토큰\n *   rounded-full pill · 눌림 bg-muted · variant outline 은 1px border\n *\n * 상태\n *   꺼짐 / 켜짐(aria-pressed) / disabled\n *\n * 키보드·ARIA\n *   Base UI Toggle — aria-pressed\n *\n * 수용 기준\n *   - 켜짐이 색만이 아니라 면 변화로 보인다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst toggleVariants = cva(\n  \"group/toggle inline-flex items-center justify-center gap-1 rounded-full text-sm font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-input bg-transparent hover:bg-muted\",\n      },\n      size: {\n        default:\n          \"h-8 min-w-8 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2\",\n        sm: \"h-7 min-w-7 rounded-full px-3 text-sm has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5\",\n        lg: \"h-9 min-w-9 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nfunction Toggle({\n  className,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle\"\n      className={cn(toggleVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

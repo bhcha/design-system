@@ -1,3 +1,6 @@
+import { cn } from "@/lib/utils"
+import { Loader2Icon } from "lucide-react"
+
 /**
  * shadcn/ui spinner (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -18,8 +21,6 @@
  *   - 색은 부모 글자색(토큰)에서 온다.
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import { cn } from "@/lib/utils"
-import { Loader2Icon } from "lucide-react"
 
 function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
   return (

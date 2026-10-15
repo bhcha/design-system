@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "./pretendard.css";
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
 /* ===========================================================================
    토큰 단일 정본 — shadcn/ui(Base UI, base-nova) 테마 + Ollama 값
@@ -256,12 +256,6 @@
 /* global-nav(56px = spacing*14, design.md primary-nav) 아래에 붙어 스스로 스크롤하는 고정 열의 높이 */
 @utility h-below-nav {
   height: calc(100dvh - calc(var(--spacing) * 14));
-}
-
-/* 모달 패널 — 뷰포트를 넘지 않는 크기. 토큰이 아니라 뷰포트 비율이라 여기서 감싼다. */
-@utility dialog-size {
-  width: 92vw;
-  max-height: 90dvh;
 }
 
 /* Miller Columns 열 격자.

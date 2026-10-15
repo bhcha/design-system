@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumb",
+  "title": "breadcrumb",
+  "description": "shadcn/ui breadcrumb (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/breadcrumb.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui breadcrumb (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   Breadcrumb·List·Item·Link·Page·Separator·Ellipsis\n *\n * 토큰\n *   text-sm text-muted-foreground · 현재 text-foreground\n *\n * 상태\n *   링크 / 현재(aria-current=\"page\")\n *\n * 키보드·ARIA\n *   <nav aria-label> + <ol>. 구분자는 aria-hidden\n *\n * 수용 기준\n *   - 마지막 항목은 링크가 아니다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport * as React from \"react\"\nimport { mergeProps } from \"@base-ui/react/merge-props\"\nimport { useRender } from \"@base-ui/react/use-render\"\nimport { cn } from \"@/lib/utils\"\nimport { ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\"\n\nfunction Breadcrumb({ className, ...props }: React.ComponentProps<\"nav\">) {\n  return (\n    <nav\n      aria-label=\"breadcrumb\"\n      data-slot=\"breadcrumb\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbList({ className, ...props }: React.ComponentProps<\"ol\">) {\n  return (\n    <ol\n      data-slot=\"breadcrumb-list\"\n      className={cn(\n        \"flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbItem({ className, ...props }: React.ComponentProps<\"li\">) {\n  return (\n    <li\n      data-slot=\"breadcrumb-item\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbLink({\n  className,\n  render,\n  ...props\n}: useRender.ComponentProps<\"a\">) {\n  return useRender({\n    defaultTagName: \"a\",\n    props: mergeProps<\"a\">(\n      {\n        className: cn(\"transition-colors hover:text-foreground\", className),\n      },\n      props\n    ),\n    render,\n    state: {\n      slot: \"breadcrumb-link\",\n    },\n  })\n}\n\nfunction BreadcrumbPage({ className, ...props }: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      data-slot=\"breadcrumb-page\"\n      role=\"link\"\n      aria-disabled=\"true\"\n      aria-current=\"page\"\n      className={cn(\"font-normal text-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbSeparator({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<\"li\">) {\n  return (\n    <li\n      data-slot=\"breadcrumb-separator\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\"[&>svg]:size-3.5\", className)}\n      {...props}\n    >\n      {children ?? (\n        <ChevronRightIcon />\n      )}\n    </li>\n  )\n}\n\nfunction BreadcrumbEllipsis({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      data-slot=\"breadcrumb-ellipsis\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"flex size-5 items-center justify-center [&>svg]:size-4\",\n        className\n      )}\n      {...props}\n    >\n      <MoreHorizontalIcon\n      />\n      <span className=\"sr-only\">More</span>\n    </span>\n  )\n}\n\nexport {\n  Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n  BreadcrumbEllipsis,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

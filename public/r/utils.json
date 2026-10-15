@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "title": "utils",
+  "description": "shadcn/ui 표준 클래스 결합 함수.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.6.0"
+  ],
+  "files": [
+    {
+      "path": "src/lib/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\n/**\n * shadcn/ui 표준 클래스 결합 함수.\n *\n * 토큰 이름이 shadcn 규약(text-sm · bg-primary …)과 Tailwind 기본 타입 스케일을 그대로\n * 따르므로 tailwind-merge 기본 설정이 크기와 색을 올바르게 구분한다.\n * design.md 고유 색(charcoal · mute · on-dark …)은 tailwind-merge 가 색으로 취급한다.\n */\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

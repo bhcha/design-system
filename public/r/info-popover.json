@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "info-popover",
+  "title": "info-popover",
+  "description": "InfoPopover — 트리거·제목·본문을 props 로 받는 보충 설명 팝오버 (shadcn Popover 조립)",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/popover.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/info-popover.tsx",
+      "content": "\"use client\"\n\nimport {\n  Popover,\n  PopoverContent,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * InfoPopover — 트리거·제목·본문을 props 로 받는 보충 설명 팝오버 (shadcn Popover 조립)\n *\n * 해부도\n *   [트리거] → ┌ PopoverContent ┐\n *              │ PopoverTitle   │\n *              │ 본문           │\n *              └────────────────┘\n *\n * 토큰\n *   shadcn Popover — bg-popover · ring-1 ring-foreground/10 · rounded-lg(12px) · 그림자 없음\n *   폭 w-80 · 본문 text-base text-charcoal\n *\n * 상태\n *   닫힘 / 열림\n *\n * 키보드·ARIA\n *   Base UI Popover — 트리거 Enter/Space 로 열고 Esc 로 닫는다. 포커스를 가두지 않는다.\n *\n * 수용 기준\n *   - 배경을 가리지 않는다(모달이 아니다).\n */\nexport type InfoPopoverProps = {\n  trigger: React.ReactElement<Record<string, unknown>>\n  title: React.ReactNode\n  children: React.ReactNode\n  className?: string\n}\n\nexport function InfoPopover({ trigger, title, children, className }: InfoPopoverProps) {\n  return (\n    <Popover>\n      <PopoverTrigger render={trigger} />\n      <PopoverContent sideOffset={8} className={cn(\"w-80 gap-2 p-4\", className)}>\n        <PopoverHeader>\n          <PopoverTitle className=\"text-base font-semibold\">{title}</PopoverTitle>\n        </PopoverHeader>\n        <div className=\"text-base text-charcoal\">{children}</div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

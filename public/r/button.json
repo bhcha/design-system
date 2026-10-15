@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "title": "button",
+  "description": "shadcn/ui Button (base-nova) — Ollama 테마 적용본",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/button.tsx",
+      "content": "import { Button as ButtonPrimitive } from \"@base-ui/react/button\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * shadcn/ui Button (base-nova) — Ollama 테마 적용본\n *\n * 해부도\n *   [ 아이콘(data-icon=\"inline-start\") ][ 라벨 ][ 아이콘(inline-end) ]\n *\n * 토큰 — design.md\n *   {component.button-primary}        → variant=\"default\"  bg-primary · text-primary-foreground\n *   {component.button-primary-active} → :active            bg-primary-active(#090909)\n *   {component.button-secondary}      → variant=\"outline\"  bg-background · 1px hairline-strong\n *   {component.button-pill-on-dark}   → variant=\"on-dark\"  어두운 면 위의 흰 pill\n *   {component.button-disabled}       → disabled           bg-muted · text-mute\n *   곡률 {rounded.full} · 라벨 {typography.button-md} 14px/500\n *   size default 36px(px-5) · sm 32px(px-4, 작업 화면 compact — 적용 차이 5) · lg 40px\n *\n * 상태\n *   기본 / hover / active / focus-visible(ring 3px, ring/50 = design.md focus-ring) / disabled\n *\n * 키보드·ARIA\n *   Base UI Button. 링크로 렌더하려면 `render={<Link href />}` + `nativeButton={false}`\n *   (button-link.tsx 의 ButtonLink 가 감싼다). 아이콘만 있으면 aria-label 필수.\n *\n * 수용 기준\n *   - 기본 높이 36px · 곡률 9999px · 14px/500.\n *   - 비활성은 opacity 가 아니라 토큰(bg-muted · text-mute)이다.\n */\nconst buttonVariants = cva(\n  \"group/button inline-flex shrink-0 items-center justify-center rounded-full border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-colors outline-none select-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:border-transparent disabled:bg-muted disabled:text-mute aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground active:bg-primary-active data-pressed:bg-primary-active\",\n        outline:\n          \"border-hairline-strong bg-background text-foreground hover:bg-muted active:bg-accent aria-expanded:bg-muted\",\n        secondary:\n          \"bg-secondary text-secondary-foreground hover:bg-accent aria-expanded:bg-accent\",\n        ghost: \"text-foreground hover:bg-muted aria-expanded:bg-muted\",\n        destructive:\n          \"bg-status-danger-soft text-destructive hover:bg-status-danger-soft/80\",\n        link: \"text-foreground underline underline-offset-4\",\n        \"on-dark\": \"bg-background text-foreground hover:bg-muted active:bg-accent\",\n      },\n      size: {\n        default:\n          \"h-9 gap-2 px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4\",\n        xs: \"h-6 gap-1 px-3 text-xs [&_svg:not([class*='size-'])]:size-3\",\n        sm: \"h-8 gap-1.5 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3\",\n        lg: \"h-10 gap-2 px-6\",\n        icon: \"size-9\",\n        \"icon-xs\": \"size-6 [&_svg:not([class*='size-'])]:size-3\",\n        \"icon-sm\": \"size-8\",\n        \"icon-lg\": \"size-11\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n)\n\nfunction Button({\n  className,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {\n  return (\n    <ButtonPrimitive\n      data-slot=\"button\"\n      className={cn(buttonVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,3 +1,7 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { ChevronDownIcon } from "lucide-react"
+
 /**
  * shadcn/ui native-select (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.
  *
@@ -17,9 +21,6 @@
  *   - 표시자가 보여 TextInput 과 구별된다
  *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.
  */
-import * as React from "react"
-import { cn } from "@/lib/utils"
-import { ChevronDownIcon } from "lucide-react"
 
 type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
   size?: "sm" | "default"

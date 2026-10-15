@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skip-link",
+  "title": "skip-link",
+  "description": "SkipLink — 본문 바로가기",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/skip-link.tsx",
+      "content": "import { buttonVariants } from \"@/components/ui/button\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * SkipLink — 본문 바로가기\n *\n * shadcn 기반\n *   shadcn `buttonVariants({ variant: \"default\", size: \"sm\" })` 를 입힌 <a> 다 —\n *   포커스를 받아 나타나는 순간 Button(primary · compact 32px · pill)과 같은 모양이다.\n *   평소에는 `sr-only` 로 숨긴다. 포커스 시 `focus:not-sr-only` 가 height·padding 을\n *   auto·0 으로 되돌리므로 Button 의 높이(h-8)·좌우 패딩(px-4)을 focus: 변형으로 다시 건다.\n *   이동이므로 Base UI Button 이 아니라 네이티브 <a href=\"#id\"> 다(서버 컴포넌트 유지).\n *\n * 근거: ADS 접근성 원칙 \"헤딩 계층 + 본문 건너뛰기 링크\". 시각 값은 design.md 토큰.\n *\n * 해부도\n *   평소에는 보이지 않다가 키보드 포커스를 받으면 좌상단에 나타나는 pill 링크.\n *\n * 토큰\n *   Button default/sm — 배경 --color-primary · 텍스트 --color-primary-foreground ·\n *   곡률 --radius-full · 높이 32px · 라벨 {typography.button-md} 14px/500\n *   위치 top-2 left-2 · 층위 z-50\n *\n * 상태\n *   숨김(기본) / 포커스(표시, Button 의 focus-visible ring)\n *\n * 키보드·ARIA\n *   문서에서 가장 먼저 포커스를 받아야 하므로 <body> 최상단에 둔다.\n *   `sr-only` 로 숨기고 `focus:not-sr-only` 로 되살린다 — display:none 은 쓰지 않는다\n *   (포커스를 받을 수 없게 되기 때문).\n *\n * 수용 기준\n *   - Tab 한 번에 도달한다.\n *   - 활성화하면 targetId 요소로 포커스가 옮겨간다(대상에 tabindex=\"-1\" 필요).\n */\nexport function SkipLink({\n  targetId,\n  children = \"본문 바로가기\",\n  className,\n}: {\n  targetId: string;\n  children?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <a\n      href={`#${targetId}`}\n      className={cn(\n        buttonVariants({ variant: \"default\", size: \"sm\" }),\n        \"sr-only focus:not-sr-only\",\n        \"focus:absolute focus:top-2 focus:left-2 focus:z-50\",\n        \"focus:h-8 focus:px-4\",\n        className,\n      )}\n    >\n      {children}\n    </a>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "floating-sticky-bar",
+  "title": "floating-sticky-bar",
+  "description": "{component.floating-sticky-bar} — 스펙 시트",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/floating-sticky-bar.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * {component.floating-sticky-bar} — 스펙 시트\n *\n * shadcn 기반\n *   대응하는 shadcn 프리미티브가 없다(고정 위치 띠는 shadcn 범위 밖이다).\n *   네이티브 <div role=\"region\"> + 토큰 유틸리티로 남기고, 액션 슬롯에는 호출부가\n *   shadcn Button/ButtonLink 를 넣는다.\n *\n * 해부도\n *   [ 좌측 요약(합계·상태) ................ ][ 우측 주요 액션 ]\n *   뷰포트 하단에 고정돼 스크롤 위에 떠 있는 반투명 유리 띠.\n *\n * 토큰\n *   높이 min-h-16(64px) · 패딩 px-8 py-3(32/12px) + 하단 안전 영역\n *   배경 --color-muted 80% + backdrop-blur-frosted\n *   상단 구분선 1px --color-border\n *\n * design.md 원칙\n *   \"떠 있는\" 느낌은 그림자가 아니라 backdrop-filter 가 만든다. 그림자를 주지 않는다.\n *\n * 반응형·안전 영역\n *   전체 폭에 닿는 고정 요소이므로 하단에 env(safe-area-inset-bottom) 을 더한다.\n *   globals.css 의 `pb-safe` 유틸리티가 그 값을 감싼다.\n *\n * 상태\n *   상태 없음(표시용 컨테이너).\n *\n * 키보드·ARIA\n *   화면 콘텐츠를 가리므로 <div role=\"region\" aria-label> 로 이름을 준다.\n *   호출부는 본문 하단에 이 바 높이만큼 여백을 확보한다.\n *\n * 수용 기준\n *   - 하단 고정, 콘텐츠 위(z-40).\n *   - 좌측 요약이 길어져도 우측 액션을 밀어내지 않는다(min-w-0 + truncate).\n */\nexport type FloatingStickyBarProps = React.ComponentProps<\"div\"> & {\n  /** 좌측 요약 슬롯. */\n  summary: React.ReactNode;\n  /** 우측 주요 액션 슬롯. */\n  action?: React.ReactNode;\n  /** 랜드마크 이름. */\n  label: string;\n};\n\nexport function FloatingStickyBar({\n  className,\n  summary,\n  action,\n  label,\n  ...props\n}: FloatingStickyBarProps) {\n  return (\n    <div\n      role=\"region\"\n      aria-label={label}\n      className={cn(\n        \"fixed inset-x-0 bottom-0 z-40 border-t border-border\",\n        \"bg-muted/80 backdrop-blur-frosted backdrop-saturate-180\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"mx-auto flex min-h-16 max-w-app items-center gap-4 px-8 pt-3 pb-safe\">\n        <div className=\"min-w-0 flex-1 truncate text-base text-foreground\">\n          {summary}\n        </div>\n        {action ? <div className=\"shrink-0\">{action}</div> : null}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

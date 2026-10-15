@@ -1,18 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Nunito } from "next/font/google";
 import { THEME_COLOR } from "@/lib/design-tokens";
+import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
-
-/* design.md 의 공개 대체 서체 — Inter(ui-sans-serif 자리) · Nunito(SF Pro Rounded 자리).
-   next/font 가 self-host 하고 CSS 변수만 <html> 에 심는다. 실제 font-family 결박은
-   globals.css 의 --font-sans · --font-display 가 한다. */
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-nunito",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -28,7 +17,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={`h-full ${inter.variable} ${nunito.variable}`}>
+    <html lang="ko" className={`h-full ${fontVariables}`}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

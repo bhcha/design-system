@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-field",
+  "title": "form-field",
+  "description": "FormField — 라벨·도움말·오류를 한 번에 받는 폼 행 (shadcn Field 조립)",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/field.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/form-field.tsx",
+      "content": "import {\n  Field,\n  FieldDescription,\n  FieldError,\n  FieldLabel,\n} from \"@/components/ui/field\"\n\n/**\n * FormField — 라벨·도움말·오류를 한 번에 받는 폼 행 (shadcn Field 조립)\n *\n * 해부도\n *   <Field>\n *     <FieldLabel>라벨 [필수]</FieldLabel>\n *     컨트롤(children)\n *     <FieldDescription>도움말</FieldDescription> | <FieldError>오류</FieldError>\n *   </Field>\n *   라벨이 컨트롤을 감싸므로(label 요소) id 없이도 접근 가능한 이름이 생긴다.\n *\n * 토큰\n *   shadcn Field 그대로 — 라벨 text-sm font-medium · 도움말 text-muted-foreground ·\n *   오류 text-destructive · 필수 표시 text-destructive\n *\n * 상태\n *   기본 / 필수 / 오류(data-invalid) / 비활성은 컨트롤이 가진다\n *\n * 키보드·ARIA\n *   오류가 있으면 Field 에 data-invalid, 오류 문구는 aria-live=\"polite\".\n *   \"필수\"는 보이는 글자라 접근 가능한 이름에 포함된다.\n *\n * 수용 기준\n *   - 오류가 있으면 도움말 대신 오류만 보인다.\n */\nexport type FormFieldProps = {\n  label: React.ReactNode\n  required?: boolean\n  hint?: React.ReactNode\n  error?: React.ReactNode\n  children: React.ReactNode\n  className?: string\n}\n\nexport function FormField({\n  label,\n  required = false,\n  hint,\n  error,\n  children,\n  className,\n}: FormFieldProps) {\n  // 라벨이 컨트롤을 감싼다 — 기존 화면과 접근 가능한 이름이 같다(\"라벨 필수\").\n  // 도움말·오류는 블록 요소(p·div)라 label 밖에 둔다(label 은 phrasing 콘텐츠만 허용).\n  return (\n    <Field data-invalid={error ? true : undefined} className={className}>\n      <FieldLabel className=\"flex w-full flex-col items-stretch gap-1.5\">\n        <span className=\"flex flex-wrap items-baseline gap-2\">\n          <span className=\"text-sm font-medium text-charcoal\">{label}</span>\n          {required ? (\n            <span className=\"text-sm font-medium text-destructive\">필수</span>\n          ) : null}\n        </span>\n        {children}\n      </FieldLabel>\n      {error ? (\n        <FieldError aria-live=\"polite\">{error}</FieldError>\n      ) : hint ? (\n        <FieldDescription>{hint}</FieldDescription>\n      ) : null}\n    </Field>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

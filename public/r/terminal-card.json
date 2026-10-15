@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "terminal-card",
+  "title": "terminal-card",
+  "description": "{component.terminal-card} · {component.terminal-traffic-lights} — 스펙 시트",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/terminal-card.tsx",
+      "content": "import { Separator } from \"@/components/ui/separator\";\nimport { cn } from \"@/lib/utils\";\nimport { Card } from \"@/components/ui/card\";\n\n/**\n * {component.terminal-card} · {component.terminal-traffic-lights} — 스펙 시트\n *\n * 구현 — shadcn/ui Card 위에 조립한다\n *   Card(겉 상자) > <figure>(시맨틱) > 신호등 · <pre> · <figcaption>.\n *   Card 는 div 만 그리므로 <figure> 를 안쪽에 한 겹 둔다 — <figcaption> 이 <figure> 의\n *   직계 자식으로 남아 HTML 이 유효하고, 캡션은 이전처럼 상자 안에 있다.\n *   Card 기본값(ring · rounded-xl · py-4 · gap-4)은 design.md 값으로 덮는다.\n *\n * 해부도\n *   ┌───────────────────────────────┐\n *   │ ● ● ●                          │  ← 머리: 신호등 3점(12px, 간격 4px)\n *   ├───────────────────────────────┤  ← hairline(Separator)\n *   │ $ 명령                          │  ← kind=\"command\" — ink\n *   │ 출력…                           │  ← kind=\"output\"  — 보조 회색\n *   │ → 결과                          │  ← kind=\"result\"  — ink\n *   └───────────────────────────────┘\n *\n * 토큰 — design.md {component.terminal-card}\n *   배경 --color-background · 1px --color-border · ring 없음 · 곡률 --radius-lg(12px) · padding 16px(p-4)\n *   본문 {typography.code-sm}(font-mono 14/20)\n *   신호등 --color-terminal-red · --color-terminal-yellow · --color-terminal-green, 12px(size-3) 원형\n *   출력 줄 --color-charcoal — design.md 의 mute(#a3a3a3)는 AA 미달이라\n *   이 시스템에서 비활성 전용이다(design.md 적용 차이 4).\n *\n * 상태\n *   정적 표시 하나뿐이다.\n *\n * 키보드·ARIA\n *   <figure> + 선택적 <figcaption>. 신호등은 장식이라 aria-hidden.\n *   줄은 <pre> 안의 텍스트라 스크린 리더가 순서대로 읽는다.\n *\n * 수용 기준\n *   - 신호등 3점이 12px 이고 terminal 토큰 색이다.\n *   - 곡률 12px · 1px hairline · 그림자·ring 없음.\n */\nexport type TerminalLine = {\n  kind: \"command\" | \"output\" | \"result\";\n  text: string;\n};\n\nexport function TerminalTrafficLights() {\n  return (\n    <div aria-hidden=\"true\" className=\"flex items-center gap-1\">\n      <span className=\"size-3 rounded-full bg-terminal-red\" />\n      <span className=\"size-3 rounded-full bg-terminal-yellow\" />\n      <span className=\"size-3 rounded-full bg-terminal-green\" />\n    </div>\n  );\n}\n\nexport function TerminalCard({\n  lines,\n  caption,\n  className,\n}: {\n  lines: readonly TerminalLine[];\n  caption?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <Card\n      render={<figure />}\n      className={cn(\"gap-0 rounded-lg py-0\", className)}\n    >\n      {/* 머리 — 신호등 줄 아래 hairline 하나로 본문과 나뉜다(Ollama terminal-card 원본). */}\n      <div className=\"px-4 py-3\">\n        <TerminalTrafficLights />\n      </div>\n      <Separator />\n      <pre className=\"overflow-x-auto p-4 font-mono text-sm\">\n        {lines.map((line, index) => (\n          <span\n            key={`${index}-${line.text}`}\n            className={cn(\n              \"block\",\n              line.kind === \"output\" ? \"text-charcoal\" : \"text-foreground\",\n            )}\n          >\n            {line.kind === \"command\" ? (\n              <span className=\"text-charcoal\">$ </span>\n            ) : line.kind === \"result\" ? (\n              \"→ \"\n            ) : null}\n            {line.text}\n          </span>\n        ))}\n      </pre>\n      {caption ? (\n        <figcaption className=\"px-4 pb-4 text-xs text-muted-foreground\">\n          {caption}\n        </figcaption>\n      ) : null}\n    </Card>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

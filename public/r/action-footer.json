@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "action-footer",
+  "title": "action-footer",
+  "description": "ActionFooter — 폼·패널 하단의 액션 줄 (저장·취소 버튼 묶음)",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/action-footer.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n/**\n * ActionFooter — 폼·패널 하단의 액션 줄 (저장·취소 버튼 묶음)\n *\n * 해부도\n *   ─────────────── (위쪽 1px hairline)\n *   [ 버튼 ][ 버튼 ] …\n *   sticky 이면 스크롤 컨테이너 바닥에 붙는다(작업 도구 패널의 액션 푸터 패턴).\n *\n * 토큰\n *   위 테두리 border-border(hairline) · 버튼 간격 gap-2 · 위 여백 pt-3\n *   sticky: bg-background · 패널 패딩을 상쇄하는 -mx-4 -mb-4 px-4 py-3 · z-10(globals.css 층위 표)\n *\n * 상태\n *   기본 / sticky\n *\n * 키보드·ARIA\n *   시맨틱 없음 — 안의 버튼이 포커스를 받는다.\n *\n * 수용 기준\n *   - 폼이 길어도 sticky 이면 저장 버튼이 보인다.\n *   - 그림자 없이 hairline 하나로 본문과 나뉜다.\n */\nexport function ActionFooter({\n  sticky = false,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & { sticky?: boolean }) {\n  return (\n    <div\n      data-slot=\"action-footer\"\n      className={cn(\n        \"flex flex-wrap gap-2 border-t border-border\",\n        sticky ? \"sticky bottom-0 z-10 -mx-4 -mb-4 bg-background px-4 py-3\" : \"pt-3\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

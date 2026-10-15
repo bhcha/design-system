@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal-dialog",
+  "title": "modal-dialog",
+  "description": "ModalDialog — 트리거·제목·본문·하단 액션을 props 로 받는 모달 (shadcn Dialog 조립)",
+  "dependencies": [
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/modal-dialog.tsx",
+      "content": "\"use client\"\n\nimport { XIcon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/components/ui/dialog\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * ModalDialog — 트리거·제목·본문·하단 액션을 props 로 받는 모달 (shadcn Dialog 조립)\n *\n * 해부도\n *   [트리거]  →  ┌ DialogContent ───────────────┐\n *                │ DialogTitle / Description [✕] │\n *                │ 본문(스크롤)                   │\n *                │ DialogFooter(액션)             │\n *                └──────────────────────────────┘\n *\n * 토큰\n *   shadcn Dialog — bg-popover · ring-1 ring-foreground/10 · rounded-xl(12px) · 그림자 없음\n *   폭 max-w-reading(720px) · 닫기 Button ghost icon-sm\n *\n * 상태\n *   닫힘 / 열림 · 제어(open·onOpenChange) / 비제어\n *\n * 키보드·ARIA\n *   Base UI Dialog — 포커스 가둠, Esc 닫기, 닫으면 트리거로 포커스 복귀.\n *   닫기 버튼 접근 가능한 이름은 closeLabel(기본 \"닫기\").\n *\n * 수용 기준\n *   - 본문이 길면 패널이 아니라 본문 영역이 스크롤한다.\n */\nexport type ModalDialogProps = {\n  trigger: React.ReactElement<Record<string, unknown>>\n  title: React.ReactNode\n  description?: React.ReactNode\n  children: React.ReactNode\n  footer?: React.ReactNode\n  closeLabel?: string\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  className?: string\n}\n\nexport function ModalDialog({\n  trigger,\n  title,\n  description,\n  children,\n  footer,\n  closeLabel = \"닫기\",\n  open,\n  onOpenChange,\n  className,\n}: ModalDialogProps) {\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogTrigger render={trigger} />\n      <DialogContent\n        showCloseButton={false}\n        className={cn(\n          \"flex max-h-[90dvh] flex-col p-6 sm:max-w-reading\",\n          className,\n        )}\n      >\n        <DialogHeader className=\"flex-row items-start gap-3\">\n          <div className=\"flex min-w-0 flex-1 flex-col gap-1\">\n            <DialogTitle className=\"text-xl font-semibold break-words\">\n              {title}\n            </DialogTitle>\n            {description ? (\n              <DialogDescription className=\"text-base\">{description}</DialogDescription>\n            ) : null}\n          </div>\n          <DialogClose\n            render={<Button variant=\"secondary\" size=\"icon-sm\" aria-label={closeLabel} />}\n          >\n            <XIcon aria-hidden=\"true\" />\n          </DialogClose>\n        </DialogHeader>\n        <div className=\"min-h-0 flex-1 overflow-y-auto overscroll-contain\">{children}</div>\n        {footer ? (\n          <DialogFooter className=\"flex-row flex-wrap items-center justify-start gap-2 border-t border-border pt-3\">\n            {footer}\n          </DialogFooter>\n        ) : null}\n      </DialogContent>\n    </Dialog>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "title": "spinner",
+  "description": "shadcn/ui spinner (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/spinner.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport { Loader2Icon } from \"lucide-react\"\n\n/**\n * shadcn/ui spinner (base-nova) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   회전하는 Loader2 아이콘 하나\n *\n * 토큰\n *   size-4 · currentColor(부모 글자색) · animate-spin\n *\n * 상태\n *   회전 중\n *\n * 키보드·ARIA\n *   role=status · aria-label=\"불러오는 중\". 맥락이 다르면 aria-label 을 덮어쓴다.\n *\n * 수용 기준\n *   - 접근 가능한 이름이 있다.\n *   - 색은 부모 글자색(토큰)에서 온다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nfunction Spinner({ className, ...props }: React.ComponentProps<\"svg\">) {\n  return (\n    <Loader2Icon data-slot=\"spinner\" role=\"status\" aria-label=\"불러오는 중\" className={cn(\"size-4 animate-spin\", className)} {...props} />\n  )\n}\n\nexport { Spinner }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

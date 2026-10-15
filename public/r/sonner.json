@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner",
+  "title": "sonner",
+  "description": "shadcn/ui sonner (base-nova, sonner) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "lucide-react@^1.57.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/sonner.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui sonner (base-nova, sonner) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   <Toaster /> 하나를 둔다 → toast() 가 오른쪽 아래(기본)에 쌓인다 ─ 아이콘 · 제목 · 설명 · 액션\n *\n * 토큰\n *   --normal-bg popover · --normal-text popover-foreground · --normal-border border(hairline) · --border-radius radius(12px)\n *   그림자 없음(shadow-none!) · 테마 light 고정(이 앱은 어두운 테마가 없다)\n *\n * 상태\n *   기본 / success / info / warning / error / loading\n *\n * 키보드·ARIA\n *   sonner — 알림 영역은 aria-live 로 읽힌다. Alt+T 로 알림 영역으로 포커스 이동.\n *   액션 버튼에는 동작이 드러나는 라벨을 쓴다.\n *\n * 수용 기준\n *   - 토스트에 그림자가 없다.\n *   - 알림은 스크린리더에 읽힌다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { Toaster as Sonner, type ToasterProps } from \"sonner\"\nimport { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from \"lucide-react\"\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      theme=\"light\"\n      className=\"group\"\n      icons={{\n        success: (\n          <CircleCheckIcon className=\"size-4\" />\n        ),\n        info: (\n          <InfoIcon className=\"size-4\" />\n        ),\n        warning: (\n          <TriangleAlertIcon className=\"size-4\" />\n        ),\n        error: (\n          <OctagonXIcon className=\"size-4\" />\n        ),\n        loading: (\n          <Loader2Icon className=\"size-4 animate-spin\" />\n        ),\n      }}\n      style={\n        {\n          \"--normal-bg\": \"var(--popover)\",\n          \"--normal-text\": \"var(--popover-foreground)\",\n          \"--normal-border\": \"var(--border)\",\n          \"--border-radius\": \"var(--radius)\",\n        } as React.CSSProperties\n      }\n      toastOptions={{\n        classNames: {\n          toast: \"shadow-none!\",\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "switch",
+  "description": "shadcn/ui switch (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/switch.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui switch (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   [ 트랙(pill) [썸(원)] ] — 켜면 썸이 오른쪽으로 간다\n *\n * 토큰\n *   트랙 rounded-full · 켜짐 bg-primary · 꺼짐 bg-hairline-strong · 썸 bg-background\n *   size default 20×36px(h-5 w-9) · sm 16×28px(h-4 w-7) — 간격 토큰만 쓴다\n *   포커스 ring-2 ring-ring(불투명, 적용 차이 2) · 그림자 없음\n *\n * 상태\n *   꺼짐 / 켜짐 / focus-visible / aria-invalid / disabled(트랙 bg-muted · 썸 bg-mute — opacity 아님)\n *\n * 키보드·ARIA\n *   Base UI Switch — role=\"switch\" · aria-checked · Space 로 전환.\n *   Root 가 span 이라 `Label htmlFor` 로 이름이 붙지 않는다 → aria-label 또는\n *   aria-labelledby(라벨 텍스트의 id)로 이름을 준다.\n *\n * 수용 기준\n *   - 트랙·썸 모두 곡률 9999px.\n *   - 비활성은 opacity 가 아니라 토큰(bg-muted · bg-mute)이다.\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\nimport { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Switch({\n  className,\n  size = \"default\",\n  ...props\n}: SwitchPrimitive.Root.Props & {\n  size?: \"sm\" | \"default\"\n}) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      data-size={size}\n      className={cn(\n        \"peer group/switch relative inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-2 focus-visible:ring-ring aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-[size=default]:h-5 data-[size=default]:w-9 data-[size=sm]:h-4 data-[size=sm]:w-7 data-checked:bg-primary data-unchecked:bg-hairline-strong data-disabled:cursor-not-allowed data-disabled:bg-muted data-disabled:ring-1 data-disabled:ring-border\",\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className=\"pointer-events-none block rounded-full bg-background transition-transform group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-4 group-data-[size=sm]/switch:data-checked:translate-x-3 data-unchecked:translate-x-0 group-data-disabled/switch:bg-mute\"\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

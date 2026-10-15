@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "scroll-area",
+  "description": "shadcn/ui scroll-area (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\n/**\n * shadcn/ui scroll-area (base-nova, Base UI) — Ollama 테마. shadcn CLI 로 설치한 원본이다.\n *\n * 해부도\n *   스스로 스크롤하는 영역 + 얇은 스크롤바\n *\n * 토큰\n *   스크롤바 bg-border · rounded-full\n *\n * 상태\n *   스크롤 / 스크롤 없음\n *\n * 키보드·ARIA\n *   Base UI ScrollArea — 뷰포트가 tabIndex=0 이라 Tab 으로 들어가 화살표로 스크롤한다\n *\n * 수용 기준\n *   - 내용이 넘칠 때만 스크롤바가 보인다\n *   - 색·곡률·크기는 globals.css 의 shadcn 시맨틱 토큰에서만 나온다.\n */\n\nimport * as React from \"react\"\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\"\nimport { cn } from \"@/lib/utils\"\n\nfunction ScrollArea({\n  className,\n  children,\n  ...props\n}: ScrollAreaPrimitive.Root.Props) {\n  return (\n    <ScrollAreaPrimitive.Root\n      data-slot=\"scroll-area\"\n      className={cn(\"relative\", className)}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Viewport\n        data-slot=\"scroll-area-viewport\"\n        // 키보드 사용자가 스크롤할 수 있도록 뷰포트를 탭 순서에 넣는다(axe scrollable-region-focusable).\n        tabIndex={0}\n        className=\"size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-1\"\n      >\n        {children}\n      </ScrollAreaPrimitive.Viewport>\n      <ScrollBar />\n      <ScrollAreaPrimitive.Corner />\n    </ScrollAreaPrimitive.Root>\n  )\n}\n\nfunction ScrollBar({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: ScrollAreaPrimitive.Scrollbar.Props) {\n  return (\n    <ScrollAreaPrimitive.Scrollbar\n      data-slot=\"scroll-area-scrollbar\"\n      data-orientation={orientation}\n      orientation={orientation}\n      className={cn(\n        \"flex touch-none p-px transition-colors select-none data-horizontal:h-2.5 data-horizontal:flex-col data-horizontal:border-t data-horizontal:border-t-transparent data-vertical:h-full data-vertical:w-2.5 data-vertical:border-l data-vertical:border-l-transparent\",\n        className\n      )}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Thumb\n        data-slot=\"scroll-area-thumb\"\n        className=\"relative flex-1 rounded-full bg-border\"\n      />\n    </ScrollAreaPrimitive.Scrollbar>\n  )\n}\n\nexport { ScrollArea, ScrollBar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

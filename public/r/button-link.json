@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-link",
+  "title": "button-link",
+  "description": "ButtonLink — 버튼처럼 보이는 **이동** (shadcn Button + next/link)",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/button-link.tsx",
+      "content": "import Link from \"next/link\"\nimport type { VariantProps } from \"class-variance-authority\"\nimport { Button, buttonVariants } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * ButtonLink — 버튼처럼 보이는 **이동** (shadcn Button + next/link)\n *\n * 해부도\n *   shadcn `buttonVariants` 를 그대로 쓰는 <Link>. 시각이 Button 과 갈라질 수 없다.\n *\n * 토큰\n *   Button 과 같다(variant · size).\n *\n * 상태\n *   링크 / 비활성 — 비활성 링크는 표준이 없어 **비활성 shadcn Button** 을 렌더한다.\n *   aria-disabled + pointer-events-none 은 키보드 Enter 이동을 막지 못한다.\n *\n * 키보드·ARIA\n *   이동은 반드시 <a>(next/link). Cmd·중클릭·새 탭이 동작한다.\n *\n * 수용 기준\n *   - disabled 이면 링크가 아니라 disabled <button> 이다.\n */\nexport type ButtonLinkProps = React.ComponentProps<typeof Link> &\n  VariantProps<typeof buttonVariants> & {\n    disabled?: boolean\n  }\n\nexport function ButtonLink({\n  className,\n  variant,\n  size,\n  disabled = false,\n  children,\n  ...props\n}: ButtonLinkProps) {\n  if (disabled) {\n    return (\n      <Button variant={variant} size={size} className={className} disabled>\n        {children}\n      </Button>\n    )\n  }\n  return (\n    <Link\n      data-slot=\"button\"\n      className={cn(buttonVariants({ variant, size }), className)}\n      {...props}\n    >\n      {children}\n    </Link>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
