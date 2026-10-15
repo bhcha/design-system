@@ -71,6 +71,12 @@ const COLOR = {
   "status-warn-soft": "bg-status-warn-soft",
   "status-danger": "bg-status-danger",
   "status-danger-soft": "bg-status-danger-soft",
+  "syntax-keyword": "bg-syntax-keyword",
+  "syntax-string": "bg-syntax-string",
+  "syntax-constant": "bg-syntax-constant",
+  "syntax-function": "bg-syntax-function",
+  "syntax-comment": "bg-syntax-comment",
+  "syntax-punctuation": "bg-syntax-punctuation",
 } as const
 
 export type ColorToken = keyof typeof COLOR

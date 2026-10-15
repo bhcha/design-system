@@ -21,6 +21,7 @@ import { ShadcnSection } from "./_sections/shadcn";
 import { ShadcnMoreSection } from "./_sections/shadcn-more";
 import { DataSection } from "./_sections/data";
 import { DiagramsSection } from "./_sections/diagrams";
+import { CodeSection } from "./_sections/code";
 import { FormsSection } from "./_sections/forms";
 import { NarrativeSection } from "./_sections/narrative";
 import { PanelsSection } from "./_sections/panels";
@@ -161,6 +162,12 @@ export default function DesignSystemPage() {
             <Swatch name="status-warn-soft" />
             <Swatch name="status-danger" contrast="8.25:1" />
             <Swatch name="status-danger-soft" />
+            <Swatch name="syntax-keyword" contrast="6.76:1" />
+            <Swatch name="syntax-string" contrast="6.17:1" />
+            <Swatch name="syntax-constant" contrast="6.10:1" />
+            <Swatch name="syntax-function" contrast="7.07:1" />
+            <Swatch name="syntax-comment" contrast="5.26:1" />
+            <Swatch name="syntax-punctuation" contrast="7.49:1" />
           </div>
         </Section>
 
@@ -399,6 +406,7 @@ export default function DesignSystemPage() {
         <FormsSection />
         <PanelsSection />
         <DiagramsSection />
+        <CodeSection />
         <NarrativeSection />
 
         <Section

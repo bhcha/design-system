@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-button",
+  "title": "copy-button",
+  "description": "CopyButton — 주어진 문자열을 클립보드에 복사하는 아이콘 버튼.",
+  "dependencies": [
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/copy-button.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\nimport { CheckIcon, CopyIcon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\n\n/**\n * CopyButton — 주어진 문자열을 클립보드에 복사하는 아이콘 버튼.\n *\n * 해부도\n *   [ 복사 아이콘 → 복사됨 체크 ] + sr-only 알림(aria-live)\n *\n * 토큰\n *   Button variant=\"ghost\" size=\"icon-sm\" 그대로 — 모양은 Button 이 정한다.\n *\n * 상태\n *   대기 / 복사됨(2초) / 복사 실패(2초)\n *\n * 키보드·ARIA\n *   <button>. aria-label 이 상태를 따라 \"{label}\" → \"복사됨\" → \"복사 실패\" 로 바뀌고,\n *   aria-live=\"polite\" 영역이 결과를 읽어 준다.\n *\n * 수용 기준\n *   - 화면에 보이는 것(줄 번호 등)이 아니라 value 그대로를 복사한다.\n *   - 클립보드 권한이 없으면 \"복사 실패\"를 알린다.\n */\nexport function CopyButton({\n  value,\n  label = \"복사\",\n}: {\n  value: string\n  /** 대기 상태의 접근 가능한 이름 — 예: \"SQL 복사\". */\n  label?: string\n}) {\n  const [state, setState] = useState<\"idle\" | \"copied\" | \"failed\">(\"idle\")\n\n  async function copy() {\n    try {\n      await navigator.clipboard.writeText(value)\n      setState(\"copied\")\n    } catch {\n      setState(\"failed\")\n    }\n    window.setTimeout(() => setState(\"idle\"), 2000)\n  }\n\n  const current =\n    state === \"copied\" ? \"복사됨\" : state === \"failed\" ? \"복사 실패\" : label\n\n  return (\n    <>\n      <Button variant=\"ghost\" size=\"icon-sm\" onClick={copy} aria-label={current}>\n        {state === \"copied\" ? (\n          <CheckIcon aria-hidden=\"true\" />\n        ) : (\n          <CopyIcon aria-hidden=\"true\" />\n        )}\n      </Button>\n      <span aria-live=\"polite\" className=\"sr-only\">\n        {state === \"idle\" ? \"\" : current}\n      </span>\n    </>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -159,6 +159,15 @@
   --color-status-danger: #8a3030;
   --color-status-danger-soft: #f6e9e9;
 
+  /* 구문 강조 — design.md 에 없다(이슈 #3, CodeViewer 전용). 코드 면(--muted #fafafa) 위 4.5:1 이상.
+     상태 색과 같은 계열을 써서 팔레트를 늘리지 않는다. 보라(function)만 새 값이다. */
+  --color-syntax-keyword: #255d84; /* = status-info */
+  --color-syntax-string: #176b52; /* = status-ok */
+  --color-syntax-constant: #815700; /* = status-warn — 숫자·상수 */
+  --color-syntax-function: #6b3fa0;
+  --color-syntax-comment: #696969; /* 강조 줄(status-info-soft) 위에서도 4.5:1 — muted-foreground(#737373)는 4.1:1 이라 못 쓴다 */
+  --color-syntax-punctuation: #525252; /* = charcoal */
+
   /* 타입 스케일 — design.md typography = Tailwind 기본 8단계 */
   --text-*: initial;
   --text-xs: 12px; /* caption-sm */
