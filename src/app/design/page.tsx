@@ -5,23 +5,20 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { CommandTag } from "@/components/ui/command-tag";
 import { CtaStripDark } from "@/components/ui/cta-strip";
 import { FaqList } from "@/components/ui/faq-row";
-import { EnvironmentQuoteCard } from "@/components/ui/environment-quote-card";
 import { FloatingStickyBar } from "@/components/ui/floating-sticky-bar";
 import { GlobalNav } from "@/components/ui/global-nav";
-import { IconButton } from "@/components/ui/icon-button";
+import { IconButton, IconButtonLink } from "@/components/ui/icon-button";
 import { InstallSnippet } from "@/components/ui/install-snippet";
 import { PricingCard } from "@/components/ui/pricing-card";
-import { ProductTile } from "@/components/ui/product-tile";
 import { SearchInput } from "@/components/ui/search-input";
 import { SiteFooter } from "@/components/ui/site-footer";
-import { StoreUtilityCard } from "@/components/ui/store-utility-card";
-import { SubNav } from "@/components/ui/sub-nav";
 import { TerminalCard, TerminalTrafficLights } from "@/components/ui/terminal-card";
 import { TextInput } from "@/components/ui/text-input";
 import { TextLink } from "@/components/ui/text-link";
 import { Grid, Section, Specimen, Swatch } from "./_catalog";
 import { AppFrameSection } from "./_sections/app-frame";
 import { ShadcnSection } from "./_sections/shadcn";
+import { ShadcnMoreSection } from "./_sections/shadcn-more";
 import { DataSection } from "./_sections/data";
 import { DiagramsSection } from "./_sections/diagrams";
 import { FormsSection } from "./_sections/forms";
@@ -134,6 +131,14 @@ export default function DesignSystemPage() {
             <Swatch name="destructive" contrast="= status-danger" />
             <Swatch name="border" />
             <Swatch name="input" />
+            <Swatch name="sidebar" contrast="사이드바 면" />
+            <Swatch name="sidebar-foreground" />
+            <Swatch name="sidebar-primary" />
+            <Swatch name="sidebar-primary-foreground" />
+            <Swatch name="sidebar-accent" contrast="사이드바 hover" />
+            <Swatch name="sidebar-accent-foreground" />
+            <Swatch name="sidebar-border" />
+            <Swatch name="sidebar-ring" />
             <Swatch name="ring" contrast="포커스 링 3.7:1" />
             <Swatch name="black" contrast="오버레이 전용" />
             <Swatch name="white" />
@@ -257,8 +262,8 @@ export default function DesignSystemPage() {
 
             <Specimen
               name="icon-button.tsx"
-              state="기본 / 비활성"
-              note="design.md 밖 앱 컴포넌트 — 아이콘만 있는 원형 버튼."
+              state="기본 / 비활성 / 링크"
+              note="design.md 밖 앱 컴포넌트 — 아이콘만 있는 원형 버튼. 주소를 바꾸면 IconButtonLink."
             >
               <IconButton aria-label="다음 항목">
                 <ChevronIcon />
@@ -266,6 +271,9 @@ export default function DesignSystemPage() {
               <IconButton aria-label="다음 항목 (비활성)" disabled>
                 <ChevronIcon />
               </IconButton>
+              <IconButtonLink href="/design#buttons" aria-label="버튼 구역으로 이동">
+                <ChevronIcon />
+              </IconButtonLink>
             </Specimen>
 
             <Specimen name="{component.link-inline}" state="밝은 면 / 어두운 면">
@@ -385,6 +393,7 @@ export default function DesignSystemPage() {
         </Section>
 
         <ShadcnSection />
+        <ShadcnMoreSection />
         <AppFrameSection />
         <DataSection />
         <FormsSection />
@@ -409,111 +418,9 @@ export default function DesignSystemPage() {
             </Card>
           </Specimen>
 
-          <Specimen name="sub-nav.tsx" state="표본" span note="design.md 밖 앱 컴포넌트 — 섹션 띠.">
-            <Card className="w-full gap-0 overflow-hidden py-0">
-              <SubNav
-                category="프로젝트"
-                label="섹션 (표본)"
-                items={NAV_ITEMS.slice(1)}
-                className="static"
-                action={<Button size="sm">승인 요청</Button>}
-              />
-            </Card>
-          </Specimen>
         </Section>
 
-        <Section
-          id="tiles"
-          title="앱 확장 — 타일"
-          note="design.md 밖 앱 컴포넌트. 색·곡률·서체는 design.md 토큰을 그대로 따른다."
-        >
-          <Specimen
-            name="product-tile.tsx"
-            state="light · parchment · dark · dark-2 · dark-3"
-            span
-            note="design.md 밖 · 미사용."
-          >
-            <Card className="w-full gap-0 overflow-hidden py-0">
-              <ProductTile
-                surface="light"
-                title="product-tile-light"
-                tagline="흰 캔버스 위의 기본 타일"
-                actions={
-                  <>
-                    <Button>더 알아보기</Button>
-                    <Button variant="outline">비교하기</Button>
-                  </>
-                }
-              />
-              <ProductTile
-                surface="parchment"
-                title="product-tile-parchment"
-                tagline="흰 타일이 연달아 올 때 리듬을 만든다"
-              />
-              <ProductTile
-                surface="dark"
-                title="product-tile-dark"
-                tagline="어두운 면에서는 인라인 링크가 흰색이다"
-                actions={<Button>더 알아보기</Button>}
-              />
-              <ProductTile
-                surface="dark-2"
-                title="product-tile-dark-2"
-                tagline="어두운 타일이 이어질 때의 미세한 밝기 차이"
-              />
-              <ProductTile
-                surface="dark-3"
-                title="product-tile-dark-3"
-                tagline="스택 하단과 영상 프레임"
-              />
-            </Card>
-          </Specimen>
-        </Section>
 
-        <Section
-          id="cards"
-          title="앱 확장 — 카드"
-          note="design.md 밖 앱 컴포넌트. 그림자 없음."
-        >
-          <Grid>
-            <Specimen
-              name="store-utility-card.tsx"
-              state="기본 / 빈 상태"
-              note="요약 카드 컨테이너로만 전용 가능."
-            >
-              <StoreUtilityCard
-                className="w-64"
-                name="Atlas 웹 개편"
-                meta="마일스톤 5 · 작업 14"
-                action={<TextLink href="/design#cards">구조 열기</TextLink>}
-                media={
-                  <div className="flex size-full items-center justify-center text-xs text-charcoal">
-                    이미지 슬롯
-                  </div>
-                }
-              />
-              <StoreUtilityCard
-                className="w-64"
-                name="이름 없는 후보"
-                meta="확인 필요 — 담당자 지정 전"
-              />
-            </Specimen>
-
-            <Specimen
-              name="environment-quote-card.tsx"
-              state="기본"
-              note="카탈로그 전시용 · 미사용."
-            >
-              <Card variant="flat" className="w-full gap-0 overflow-hidden py-0">
-                <EnvironmentQuoteCard
-                  eyebrow="Atlas 2026"
-                  headline="승인된 것만 기준이 된다"
-                  action={<Button>원칙 보기</Button>}
-                />
-              </Card>
-            </Specimen>
-          </Grid>
-        </Section>
 
         <Section
           id="bars"

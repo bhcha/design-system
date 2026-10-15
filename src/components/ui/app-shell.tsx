@@ -29,9 +29,7 @@ import { cn } from "@/lib/utils";
  *   사이드바만 한 단계 가라앉아 경계를 만든다.
  *
  * 고정 오프셋
- *   상단에 붙는 띠의 높이만큼 사이드바를 내려야 화면 밖으로 넘치지 않는다.
- *   chrome="nav"        — global-nav 만 (56px, top-14 · h-below-nav)
- *   chrome="nav-subnav" — global-nav + sub-nav (108px, top-27 · h-below-chrome, 기본값)
+ *   상단 global-nav(56px)만큼 사이드바를 내려야 화면 밖으로 넘치지 않는다 — top-14 · h-below-nav.
  *
  * 상태
  *   상태 없음(레이아웃 컨테이너).
@@ -43,15 +41,13 @@ import { cn } from "@/lib/utils";
  * 수용 기준
  *   - 본문이 가로로 넘치지 않는다(min-w-0).
  *   - 사이드바가 길어지면 자체 스크롤한다(본문 스크롤을 뺏지 않는다).
- *   - chrome="nav" 에서 사이드바가 56px 에서 시작해 뷰포트 바닥에서 끝난다.
+ *   - 사이드바가 56px 에서 시작해 뷰포트 바닥에서 끝난다.
  */
 export type AppShellProps = {
   sidebar: React.ReactNode;
   children: React.ReactNode;
   /** SkipLink 착지점 id. */
   mainId?: string;
-  /** 위에 깔린 고정 띠의 구성. 사이드바의 sticky 오프셋과 높이를 정한다. */
-  chrome?: "nav" | "nav-subnav";
   className?: string;
 };
 
@@ -59,7 +55,6 @@ export function AppShell({
   sidebar,
   children,
   mainId = "main",
-  chrome = "nav-subnav",
   className,
 }: AppShellProps) {
   return (
@@ -73,7 +68,7 @@ export function AppShell({
         className={cn(
           "shrink-0 border-b border-border bg-muted",
           "lg:sticky lg:w-60 lg:overflow-y-auto lg:border-r lg:border-b-0",
-          chrome === "nav" ? "lg:top-14 lg:h-below-nav" : "lg:top-27 lg:h-below-chrome",
+          "lg:top-14 lg:h-below-nav",
         )}
       >
         <div className="p-3">{sidebar}</div>

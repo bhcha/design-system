@@ -76,45 +76,45 @@ export function SectionPanel({
 }: SectionPanelProps) {
   const titleId = `${id}-title`;
   return (
-    <section
-      aria-labelledby={titleId}
-      className={cn("flex flex-col", className)}
-      {...props}
+    <Card
+      render={<section aria-labelledby={titleId} {...props} />}
+      className={cn("gap-3 overflow-visible text-base", className)}
     >
-      <Card className="flex-1 gap-3 overflow-visible text-base ring-border">
-        <CardHeader className="gap-x-3 gap-y-1">
-          <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
-            <CardTitle className="min-w-0">
-              <h2 id={titleId} className="text-base font-semibold text-foreground">
-                {title}
-              </h2>
-            </CardTitle>
-            {meta ? (
-              <span className="min-w-0 flex-1 text-xs text-charcoal">{meta}</span>
-            ) : null}
-          </div>
-
-          {actions ? (
-            <CardAction className="flex items-center gap-2">{actions}</CardAction>
+      <CardHeader className="gap-x-3 gap-y-1">
+        <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+          <CardTitle className="min-w-0">
+            <h2
+              id={titleId}
+              className="text-base font-semibold text-foreground"
+            >
+              {title}
+            </h2>
+          </CardTitle>
+          {meta ? (
+            <span className="min-w-0 flex-1 text-xs text-charcoal">{meta}</span>
           ) : null}
+        </div>
 
-          {description ? (
-            <CardDescription className="text-xs text-charcoal">
-              {description}
-            </CardDescription>
-          ) : null}
-        </CardHeader>
-
-        {children != null && children !== false ? (
-          <CardContent className="flex flex-col gap-3">{children}</CardContent>
+        {actions ? (
+          <CardAction className="flex items-center gap-2">{actions}</CardAction>
         ) : null}
 
-        {note ? (
-          <CardFooter className="border-t-0 bg-transparent pt-0 text-xs text-charcoal">
-            <p>{note}</p>
-          </CardFooter>
+        {description ? (
+          <CardDescription className="text-xs text-charcoal">
+            {description}
+          </CardDescription>
         ) : null}
-      </Card>
-    </section>
+      </CardHeader>
+
+      {children != null && children !== false ? (
+        <CardContent className="flex flex-col gap-3">{children}</CardContent>
+      ) : null}
+
+      {note ? (
+        <CardFooter className="border-t-0 bg-transparent pt-0 text-xs text-charcoal">
+          <p>{note}</p>
+        </CardFooter>
+      ) : null}
+    </Card>
   );
 }

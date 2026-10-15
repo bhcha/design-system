@@ -1,3 +1,4 @@
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 
@@ -12,7 +13,8 @@ import { Card } from "@/components/ui/card";
  *
  * 해부도
  *   ┌───────────────────────────────┐
- *   │ ● ● ●                          │  ← 신호등 3점(12px, 간격 4px)
+ *   │ ● ● ●                          │  ← 머리: 신호등 3점(12px, 간격 4px)
+ *   ├───────────────────────────────┤  ← hairline(Separator)
  *   │ $ 명령                          │  ← kind="command" — ink
  *   │ 출력…                           │  ← kind="output"  — 보조 회색
  *   │ → 결과                          │  ← kind="result"  — ink
@@ -62,35 +64,37 @@ export function TerminalCard({
 }) {
   return (
     <Card
-      className={cn(
-        "gap-0 rounded-lg border border-border bg-background p-4 text-foreground ring-0",
-        className,
-      )}
+      render={<figure />}
+      className={cn("gap-0 rounded-lg py-0", className)}
     >
-      <figure className="flex flex-col gap-3">
+      {/* 머리 — 신호등 줄 아래 hairline 하나로 본문과 나뉜다(Ollama terminal-card 원본). */}
+      <div className="px-4 py-3">
         <TerminalTrafficLights />
-        <pre className="overflow-x-auto font-mono text-sm">
-          {lines.map((line, index) => (
-            <span
-              key={`${index}-${line.text}`}
-              className={cn(
-                "block",
-                line.kind === "output" ? "text-charcoal" : "text-foreground",
-              )}
-            >
-              {line.kind === "command" ? (
-                <span className="text-charcoal">$ </span>
-              ) : line.kind === "result" ? (
-                "→ "
-              ) : null}
-              {line.text}
-            </span>
-          ))}
-        </pre>
-        {caption ? (
-          <figcaption className="text-xs text-muted-foreground">{caption}</figcaption>
-        ) : null}
-      </figure>
+      </div>
+      <Separator />
+      <pre className="overflow-x-auto p-4 font-mono text-sm">
+        {lines.map((line, index) => (
+          <span
+            key={`${index}-${line.text}`}
+            className={cn(
+              "block",
+              line.kind === "output" ? "text-charcoal" : "text-foreground",
+            )}
+          >
+            {line.kind === "command" ? (
+              <span className="text-charcoal">$ </span>
+            ) : line.kind === "result" ? (
+              "→ "
+            ) : null}
+            {line.text}
+          </span>
+        ))}
+      </pre>
+      {caption ? (
+        <figcaption className="px-4 pb-4 text-xs text-muted-foreground">
+          {caption}
+        </figcaption>
+      ) : null}
     </Card>
   );
 }

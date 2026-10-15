@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Item } from "@/components/ui/item";
@@ -109,10 +110,37 @@ export function millerItemClass(selected: boolean): string {
   return cn(
     // Item(size="xs") 의 겉 — 곡률 · 전환 · focus-visible ring 을 같은 값으로 맞춘다.
     // border-0 이 Item 의 1px 투명 테두리를 지워 기본 렌더러(<Item>)와 링크가 같은 크기다.
-    "flex w-full items-start gap-2 rounded-lg border-0 border-l-2 px-2 py-2 transition-colors duration-100 outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50",
+    "flex w-full items-start gap-2 rounded-lg border-0 border-l-2 px-2 py-2 transition-colors duration-100 outline-none select-none focus-visible:ring-2 focus-visible:ring-ring",
     selected
       ? "border-l-primary bg-selected"
       : "border-l-border hover:bg-accent",
+  );
+}
+
+/**
+ * MillerItemLink — 이동하는 Miller 항목. 기본 렌더러와 같은 한 벌의 겉(millerItemClass)을
+ * 컴포넌트 안에서 입힌다. 화면이 `className={millerItemClass(...)}` 를 직접 쓰면 동적
+ * 클래스라 lint(require-static-classes)가 막는다 — 대신 이 컴포넌트를 renderItem 에서 쓴다.
+ * 현재 항목은 aria-current="page" 로 알린다.
+ */
+export function MillerItemLink({
+  href,
+  item,
+  selected,
+}: {
+  href: string;
+  item: MillerItem;
+  selected: boolean;
+}) {
+  return (
+    <Item
+      size="xs"
+      render={<Link href={href} />}
+      aria-current={selected ? "page" : undefined}
+      className={millerItemClass(selected)}
+    >
+      <MillerItemBody item={item} />
+    </Item>
   );
 }
 

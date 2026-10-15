@@ -39,19 +39,22 @@ import { cn } from "@/lib/utils";
  *   - 어떤 톤이든 배경 대비 AA 이상.
  *   - 좁은 셀에서는 알약이 줄어들고 라벨이 말줄임된다(shrink 허용).
  */
+/** Lozenge 의 tone → Badge 상태 variant. 색은 Badge 한 곳에만 있다. */
+const TONE_TO_BADGE = {
+  neutral: "muted",
+  ok: "success",
+  info: "info",
+  warn: "warning",
+  danger: "danger",
+} as const;
+
 const lozengeVariants = cva(
   // Badge 기본값 위에 덮는 것만 적는다. shrink 는 Badge 의 shrink-0 을 풀어 좁은
   // 셀에서 말줄임이 동작하게 한다.
   "max-w-full shrink rounded-full font-semibold",
   {
     variants: {
-      tone: {
-        neutral: "bg-muted text-charcoal",
-        ok: "bg-status-ok-soft text-status-ok",
-        info: "bg-status-info-soft text-status-info",
-        warn: "bg-status-warn-soft text-status-warn",
-        danger: "bg-status-danger-soft text-status-danger",
-      },
+      tone: { neutral: "", ok: "", info: "", warn: "", danger: "" },
     },
     defaultVariants: { tone: "neutral" },
   },
@@ -74,7 +77,11 @@ export function Lozenge({
   return (
     <span
       data-slot="badge"
-      className={cn(badgeVariants(), lozengeVariants({ tone }), className)}
+      className={cn(
+        badgeVariants({ variant: TONE_TO_BADGE[tone ?? "neutral"] }),
+        lozengeVariants({ tone }),
+        className,
+      )}
       {...props}
     >
       {srLabel ? <span className="sr-only">{`${srLabel} `}</span> : null}

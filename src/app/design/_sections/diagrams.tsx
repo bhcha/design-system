@@ -1,6 +1,6 @@
 import { FlowSteps, type FlowStep } from "@/components/ui/flow-steps";
 import { Lozenge } from "@/components/ui/lozenge";
-import { MillerColumns, type MillerColumn } from "@/components/ui/miller-columns";
+import { MillerColumns, MillerItemLink, type MillerColumn } from "@/components/ui/miller-columns";
 import { MillerNavigator } from "@/components/ui/miller-navigator";
 import { SearchInput } from "@/components/ui/search-input";
 import { StageFlow, type StageCard } from "@/components/ui/stage-flow";
@@ -204,12 +204,19 @@ export function DiagramsSection() {
         name="miller-navigator.tsx"
         state="열 너비 손잡이 / 초기화 / 좁은 화면 이동 바"
         span
-        note="xl 이상에서는 열 사이 손잡이를 끌거나 ←→ 로 열 너비를 바꾸고, 그 아래 폭에서는 이동 바로 열을 넘긴다. 항목 안의 ↑↓ · ←→ 이동은 항목이 링크(renderItem + millerItemClass)일 때 붙는다 — 여기서는 표시 전용 항목이라 손잡이와 이동 바만 전시한다."
+        note="xl 이상에서는 열 사이 손잡이를 끌거나 ←→ 로 열 너비를 바꾸고, 그 아래 폭에서는 이동 바로 열을 넘긴다. 항목은 MillerItemLink(링크)라 ↑↓ 로 열 안을, ←→ 로 열 사이를 이동한다."
       >
         <MillerNavigator titles={NAV_COLUMNS.map((column) => column.title)} className="w-full">
           <MillerColumns
             label="프로젝트 계층 (탐색)"
             columns={NAV_COLUMNS}
+            renderItem={(item, column) => (
+              <MillerItemLink
+                href={`/design?item=${item.id}#diagrams`}
+                item={item}
+                selected={item.id === column.selectedId}
+              />
+            )}
           />
         </MillerNavigator>
       </Specimen>

@@ -215,11 +215,16 @@ export function ShadcnSection() {
           </ToggleGroup>
         </Specimen>
 
-        <Specimen name="badge.tsx · avatar.tsx · kbd.tsx" state="variant">
+        <Specimen name="badge.tsx · avatar.tsx · kbd.tsx" state="variant · 상태 색">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
           <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="success">승인</Badge>
+          <Badge variant="info">검토 중</Badge>
+          <Badge variant="warning">확인 필요</Badge>
+          <Badge variant="danger">반려</Badge>
+          <Badge variant="muted">초안</Badge>
           <Avatar>
             <AvatarFallback>AT</AvatarFallback>
           </Avatar>
@@ -257,7 +262,15 @@ export function ShadcnSection() {
           </Breadcrumb>
         </Specimen>
 
-        <Specimen name="card.tsx" state="헤더 · 본문 · 푸터">
+        <Specimen name="card.tsx" state="헤더 · 본문 · 푸터 / render=article · dark">
+          <Card render={<article aria-labelledby="shadcn-card-article" />} variant="dark" size="sm" className="w-full">
+            <CardHeader>
+              <CardTitle>
+                <h4 id="shadcn-card-article">article 로 렌더한 카드</h4>
+              </CardTitle>
+              <CardDescription>render 로 의미 태그 자체가 카드가 된다.</CardDescription>
+            </CardHeader>
+          </Card>
           <Card className="w-full">
             <CardHeader>
               <CardTitle>Atlas 웹 개편</CardTitle>

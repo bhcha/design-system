@@ -64,23 +64,16 @@ export function Figure({
   className,
 }: FigureProps) {
   return (
-    <Card
-      className={cn(
-        "gap-0 rounded-lg border border-border bg-background p-3 ring-0",
-        className,
-      )}
-    >
-      <figure className="flex flex-col gap-2">
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          priority={priority}
-          className="h-auto w-full rounded-sm"
-        />
-        <figcaption className="text-xs text-charcoal">{caption}</figcaption>
-      </figure>
+    <Card render={<figure />} className={cn("gap-2 rounded-lg p-3", className)}>
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        priority={priority}
+        className="h-auto w-full rounded-sm"
+      />
+      <figcaption className="text-xs text-charcoal">{caption}</figcaption>
     </Card>
   );
 }

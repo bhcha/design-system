@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority"
+import { cva } from "class-variance-authority";
 
 /**
  * shadcn Badge 의 스타일 정의 — 서버에서도 부를 수 있도록 badge.tsx("use client")에서 분리했다.
@@ -19,10 +19,16 @@ export const badgeVariants = cva(
         ghost:
           "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
         link: "text-primary underline-offset-4 hover:underline",
+        // 상태 표시 — design.md 적용 차이 3 의 상태 팔레트. 상호작용 신호로 쓰지 않는다.
+        success: "bg-status-ok-soft text-status-ok",
+        info: "bg-status-info-soft text-status-info",
+        warning: "bg-status-warn-soft text-status-warn",
+        danger: "bg-status-danger-soft text-status-danger",
+        muted: "bg-muted text-charcoal",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  }
-)
+  },
+);

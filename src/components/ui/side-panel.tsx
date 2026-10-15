@@ -52,7 +52,7 @@ import { cn } from "@/lib/utils";
  * 토큰
  *   폭 w-80(320px) · 2xl w-96(384px) · 배경 --color-background
  *   좌측 테두리 --color-border · 헤더 하단 --color-border · 패딩 p-4(Card 간격 단위)
- *   층위 20 — globals.css 의 "층위(z-index) 사다리" 중 **본문 위 크롬**(SubNav 와 공유).
+ *   층위 20 — globals.css 의 "층위(z-index) 사다리" 중 **본문 위 크롬**. 상단 global-nav(56px) 아래 top-14 부터.
  *   overline --text-xs + uppercase + --color-charcoal · 제목 --text-base + font-semibold
  *   닫기 Button secondary/icon-sm — --color-secondary 면 · hover --color-accent · press scale 0.95
  *
@@ -79,8 +79,6 @@ export type SidePanelProps = React.ComponentProps<"aside"> & {
   /** 클라이언트 상태로 여닫는 자리의 닫기 콜백. closeHref 와 함께 주지 않는다. */
   onClose?: () => void;
   closeLabel?: string;
-  /** 위에 깔린 고정 띠의 구성. AppShell 과 같은 값을 준다. */
-  chrome?: "nav" | "nav-subnav";
 };
 
 /** 닫기 버튼 — 두 분기가 같은 shadcn 변형을 쓴다. press 축소만 덧붙인다. */
@@ -95,7 +93,6 @@ export function SidePanel({
   closeHref,
   onClose,
   closeLabel = "패널 닫기",
-  chrome = "nav-subnav",
   children,
   ...props
 }: SidePanelProps) {
@@ -116,7 +113,7 @@ export function SidePanel({
           "flex w-full shrink-0 flex-col border-t border-border bg-background",
           "lg:fixed lg:right-0 lg:bottom-0 lg:z-20 lg:w-80 lg:border-t-0 lg:border-l",
           "2xl:w-96",
-          chrome === "nav" ? "lg:top-14" : "lg:top-27",
+          "lg:top-14",
           className,
         )}
         {...props}

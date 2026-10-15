@@ -41,20 +41,17 @@ export function CtaStripDark({
 }) {
   return (
     <Card
+      variant="dark"
+      render={<section aria-labelledby={id} />}
       className={cn(
-        "gap-0 rounded-lg bg-surface-dark p-0 text-base text-on-dark ring-0",
+        "flex-row flex-wrap items-center justify-between gap-4 rounded-lg px-8 py-6 text-base",
         className,
       )}
     >
-      <section
-        aria-labelledby={id}
-        className="flex flex-wrap items-center justify-between gap-4 px-8 py-6"
-      >
-        <h2 id={id} className="font-heading text-2xl font-semibold">
-          {title}
-        </h2>
-        {action}
-      </section>
+      <h2 id={id} className="font-heading text-2xl font-semibold">
+        {title}
+      </h2>
+      {action}
     </Card>
   );
 }

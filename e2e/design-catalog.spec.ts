@@ -213,7 +213,7 @@ test.describe("토큰 실측", () => {
     expect(box.fontWeight).toBe("500");
   });
 
-  test("전역 내비와 서브 내비의 높이", async ({ page }) => {
+  test("전역 내비의 높이", async ({ page }) => {
     await page.goto("/design");
 
     const navHeight = await page
@@ -222,14 +222,6 @@ test.describe("토큰 실측", () => {
       .first()
       .evaluate((node) => node.getBoundingClientRect().height);
     expect(navHeight).toBe(56); // design.md {component.primary-nav}
-
-    // 섹션 띠는 앱에서 걷어냈고 카탈로그에는 표본으로만 남아 있다.
-    const subNavHeight = await page
-      .getByRole("navigation", { name: "섹션 (표본)" })
-      .locator("div")
-      .first()
-      .evaluate((node) => node.getBoundingClientRect().height);
-    expect(subNavHeight).toBe(52); // 앱 확장 sub-nav (design.md 밖)
   });
 
   test("아이콘 버튼은 44 × 44 이고 접근 가능한 이름이 있다", async ({ page }) => {

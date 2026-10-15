@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 /**
@@ -58,6 +59,10 @@ export type IconButtonProps = Omit<
   size?: "default" | "compact";
 };
 
+/** 아이콘 버튼의 겉 — 버튼과 링크가 같은 한 벌을 쓴다. */
+const ICON_SKIN =
+  "bg-hairline-strong/64 text-foreground hover:bg-hairline-strong transition-transform duration-100 active:scale-95";
+
 export function IconButton({
   className,
   type = "button",
@@ -70,14 +75,47 @@ export function IconButton({
       type={type}
       variant="secondary"
       size={size === "compact" ? "icon-sm" : "icon-lg"}
+      className={cn(ICON_SKIN, className)}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+}
+
+/**
+ * IconButtonLink — 아이콘만 있는 **이동**. IconButton 과 같은 모양(반투명 회색 원 · press 축소)의 <Link>.
+ * 닫기·뒤로가기처럼 주소를 바꾸는 아이콘 버튼에 쓴다. 접근 가능한 이름(aria-label)이 필수다.
+ */
+export type IconButtonLinkProps = Omit<
+  React.ComponentProps<typeof Link>,
+  "children"
+> & {
+  "aria-label": string;
+  children: React.ReactNode;
+  size?: "default" | "compact";
+};
+
+export function IconButtonLink({
+  className,
+  size = "default",
+  children,
+  ...props
+}: IconButtonLinkProps) {
+  return (
+    <Link
+      data-slot="button"
       className={cn(
-        "bg-hairline-strong/64 text-foreground hover:bg-hairline-strong",
-        "transition-transform duration-100 active:scale-95",
+        buttonVariants({
+          variant: "secondary",
+          size: size === "compact" ? "icon-sm" : "icon-lg",
+        }),
+        ICON_SKIN,
         className,
       )}
       {...props}
     >
       {children}
-    </Button>
+    </Link>
   );
 }

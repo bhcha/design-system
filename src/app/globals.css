@@ -76,6 +76,16 @@
   --border: #e5e5e5; /* colors.hairline */
   --input: #e5e5e5;
   --ring: #3b82f6; /* colors.focus-ring 의 불투명 기준색 — 흰 면 3.7:1 */
+
+  /* shadcn Sidebar 전용 시맨틱 — 앱 셸 사이드바와 같은 값(soft surface 면 + 검정 글자). */
+  --sidebar: #fafafa; /* colors.surface-soft */
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: color-mix(in oklab, #000000 6%, #fafafa); /* hover 면 */
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #3b82f6;
 }
 
 /* 기본 팔레트를 먼저 비운다. 비우기는 반드시 색 정의보다 **앞**에 둔다 —
@@ -105,6 +115,14 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 
   --font-sans:
     var(--font-inter), "Pretendard Variable", ui-sans-serif, system-ui,
@@ -214,15 +232,9 @@
    대신 **어떤 역할이 몇 층인지**를 여기 한 곳에 적고, 컴포넌트는 자기 층을
    스펙 시트에 이 표의 이름으로 적는다.
 
-     -10  요소 안쪽 배경 (EnvironmentQuoteCard 의 사진 backdrop)
       10  패널·폼 안쪽의 sticky 바 (부모가 만든 문맥 안에서만 쌓인다)
       20  **본문 위 크롬** — 상단 띠 아래에 붙는 고정 레일·띠
-          SubNav(sticky top-14, 가로 띠) 와 SidePanel(fixed 우측 레일) 이
-          같은 층을 **의도적으로** 공유한다. 둘 다 "global-nav 아래 크롬"이고
-          기하학적으로 겹치지 않는다 — SubNav 는 56~108px 띠를, SidePanel 은
-          그 아래(top-27)부터 화면 바닥까지를 차지한다. chrome="nav" 로 두 띠를
-          쓰지 않는 화면에서는 SubNav 자체가 없다. 층을 더 쪼개면 겹치지도 않는
-          두 요소에 순서를 부여하게 되고, 그 순서가 무엇을 뜻하는지 아무도 모른다.
+          SidePanel(fixed 우측 레일, global-nav 아래 top-14 부터 화면 바닥까지).
       30  global-nav (항상 크롬 위)
       40  화면 위로 떠오르는 것 — 백드롭·팝오버·하단 고정 바
       50  가장 위 — Dialog 패널, skip-link
@@ -244,12 +256,6 @@
 /* global-nav(56px = spacing*14, design.md primary-nav) 아래에 붙어 스스로 스크롤하는 고정 열의 높이 */
 @utility h-below-nav {
   height: calc(100dvh - calc(var(--spacing) * 14));
-}
-
-/* global-nav(56px) + sub-nav(52px) = 108px(spacing*27) 아래일 때의 높이.
-   두 띠를 모두 쓰는 화면에서 h-below-nav 를 쓰면 열이 화면 아래로 52px 넘친다. */
-@utility h-below-chrome {
-  height: calc(100dvh - calc(var(--spacing) * 27));
 }
 
 /* 모달 패널 — 뷰포트를 넘지 않는 크기. 토큰이 아니라 뷰포트 비율이라 여기서 감싼다. */

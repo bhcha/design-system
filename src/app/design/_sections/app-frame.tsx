@@ -8,7 +8,6 @@ import { GlobalNav } from "@/components/ui/global-nav";
 import { PageHeader } from "@/components/ui/page-header";
 import { SideNav } from "@/components/ui/side-nav";
 import { SkipLink } from "@/components/ui/skip-link";
-import { SubNav } from "@/components/ui/sub-nav";
 import { Grid, Section, Specimen } from "../_catalog";
 
 const SIDE_NAV_GROUPS = [
@@ -176,12 +175,6 @@ export function AppFrameSection() {
             label="전역 (셸 표본)"
             className="static"
             breadcrumb={<PathBreadcrumb items={CRUMBS} label="위치 (셸 표본)" />}
-          />
-          <SubNav
-            category="프로젝트"
-            label="섹션 (셸 표본)"
-            className="static"
-            action={<Button size="sm">승인 요청</Button>}
           />
           <AppShell
             mainId="design-shell-main"
