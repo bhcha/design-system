@@ -232,4 +232,18 @@ test.describe("토큰 실측", () => {
     expect(box?.width).toBe(44);
     expect(box?.height).toBe(44);
   });
+
+  test("기본 사이드바 세로 경계는 sidebar-border 토큰색이다 (이슈 #5)", async ({ page }) => {
+    await page.goto("/design", { waitUntil: "networkidle" });
+
+    const edges = await page
+      .locator('[data-specimen="sidebar.tsx"][data-specimen-state^="기본"] [data-slot="sidebar-container"]')
+      .evaluateAll((nodes) =>
+        nodes.map((node) => {
+          const style = getComputedStyle(node);
+          return style.borderRightWidth === "1px" ? style.borderRightColor : style.borderLeftColor;
+        }),
+      );
+    expect(edges).toEqual(["rgb(229, 229, 229)", "rgb(229, 229, 229)"]); // --sidebar-border #e5e5e5
+  });
 });

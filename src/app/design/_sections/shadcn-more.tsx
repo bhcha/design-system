@@ -293,6 +293,46 @@ function WorkbenchSplitDemo() {
   );
 }
 
+/** 기본 사이드바(offcanvas)의 세로 경계 표본 — 이슈 #5.
+    translate 가 걸린 상자는 fixed 자식의 기준이 되므로 h-svh 사이드바를 상자 안에 가둘 수 있다. */
+function SidebarEdgeDemo({ side }: { side: "left" | "right" }) {
+  return (
+    <Card size="sm" className="h-48 min-w-0 flex-1 gap-0 overflow-hidden py-0">
+      <div className="h-full translate-x-0 overflow-hidden">
+        <SidebarProvider className="h-full min-h-0">
+          {side === "right" ? (
+            <SidebarInset>
+              <p className="p-4 text-sm text-muted-foreground">본문 — 오른쪽 사이드바</p>
+            </SidebarInset>
+          ) : null}
+          <Sidebar side={side} aria-label={`기본 사이드바 경계 표본 (${side === "left" ? "왼쪽" : "오른쪽"})`}>
+            <SidebarContent>
+              <SidebarGroup>
+                <SidebarGroupLabel>{side === "left" ? "왼쪽" : "오른쪽"}</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton isActive>
+                        <FolderIcon aria-hidden="true" />
+                        <span>프로젝트</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            </SidebarContent>
+          </Sidebar>
+          {side === "left" ? (
+            <SidebarInset>
+              <p className="p-4 text-sm text-muted-foreground">본문 — 왼쪽 사이드바</p>
+            </SidebarInset>
+          ) : null}
+        </SidebarProvider>
+      </div>
+    </Card>
+  );
+}
+
 export function ShadcnMoreSection() {
   const [date, setDate] = React.useState<Date | undefined>(
     () => new Date(2026, 9, 15),
@@ -641,6 +681,18 @@ export function ShadcnMoreSection() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+        </Specimen>
+
+        <Specimen
+          name="sidebar.tsx"
+          state="기본(offcanvas) 세로 경계 — 왼쪽 / 오른쪽"
+          span
+          note="경계선은 --color-sidebar-border(hairline 회색)다. 검은 선이 보이면 회귀다(이슈 #5)."
+        >
+          <div className="flex w-full flex-col gap-3 md:flex-row">
+            <SidebarEdgeDemo side="left" />
+            <SidebarEdgeDemo side="right" />
+          </div>
         </Specimen>
 
         <Specimen
