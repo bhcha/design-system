@@ -849,6 +849,31 @@
       ]
     },
     {
+      "name": "graph-view",
+      "type": "registry:ui",
+      "title": "graph-view",
+      "description": "GraphView — 노드·간선 관계도, 읽기 전용 (이슈 #4).",
+      "dependencies": [
+        "@dagrejs/dagre@^3.1.1",
+        "@xyflow/react@^12.12.0",
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/separator.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/table.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/tabs.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/graph-view.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "hidden-field",
       "type": "registry:ui",
       "title": "hidden-field",
@@ -2026,6 +2051,7 @@
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/form-field.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/gap-checklist.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/global-nav.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/graph-view.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/hidden-field.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/history-list.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/hover-card.json",

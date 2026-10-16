@@ -10,7 +10,8 @@ const ROUTES = ["/design"];
 
 for (const route of ROUTES) {
   test(`${route} 은 axe 위반이 없다`, async ({ page }) => {
-    await page.goto(route);
+    // 하이드레이션 뒤의 ARIA(Base UI·패널 핸들이 마운트 후에 다는 속성)까지 검사한다.
+    await page.goto(route, { waitUntil: "networkidle" });
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();

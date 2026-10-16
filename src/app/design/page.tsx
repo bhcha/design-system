@@ -22,6 +22,7 @@ import { ShadcnMoreSection } from "./_sections/shadcn-more";
 import { DataSection } from "./_sections/data";
 import { DiagramsSection } from "./_sections/diagrams";
 import { CodeSection } from "./_sections/code";
+import { GraphSection } from "./_sections/graph";
 import { FormsSection } from "./_sections/forms";
 import { NarrativeSection } from "./_sections/narrative";
 import { PanelsSection } from "./_sections/panels";
@@ -407,6 +408,7 @@ export default function DesignSystemPage() {
         <PanelsSection />
         <DiagramsSection />
         <CodeSection />
+        <GraphSection />
         <NarrativeSection />
 
         <Section
