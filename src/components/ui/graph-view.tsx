@@ -63,6 +63,7 @@ import { cn } from "@/lib/utils"
  *
  * 수용 기준
  *   - 입력이 없으면 아무 관계도 그리지 않고 빈 상태 문구를 보인다.
+ *   - 읽기 전용 노드도 마우스 클릭·Enter·Space로 선택한다. 버튼을 끌어도 노드·캔버스는 이동하지 않는다.
  *   - 9개 안팎의 테이블에서 dagre 배치로 노드가 겹치지 않는다.
  *   - 긴 이름은 노드 폭에서 말줄임되고 전체 이름은 접근 가능한 이름과 title 에 남는다.
  *   - 그래프 없이 목록 보기만으로 같은 정보를 모두 읽을 수 있다.
@@ -142,7 +143,8 @@ function EntityNode({ data }: NodeProps<Node<EntityData>>) {
         title={node.label}
         onClick={() => onSelect?.(node.id)}
         className={cn(
-          "flex w-44 flex-col items-start gap-0.5 rounded-lg border bg-background px-3 py-2 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+          // 읽기 전용 React Flow 노드의 pointer-events:none을 버튼에서 복구한다.
+          "pointer-events-auto flex w-44 flex-col items-start gap-0.5 rounded-lg border bg-background px-3 py-2 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           unconfirmed ? "border-dashed border-hairline-strong" : "border-border",
           inPath && "border-status-info bg-status-info-soft",
           selected && "ring-2 ring-foreground"
@@ -390,6 +392,8 @@ function GraphViewInner({
                 elementsSelectable={false}
                 nodesFocusable={false}
                 edgesFocusable={false}
+                // 포인터를 받는 노드 버튼에서는 캔버스 팬을 시작하지 않는다.
+                noPanClassName="pointer-events-auto"
                 zoomOnScroll={false}
                 preventScrolling={false}
                 colorMode="light"
