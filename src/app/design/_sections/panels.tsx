@@ -6,6 +6,9 @@ import { ModalDialog } from "@/components/ui/modal-dialog";
 import { DisclosureTray } from "@/components/ui/disclosure-tray";
 import { Lozenge } from "@/components/ui/lozenge";
 import { InfoPopover } from "@/components/ui/info-popover";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { SectionPanel } from "@/components/ui/section-panel";
 import { SidePanel } from "@/components/ui/side-panel";
 import { Grid, Section, Specimen } from "../_catalog";
@@ -96,6 +99,37 @@ export function PanelsSection() {
           </InfoPopover>
         </Specimen>
       </Grid>
+
+      <Specimen
+        name="modal-dialog.tsx"
+        state="full-width 폼 · 짧은 본문 / 긴 본문"
+        note="본문이 포커스 링 공간을 확보한다. 별도 여백 없이 NativeSelect·Input을 폭에 맞추고 Tab으로 이동한다."
+      >
+        {[{ id: "short", length: "짧은 본문" }, { id: "long", length: "긴 본문" }].map(({ id, length }) => (
+          <ModalDialog
+            key={id}
+            trigger={<Button variant="outline">{length} 폼 열기</Button>}
+            title={`${length} 폼`}
+            description="Tab으로 테이블 선택과 메모 입력의 포커스 링을 확인합니다."
+            footer={<Button>저장</Button>}
+          >
+            <div className="flex flex-col gap-4">
+              <Label htmlFor={`modal-table-${id}`} className="sr-only">테이블</Label>
+              <NativeSelect id={`modal-table-${id}`} className="w-full">
+                <NativeSelectOption>olist_order_payments_dataset</NativeSelectOption>
+                <NativeSelectOption>olist_orders_dataset</NativeSelectOption>
+              </NativeSelect>
+              {length === "긴 본문" ? Array.from({ length: 16 }, (_, index) => (
+                <p key={index} className="text-base text-charcoal">
+                  {index + 1}. 테이블의 키와 관계를 검토합니다. 긴 본문에서는 제목과 하단 액션을 유지하고 본문만 스크롤합니다.
+                </p>
+              )) : null}
+              <Label htmlFor={`modal-memo-${id}`} className="sr-only">메모</Label>
+              <Input id={`modal-memo-${id}`} placeholder="검토 메모" />
+            </div>
+          </ModalDialog>
+        ))}
+      </Specimen>
 
       <Specimen
         name="side-panel.tsx"

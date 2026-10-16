@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils"
  * 토큰
  *   shadcn Dialog — bg-popover · ring-1 ring-foreground/10 · rounded-xl(12px) · 그림자 없음
  *   폭 max-w-reading(720px) · 닫기 Button ghost icon-sm
+ *   본문 p-1(4px)으로 포커스 공간 확보 · -m-1로 제목·하단 액션과 본문 정렬 유지
  *
  * 상태
  *   닫힘 / 열림 · 제어(open·onOpenChange) / 비제어
@@ -37,6 +38,7 @@ import { cn } from "@/lib/utils"
  *
  * 수용 기준
  *   - 본문이 길면 패널이 아니라 본문 영역이 스크롤한다.
+ *   - 본문 폭을 채운 컨트롤의 바깥 포커스 링이 스크롤 경계에서 잘리지 않는다.
  */
 export type ModalDialogProps = {
   trigger: React.ReactElement<Record<string, unknown>>
@@ -86,7 +88,12 @@ export function ModalDialog({
             <XIcon aria-hidden="true" />
           </DialogClose>
         </DialogHeader>
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
+        <div
+          data-slot="modal-dialog-body"
+          className="-m-1 min-h-0 flex-1 scroll-p-1 overflow-y-auto overscroll-contain p-1"
+        >
+          {children}
+        </div>
         {footer ? (
           <DialogFooter className="flex-row flex-wrap items-center justify-start gap-2 border-t border-border pt-3">
             {footer}
