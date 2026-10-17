@@ -1,8 +1,12 @@
 import { Figure } from "@/components/ui/figure";
+import { BulletList } from "@/components/ui/bullet-list";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HistoryList } from "@/components/ui/history-list";
 import { NumberedSteps } from "@/components/ui/numbered-steps";
 import { QuoteBlock } from "@/components/ui/quote-block";
 import { ResultCallout } from "@/components/ui/result-callout";
+import { SectionPanel } from "@/components/ui/section-panel";
+import { TextLink } from "@/components/ui/text-link";
 import { Grid, Section, Specimen } from "../_catalog";
 
 export function NarrativeSection() {
@@ -87,6 +91,53 @@ export function NarrativeSection() {
             height={240}
             caption="자리표시 도판. 실제 화면에서는 출처가 있는 도판이 들어가고 캡션에 출처를 적는다."
           />
+        </Specimen>
+      </Grid>
+
+      <Grid>
+        <Specimen name="bullet-list.tsx" state="점 목록 · SectionPanel · 인라인 코드와 링크">
+          <SectionPanel id="catalog-bullet-list" title="기술 설명" className="w-full">
+            <BulletList
+              aria-labelledby="catalog-bullet-list-title"
+              items={[
+                { id: "purpose", content: "지원하는 기능과 제한을 짧은 문장으로 설명합니다." },
+                {
+                  id: "code",
+                  content: <>연산 이름은 <code className="font-mono">SELECT</code>처럼 인라인 코드로 구분하고, 설명이 길어져도 다음 줄은 본문 시작점에 맞춥니다.</>,
+                },
+                {
+                  id: "reference",
+                  content: <>색과 글자 크기는 <TextLink href="/design#tokens">토큰 안내</TextLink>에서 확인할 수 있습니다.</>,
+                },
+              ]}
+            />
+          </SectionPanel>
+        </Specimen>
+        <Specimen name="bullet-list.tsx" state="번호 목록 · compact · Card">
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle><h3 id="catalog-numbered-list-title">사전에 준비할 것</h3></CardTitle>
+            </CardHeader>
+            <CardContent>
+              <BulletList
+                variant="numbered"
+                size="compact"
+                aria-labelledby="catalog-numbered-list-title"
+                items={[
+                  { id: "table", content: "조회할 테이블을 고릅니다." },
+                  {
+                    id: "column",
+                    content: <>집계할 열을 확인합니다: <code className="font-mono">olist_order_payments_dataset.payment_value</code></>,
+                  },
+                  { id: "question", content: "결과에 필요한 항목을 자연어 질문으로 적습니다." },
+                ]}
+              />
+            </CardContent>
+          </Card>
+        </Specimen>
+        <Specimen name="bullet-list.tsx" state="빈 목록" note="items가 비면 목록은 렌더하지 않는다. 안내 문구는 호출부가 정한다.">
+          <BulletList items={[]} aria-label="빈 설명 목록" />
+          <p className="text-base text-charcoal">등록된 설명이 없습니다.</p>
         </Specimen>
       </Grid>
 

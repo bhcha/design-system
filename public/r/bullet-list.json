@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bullet-list",
+  "title": "bullet-list",
+  "description": "BulletList — 설명 본문의 점·번호 목록",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/bullet-list.tsx",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * BulletList — 설명 본문의 점·번호 목록\n *\n * 근거: design.md 적용 차이 8. feature-bullet의 charcoal·간격 토큰을 재사용하되,\n * 체크 표식 대신 네이티브 목록 표식을 쓰고 설명 문장은 body-md로 읽히게 한다.\n * 상태·선택·순서 편집이 없는 정적 목록이라 클라이언트 경계나 훅이 필요하지 않다.\n *\n * 해부도\n *   <ul> 또는 <ol> → <li>[인라인 텍스트 · code · TextLink]</li> × n\n *   표식은 ::marker로 그려 긴 문장의 다음 줄도 본문 시작점에 맞춘다.\n *\n * 토큰\n *   본문 --text-base(16px/24px) · 본문·표식 --color-charcoal\n *   들여쓰기 ps-6 · 항목 간격 default gap-2 / compact gap-1\n *   배경·테두리·그림자 없음. SectionPanel·CardContent 안에 그대로 넣는다.\n *\n * 상태\n *   variant: bullet(점, 기본) / numbered(번호)\n *   size: default / compact(글자 크기는 유지하고 항목 간격만 줄인다)\n *   빈 items: 아무것도 렌더하지 않으며 빈 상태 문구는 호출부가 정한다.\n *\n * 키보드·ARIA\n *   네이티브 ul/ol/li 시맨틱. 목록 자체는 Tab 순서에 넣지 않는다.\n *   인라인 링크의 키보드 동작을 유지한다. aria-label·aria-labelledby를 전달할 수 있다.\n *   항목 id를 React key로 사용하므로 재정렬 시에도 항목의 정체성이 유지된다.\n *\n * 수용 기준\n *   - 본문과 compact 모두 body-md로 읽힌다.\n *   - 긴 문장·연속된 코드 문자열이 좁은 패널 안에서 줄바꿈된다.\n *   - 점·번호가 본문 밖에 정렬되고 인라인 코드·링크가 그대로 렌더된다.\n */\nexport type BulletListItem = {\n  /** 목록 안에서 유일하고 재정렬해도 바뀌지 않는 값. */\n  id: string;\n  content: ReactNode;\n};\n\nexport type BulletListProps = Omit<\n  HTMLAttributes<HTMLUListElement | HTMLOListElement>,\n  \"children\"\n> & {\n  items: readonly BulletListItem[];\n  variant?: \"bullet\" | \"numbered\";\n  size?: \"default\" | \"compact\";\n};\n\nexport function BulletList({\n  items,\n  variant = \"bullet\",\n  size = \"default\",\n  className,\n  ...props\n}: BulletListProps) {\n  if (items.length === 0) return null;\n\n  const List = variant === \"numbered\" ? \"ol\" : \"ul\";\n  return (\n    <List\n      data-slot=\"bullet-list\"\n      data-variant={variant}\n      data-size={size}\n      className={cn(\n        \"flex min-w-0 flex-col list-outside ps-6 text-base text-charcoal marker:text-charcoal\",\n        variant === \"numbered\" ? \"list-decimal\" : \"list-disc\",\n        size === \"compact\" ? \"gap-1\" : \"gap-2\",\n        className,\n      )}\n      {...props}\n    >\n      {items.map((item) => (\n        <li key={item.id} className=\"min-w-0 break-words\">\n          {item.content}\n        </li>\n      ))}\n    </List>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
