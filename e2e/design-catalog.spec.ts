@@ -117,9 +117,12 @@ test.describe("상태 매트릭스 — 실제 hover / focus", () => {
       '[data-specimen="search-input.tsx · {component.search-input}"]',
     );
     const input = specimen.getByRole("searchbox", { name: "프로젝트 검색" });
+    const group = specimen.locator('[data-slot="input-group"]').first();
+    const border = await group.evaluate((node) => getComputedStyle(node).borderColor);
 
     await input.click();
     await expect(input).toBeFocused();
+    await expect(group).toHaveCSS("border-color", border);
     await expect(specimen).toHaveScreenshot("search-input-focused.png");
   });
 });

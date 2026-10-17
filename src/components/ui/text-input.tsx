@@ -15,8 +15,8 @@ import { cn } from "@/lib/utils";
  *   `size="compact"` 라는 기존 API 와 앱 규칙(비활성 전용 mute 등)만 얹는다.
  *
  * 근거: design.md {component.text-input} — 배경 canvas · 1px hairline · {rounded.full} ·
- * {typography.body-md} 16px · padding 8px 16px · 높이 40px. 포커스 시 1px ink 테두리 +
- * focus ring({component.text-input-focused}).
+ * {typography.body-md} 16px · padding 8px 16px · 높이 40px. 포커스 시 hairline 테두리 유지 +
+ * 2px 불투명 focus ring(design.md 적용 차이 2·7).
  *
  * 해부도
  *   [ 값 / placeholder ]  — 1px 테두리 pill (Input)
@@ -24,15 +24,15 @@ import { cn } from "@/lib/utils";
  *   Textarea 는 여러 줄이라 pill 대신 {rounded.lg} 를 쓴다(design.md 적용 차이 6).
  *
  * 토큰 (primitive 기본값 + 이 파일의 보정)
- *   배경 --color-background · 테두리 --color-input(=hairline, 포커스 --color-foreground) · 곡률 --radius-full
- *   포커스 링 ring-3 --color-ring/50 (primitive)
+ *   배경 --color-background · 테두리 --color-input(=hairline, 포커스 시에도 유지) · 곡률 --radius-full
+ *   포커스 링 ring-2 --color-ring (primitive)
  *   텍스트 --text-base + --color-foreground · placeholder --color-muted-foreground(body)
  *   Select 표시자 --color-muted-foreground
  *   오류 테두리 --color-destructive(= status-danger 값) — `aria-invalid` 로 primitive 가 그린다
  *   비활성 배경 --color-muted + --color-mute(placeholder 포함) · 읽기 전용 배경 --color-muted
  *
  * 상태
- *   기본 / focus-visible(ink 테두리 + ring) / 오류(aria-invalid) / 비활성 / 읽기 전용
+ *   기본 / focus-visible(hairline 테두리 + ring) / 오류(aria-invalid) / 비활성 / 읽기 전용
  *
  * 키보드·ARIA
  *   접근 가능한 이름은 Field(FormField)가 라벨로 감싸서 만든다. 여기서 aria-label 을

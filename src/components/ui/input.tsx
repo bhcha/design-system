@@ -9,7 +9,8 @@ import { cn } from "@/lib/utils"
  *   한 줄 입력 pill
  *
  * 토큰
- *   {component.text-input} — bg-background · 1px border-input · rounded-full · h-10 px-4 · text-base. 포커스 border-foreground + ring-3 ring-ring
+ *   {component.text-input} — bg-background · 1px border-input · rounded-full · h-10 px-4 · text-base.
+ *   포커스도 border-input 유지 + ring-2 ring-ring (design.md 적용 차이 7)
  *
  * 상태
  *   기본 / focus / aria-invalid / disabled(bg-muted text-mute)
@@ -28,7 +29,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       type={type}
       data-slot="input"
       className={cn(
-        "h-10 w-full min-w-0 rounded-full border border-input bg-background px-4 py-2 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-muted disabled:text-mute aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        "h-10 w-full min-w-0 rounded-full border border-input bg-background px-4 py-2 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-muted disabled:text-mute aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
         className
       )}
       {...props}

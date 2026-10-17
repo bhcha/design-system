@@ -254,7 +254,8 @@ components:
 
 ## 이 앱에서의 적용 차이 (원문과 다르게 쓰는 부분)
 
-원문을 고치지 않고 아래 차이만 둔다. 모두 2026-10-15 사용자 확인 사항이다.
+원문을 고치지 않고 아래 차이만 둔다. 1–6번은 2026-10-15 사용자 확인 사항이며,
+7번은 2026-10-17 이슈 #8 처리 요청에 따른 조정이다.
 
 1. **서체** — 원문은 SF Pro Rounded(제목) + ui-sans-serif(본문)이다. 원문 "Note on Font
    Substitutes"와 getdesign 미리보기 그대로 **Nunito(제목) + Inter(본문)** 를 self-host 한다.
@@ -268,6 +269,11 @@ components:
 5. **compact 컨트롤** — 원문은 36px 한 단계뿐이다. 작업 화면의 촘촘한 표·도구줄을 위해
    32px compact 단계를 하나 더 둔다(원문 값에서 파생, 새 색·곡률 없음).
 6. **여러 줄 입력(textarea)** — 원문에 없다. pill 로 말면 글이 잘리므로 `{rounded.lg}` 를 쓴다.
+7. **입력 컨트롤의 포커스 테두리** — Input·Textarea·NativeSelect 및 InputGroup은
+   포커스 시에도 기본 `border-input`(hairline)을 유지한다. 원문의 ink 테두리는
+   불투명 파란 링과 맞닿으면 두꺼운 이중 테두리로 보여 사용하지 않는다(이슈 #8).
+   포커스는 기존 2px `ring-ring`으로 표시하며 링의 불투명도·바깥 범위는 유지한다.
+   오류 상태의 `border-destructive`와 비활성 상태는 기존 규칙을 따른다.
 
 
 ## Overview
