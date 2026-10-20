@@ -168,6 +168,14 @@ test("compact 범위에서 연 대화상자는 포털이어도 compact 이고 �
   );
   await expect(dialog.getByRole("heading", { name: "Olist 데이터 명세" })).toHaveCSS("font-size", "18px");
   await expect(dialog.getByRole("button", { name: "확인" })).toHaveCSS("font-size", "12px");
+  // sm 선택 상자의 내용 칸이 글자 줄 높이를 담는다 — 글자 아래가 잘리지 않는다(#11).
+  expect(
+    await dialog.getByRole("combobox").evaluate((node) => {
+      const style = getComputedStyle(node);
+      const inner = node.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      return inner >= parseFloat(style.lineHeight);
+    }),
+  ).toBe(true);
 
   await page.keyboard.press("Tab");
   expect(await dialog.evaluate((node) => node.contains(document.activeElement))).toBe(true);
@@ -200,6 +208,7 @@ test("compact 상태 — 선택·비활성·포커스·키보드 이동·접힌 
     }),
   ).toBe(true);
 
+  // 툴팁이 달린 메뉴 버튼도 disabled 가 버튼에 남는다(#12).
   await expect(root.getByRole("button", { name: "설정", exact: true })).toBeDisabled();
   await expect(root.getByRole("button", { name: "실행 결과" })).toBeDisabled();
 
@@ -226,4 +235,16 @@ test("768px 미만에서는 compact 범위도 기본 크기다", async ({ page }
     expect((await box(root.getByRole("button", { name: "SQL 생성" }))).height).toBe(32);
     await expect(root.getByRole("textbox", { name: "질문" })).toHaveCSS("font-size", "16px");
   }
+});
+
+test("기본 밀도에서도 sm 선택 상자의 글자가 잘리지 않는다 (#11)", async ({ page }) => {
+  await scope(page, "기본").getByRole("button", { name: "명세 보기" }).click();
+  const select = page.getByRole("dialog").getByRole("combobox");
+  const fits = await select.evaluate((node) => {
+    const style = getComputedStyle(node);
+    const inner = node.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+    return inner >= parseFloat(style.lineHeight);
+  });
+  expect(fits).toBe(true);
+  await expect(select).toHaveCSS("height", "32px");
 });
