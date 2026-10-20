@@ -104,8 +104,7 @@ function Workbench({ density }: { density: DensityValue }) {
                           <SidebarMenuButton
                             isActive={item.active}
                             disabled={item.disabled}
-                            // Tooltip 트리거가 되면 disabled 가 버튼에 남지 않는다 — 비활성 항목은 툴팁 없이 둔다.
-                            tooltip={item.disabled ? undefined : item.label}
+                            tooltip={item.label}
                           >
                             <item.icon aria-hidden="true" />
                             <span>{item.label}</span>

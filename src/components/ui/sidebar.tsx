@@ -543,7 +543,10 @@ function SidebarMenuButton({
       },
       props
     ),
-    render: !tooltip ? render : <TooltipTrigger render={render} />,
+    // Tooltip.Trigger 는 disabled 를 툴팁 비활성으로 가져간다 — 버튼 자신에게도 남긴다(이슈 #12).
+    render: !tooltip
+      ? render
+      : <TooltipTrigger render={render ?? <button type="button" disabled={props.disabled} />} />,
     state: {
       slot: "sidebar-menu-button",
       sidebar: "menu-button",
