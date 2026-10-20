@@ -24,6 +24,7 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu-variants"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 import { ChevronDownIcon } from "lucide-react"
 
 function NavigationMenu({
@@ -119,8 +120,9 @@ function NavigationMenuPositioner({
   alignOffset = 0,
   ...props
 }: NavigationMenuPrimitive.Positioner.Props) {
+  const density = useDensity()
   return (
-    <NavigationMenuPrimitive.Portal>
+    <NavigationMenuPrimitive.Portal data-ui-density={density}>
       <NavigationMenuPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}

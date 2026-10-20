@@ -33,8 +33,26 @@ describe("토큰 정본", () => {
       expect(tokenValue(`--text-${name}`)).toBe(size);
       expect(tokenValue(`--text-${name}--line-height`)).toBe(lineHeight);
     }
-    const declared = [...globals.matchAll(/^\s*--text-([a-z0-9]+):/gm)].map(([, n]) => n);
+    // 밀도 절이 같은 이름을 다시 정의한다 — 이름 집합만 본다(새 크기 이름이 생기지 않는다).
+    const declared = [...new Set([...globals.matchAll(/^\s*--text-([a-z0-9]+):/gm)].map(([, n]) => n))];
     expect(declared.sort()).toEqual(Object.keys(expected).sort());
+  });
+
+  it("compact 밀도는 spacing 0.8배 · 타입 스케일 안의 값 · 최소 12px 이다 (이슈 #10)", () => {
+    const start = globals.indexOf(`[data-ui-density="compact"]`);
+    expect(start).toBeGreaterThan(-1);
+    const block = globals.slice(start, globals.indexOf("}", start));
+    const value = (name: string) =>
+      new RegExp(`^\\s*${name}:\\s*([^;]+);`, "m").exec(block)?.[1].trim();
+    expect(value("--spacing")).toBe("3.2px");
+    const scale = new Set(["12px", "14px", "16px", "18px", "20px", "24px", "30px", "36px"]);
+    for (const name of ["xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"]) {
+      const size = value(`--text-${name}`);
+      expect(scale.has(size ?? ""), `--text-${name}: ${size}`).toBe(true);
+      expect(Number.parseFloat(size ?? "0")).toBeGreaterThanOrEqual(12);
+    }
+    // 모바일(768px 미만)에서는 적용하지 않는다.
+    expect(globals.lastIndexOf("@media (min-width: 768px)", start)).toBeGreaterThan(-1);
   });
 
   it("spacing 이 4px 그리드에 결박돼 있다", () => {

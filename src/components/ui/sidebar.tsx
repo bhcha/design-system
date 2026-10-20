@@ -9,7 +9,7 @@
  * 토큰
  *   bg-sidebar(surface-soft) · text-sidebar-foreground · 항목 hover/활성 bg-sidebar-accent · 경계 sidebar-border(hairline)
  *   floating/inset 은 rounded-lg + ring-1 hairline — 그림자 없음 · 포커스 ring-2 ring-sidebar-ring(불투명)
- *   폭 16rem · 아이콘 3rem · 모바일 18rem(Sheet)
+ *   폭 spacing×64(256px) · 아이콘 spacing×12(48px) · 모바일 18rem(Sheet) — Density compact 에서 폭·아이콘 폭도 0.8배
  *
  * 상태
  *   펼침 / 접힘(icon·offcanvas) / 모바일(Sheet) / 항목 활성(data-active) / 비활성(text-mute)
@@ -51,9 +51,10 @@ import { PanelLeftIcon } from "lucide-react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
+// 폭은 spacing 배수라 Density compact 에서 함께 줄어든다(256px → 204.8px). 모바일 Sheet 는 그대로다.
+const SIDEBAR_WIDTH = "calc(var(--spacing) * 64)"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
-const SIDEBAR_WIDTH_ICON = "3rem"
+const SIDEBAR_WIDTH_ICON = "calc(var(--spacing) * 12)"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 type SidebarContextProps = {

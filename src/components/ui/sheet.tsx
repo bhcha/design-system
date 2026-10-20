@@ -23,6 +23,7 @@
 import * as React from "react"
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
@@ -40,7 +41,8 @@ function SheetClose({ ...props }: SheetPrimitive.Close.Props) {
 }
 
 function SheetPortal({ ...props }: SheetPrimitive.Portal.Props) {
-  return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
+  const density = useDensity()
+  return <SheetPrimitive.Portal data-slot="sheet-portal" data-ui-density={density} {...props} />
 }
 
 function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {

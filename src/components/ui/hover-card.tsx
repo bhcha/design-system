@@ -22,6 +22,7 @@
  */
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 function HoverCard({ ...props }: PreviewCardPrimitive.Root.Props) {
   return <PreviewCardPrimitive.Root data-slot="hover-card" {...props} />
@@ -45,8 +46,9 @@ function HoverCardContent({
     PreviewCardPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const density = useDensity()
   return (
-    <PreviewCardPrimitive.Portal data-slot="hover-card-portal">
+    <PreviewCardPrimitive.Portal data-slot="hover-card-portal" data-ui-density={density}>
       <PreviewCardPrimitive.Positioner
         align={align}
         alignOffset={alignOffset}

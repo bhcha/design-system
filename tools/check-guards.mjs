@@ -77,6 +77,7 @@ const DS_EXPECTED = [
   "shadcn/no-restyle",
   "guards/no-surface-styling",
   "guards/ui-only-elements",
+  "guards/density-via-component",
 ];
 const [dsResult] = await eslint.lintFiles([DS_FIXTURE]);
 const dsCounts = new Map();

@@ -10,6 +10,8 @@
  *   ui-only-elements   : app/·features/ 에서 raw 컨트롤 엘리먼트 직접 사용 금지.
  *   no-surface-styling : app/·features/ 에서 raw 엘리먼트(+ next/link Link)에 면(배경·테두리·곡률·그림자·링)을
  *                        직접 입혀 "컴포넌트를 따로 만드는" 것을 금지. 레이아웃·간격·글자는 허용.
+ *   density-via-component : app/·features/ 에서 밀도를 바꿀 때 data-ui-density 를 직접 달거나
+ *                        scale·zoom 으로 화면을 줄이지 않는다. components/ui 의 Density 를 쓴다.
  */
 
 /** `bg-[#fff]` `text-[13px]` `w-[calc(100%-2px)]` 같은 임의값. `[var(--x)]` 는 허용. */
@@ -280,6 +282,46 @@ const noSurfaceStyling = {
   },
 };
 
+/** 화면을 통째로 줄이는 변형 — 밀도를 흉내 낼 뿐 실제 크기·간격이 바뀌지 않는다. */
+const SCALE_CLASS = /(?:^|[\s:])(-?scale(?:-[xyz])?-[a-z0-9./[\]()-]+|zoom(?:-[a-z0-9-]+)?)(?=$|\s)/;
+
+const densityViaComponent = {
+  meta: {
+    type: "problem",
+    docs: {
+      description:
+        "밀도(compact)는 components/ui 의 Density 로만 바꾼다. data-ui-density 직접 지정·scale·zoom 축소를 금지한다.",
+    },
+    schema: [],
+    messages: {
+      attribute:
+        "`data-ui-density` 를 화면에서 직접 달지 않는다. `<Density value=\"compact\">` 로 감싼다 — 포털로 열린 대화상자·팝오버도 같은 밀도를 따른다.",
+      scale:
+        "`{{ raw }}` 로 화면을 축소해 밀도를 흉내 내지 않는다. 크기·간격 토큰을 바꾸는 `<Density value=\"compact\">` 를 쓴다.",
+    },
+  },
+  create(context) {
+    function check(node) {
+      if (!isClassAttribute(node)) return;
+      for (const piece of stringPieces(node)) {
+        const match = SCALE_CLASS.exec(piece.text);
+        if (match) {
+          context.report({ node: piece.node, messageId: "scale", data: { raw: match[1] } });
+        }
+      }
+    }
+    return {
+      JSXAttribute(node) {
+        if (node.name?.type === "JSXIdentifier" && node.name.name === "data-ui-density") {
+          context.report({ node, messageId: "attribute" });
+        }
+      },
+      Literal: check,
+      TemplateElement: check,
+    };
+  },
+};
+
 const plugin = {
   meta: { name: "discovery-guards", version: "2.0.0" },
   rules: {
@@ -287,6 +329,7 @@ const plugin = {
     "no-style-literal": noStyleLiteral,
     "ui-only-elements": uiOnlyElements,
     "no-surface-styling": noSurfaceStyling,
+    "density-via-component": densityViaComponent,
   },
 };
 

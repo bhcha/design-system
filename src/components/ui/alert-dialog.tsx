@@ -23,6 +23,7 @@
 import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 import { Button } from "@/components/ui/button"
 
@@ -37,9 +38,8 @@ function AlertDialogTrigger({ ...props }: AlertDialogPrimitive.Trigger.Props) {
 }
 
 function AlertDialogPortal({ ...props }: AlertDialogPrimitive.Portal.Props) {
-  return (
-    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
-  )
+  const density = useDensity()
+  return <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" data-ui-density={density} {...props} />
 }
 
 function AlertDialogOverlay({

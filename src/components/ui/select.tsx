@@ -25,6 +25,7 @@
 import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
 
 const Select = SelectPrimitive.Root
@@ -91,8 +92,9 @@ function SelectContent({
     SelectPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
   >) {
+  const density = useDensity()
   return (
-    <SelectPrimitive.Portal>
+    <SelectPrimitive.Portal data-ui-density={density}>
       <SelectPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}

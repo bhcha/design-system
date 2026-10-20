@@ -105,6 +105,7 @@
       ],
       "registryDependencies": [
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -437,6 +438,7 @@
       ],
       "registryDependencies": [
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/input-group.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
@@ -610,6 +612,18 @@
       ]
     },
     {
+      "name": "density",
+      "type": "registry:ui",
+      "title": "density",
+      "description": "Density — 밀도 범위. 안쪽 컴포넌트의 간격·글자 토큰을 compact 로 바꾼다 (이슈 #10).",
+      "files": [
+        {
+          "path": "src/components/ui/density.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "dialog",
@@ -620,6 +634,7 @@
       ],
       "registryDependencies": [
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -653,6 +668,7 @@
         "@base-ui/react@^1.9.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -672,6 +688,7 @@
         "lucide-react@^1.57.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -924,6 +941,7 @@
         "@base-ui/react@^1.9.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -1209,6 +1227,7 @@
         "lucide-react@^1.57.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -1332,6 +1351,7 @@
         "@base-ui/react@^1.9.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -1557,6 +1577,7 @@
         "lucide-react@^1.57.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -1595,6 +1616,7 @@
       ],
       "registryDependencies": [
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -1967,6 +1989,7 @@
         "@base-ui/react@^1.9.0"
       ],
       "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
       ],
       "files": [
@@ -2052,6 +2075,7 @@
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/data-grid.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/data-table.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/definition-list.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/disclosure-tray.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/drawer.json",

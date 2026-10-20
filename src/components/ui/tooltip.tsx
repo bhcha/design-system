@@ -22,6 +22,7 @@
 
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 function TooltipProvider({
   delay = 0,
@@ -57,8 +58,9 @@ function TooltipContent({
     TooltipPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const density = useDensity()
   return (
-    <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Portal data-ui-density={density}>
       <TooltipPrimitive.Positioner
         align={align}
         alignOffset={alignOffset}

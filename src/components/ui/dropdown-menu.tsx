@@ -25,6 +25,7 @@
 import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 import { ChevronRightIcon, CheckIcon } from "lucide-react"
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
@@ -32,7 +33,8 @@ function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
 }
 
 function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {
-  return <MenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />
+  const density = useDensity()
+  return <MenuPrimitive.Portal data-slot="dropdown-menu-portal" data-ui-density={density} {...props} />
 }
 
 function DropdownMenuTrigger({ ...props }: MenuPrimitive.Trigger.Props) {
@@ -51,8 +53,9 @@ function DropdownMenuContent({
     MenuPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const density = useDensity()
   return (
-    <MenuPrimitive.Portal>
+    <MenuPrimitive.Portal data-ui-density={density}>
       <MenuPrimitive.Positioner
         className="isolate z-50 outline-none"
         align={align}

@@ -12,6 +12,8 @@
  *   shadcn/no-restyle            <Button className="p-4 rounded-none">
  *   guards/no-surface-styling    raw <div> 에 rounded·border·bg 로 만든 카드, 면을 입힌 next/link <Link>
  *   guards/ui-only-elements      raw <a> · <label>
+ * 밀도
+ *   guards/density-via-component data-ui-density 직접 지정 · scale 로 화면 축소
  */
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -29,6 +31,8 @@ export function DesignSystemViolations({ tone }: { tone: string }) {
       <Link href="/design" className="rounded-full border border-border bg-background p-2">손으로 만든 링크 버튼</Link>
       <a href="/design">raw 링크</a>
       <label>raw 라벨</label>
+      <div data-ui-density="compact">Density 없이 단 밀도</div>
+      <div className="origin-top-left scale-80">축소로 흉내 낸 밀도</div>
     </div>
   );
 }

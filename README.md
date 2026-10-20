@@ -119,6 +119,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
+### 밀도 — compact (선택)
+
+작업 화면(워크벤치)처럼 한 화면에 더 많이 보여야 하면 앱 셸 전체를 `Density` 로 감싼다.
+브라우저 배율이나 `zoom`·`transform: scale()` 대신 간격 토큰이 0.8배, 글자가 타입 스케일
+한 단계 아래(최소 12px)가 된다. 768px 미만에서는 기본 크기 그대로다.
+
+```tsx
+// src/app/layout.tsx
+import { Density } from "@/components/ui/density";
+
+<body>
+  <Density value="compact">{children}</Density>
+</body>
+```
+
+- `SidebarProvider` 처럼 크기 변수를 정하는 컴포넌트보다 **바깥**에 둔다.
+- 포털로 열리는 대화상자·팝오버·툴팁·메뉴도 연 곳의 밀도를 따른다.
+- 컴포넌트마다 `size` 를 골라 맞추지 않는다. 기본 밀도로 되돌릴 곳은 `<Density value="default">`.
+- 값과 예외는 `design.md` 적용 차이 9, 표본은 `/design#density`.
+
 ### 4. lint 켜기 (선택)
 
 `eslint.config.mjs` 와 `next.config.ts` 에 붙이는 법은

@@ -24,6 +24,7 @@
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 type DrawerContextProps = {
   hasSnapPoints: boolean
@@ -77,7 +78,8 @@ function DrawerTrigger({ ...props }: DrawerPrimitive.Trigger.Props) {
 }
 
 function DrawerPortal({ ...props }: DrawerPrimitive.Portal.Props) {
-  return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />
+  const density = useDensity()
+  return <DrawerPrimitive.Portal data-slot="drawer-portal" data-ui-density={density} {...props} />
 }
 
 function DrawerClose({ ...props }: DrawerPrimitive.Close.Props) {

@@ -23,6 +23,7 @@
 import * as React from "react"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 function Popover({ ...props }: PopoverPrimitive.Root.Props) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />
@@ -44,8 +45,9 @@ function PopoverContent({
     PopoverPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const density = useDensity()
   return (
-    <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Portal data-ui-density={density}>
       <PopoverPrimitive.Positioner
         align={align}
         alignOffset={alignOffset}

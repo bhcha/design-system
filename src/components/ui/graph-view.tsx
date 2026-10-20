@@ -44,6 +44,7 @@ import { cn } from "@/lib/utils"
  *
  * 토큰
  *   노드 bg-background · border --color-border · rounded-lg · 이름 text-sm · 유형 text-xs muted-foreground
+ *   노드 크기·간격은 --spacing 배수(176×60 · Density compact 140.8×48) — 배치 계산과 실측이 같다
  *   선택 ring-2 --color-foreground · 포커스 outline-2 --color-ring(불투명 파랑) — 둘은 따로 보인다
  *   경로 노드 bg --color-status-info-soft · border --color-status-info · 경로 간선 --color-foreground 2px
  *   일반 간선 --color-hairline-strong 1px · 미확인 노드·간선 점선 + "미확인" 글자
@@ -103,8 +104,28 @@ export type GraphViewProps = {
   className?: string
 }
 
-const NODE_WIDTH = 176
-const NODE_HEIGHT = 60
+/**
+ * 배치 치수 — --spacing(기본 4px)의 배수. 노드 버튼의 w-44·h-15 와 같은 값이어야
+ * 실측 크기와 dagre 배치가 맞는다. Density compact 에서는 --spacing 이 줄어 함께 줄어든다.
+ */
+const NODE = { width: 44, height: 15, nodesep: 8, ranksepLR: 30, ranksepTB: 18, margin: 4 }
+
+/** 캔버스가 놓인 자리의 --spacing(px). 밀도 범위·화면 폭이 바뀌면 다시 읽는다. */
+function useSpacingUnit(ref: React.RefObject<HTMLElement | null>) {
+  const [unit, setUnit] = React.useState(4)
+  React.useLayoutEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const read = () => {
+      const value = Number.parseFloat(getComputedStyle(element).getPropertyValue("--spacing"))
+      if (value > 0) setUnit(value)
+    }
+    read()
+    window.addEventListener("resize", read)
+    return () => window.removeEventListener("resize", read)
+  }, [ref])
+  return unit
+}
 
 type EntityData = {
   node: GraphNode
@@ -144,7 +165,7 @@ function EntityNode({ data }: NodeProps<Node<EntityData>>) {
         onClick={() => onSelect?.(node.id)}
         className={cn(
           // 읽기 전용 React Flow 노드의 pointer-events:none을 버튼에서 복구한다.
-          "pointer-events-auto flex w-44 flex-col items-start gap-0.5 rounded-lg border bg-background px-3 py-2 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+          "pointer-events-auto flex h-15 w-44 flex-col items-start justify-center gap-0.5 rounded-lg border bg-background px-3 py-1.5 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           unconfirmed ? "border-dashed border-hairline-strong" : "border-border",
           inPath && "border-status-info bg-status-info-soft",
           selected && "ring-2 ring-foreground"
@@ -186,14 +207,24 @@ function layout({
   path,
   selectedId,
   onSelect,
+  unit,
 }: Pick<GraphViewProps, "nodes" | "edges" | "path" | "selectedId" | "onSelect"> & {
   direction: "LR" | "TB"
+  unit: number
 }): { nodes: Node<EntityData>[]; edges: Edge[] } {
+  const width = NODE.width * unit
+  const height = NODE.height * unit
   const g = new dagre.graphlib.Graph()
   // LR 은 간선 라벨이 열 사이에 놓이므로 열 간격을 라벨 폭만큼 넓힌다.
-  g.setGraph({ rankdir: direction, nodesep: 32, ranksep: direction === "LR" ? 120 : 72, marginx: 16, marginy: 16 })
+  g.setGraph({
+    rankdir: direction,
+    nodesep: NODE.nodesep * unit,
+    ranksep: (direction === "LR" ? NODE.ranksepLR : NODE.ranksepTB) * unit,
+    marginx: NODE.margin * unit,
+    marginy: NODE.margin * unit,
+  })
   g.setDefaultEdgeLabel(() => ({}))
-  for (const node of nodes) g.setNode(node.id, { width: NODE_WIDTH, height: NODE_HEIGHT })
+  for (const node of nodes) g.setNode(node.id, { width, height })
   for (const edge of edges) g.setEdge(edge.source, edge.target)
   dagre.layout(g)
 
@@ -206,9 +237,9 @@ function layout({
       return {
         id: node.id,
         type: "entity",
-        position: { x: x - NODE_WIDTH / 2, y: y - NODE_HEIGHT / 2 },
-        width: NODE_WIDTH,
-        height: NODE_HEIGHT,
+        position: { x: x - width / 2, y: y - height / 2 },
+        width,
+        height,
         data: {
           node,
           selected: node.id === selectedId,
@@ -339,14 +370,17 @@ function GraphViewInner({
   className,
 }: GraphViewProps) {
   const [view, setView] = React.useState("graph")
+  const ref = React.useRef<HTMLDivElement>(null)
+  const unit = useSpacingUnit(ref)
   const flow = React.useMemo(
-    () => layout({ nodes, edges, direction, path, selectedId, onSelect }),
-    [nodes, edges, direction, path, selectedId, onSelect]
+    () => layout({ nodes, edges, direction, path, selectedId, onSelect, unit }),
+    [nodes, edges, direction, path, selectedId, onSelect, unit]
   )
   const empty = nodes.length === 0
 
   return (
     <Card
+      ref={ref}
       data-slot="graph-view"
       className={cn("gap-0 py-0", fill && "h-full", className)}
     >

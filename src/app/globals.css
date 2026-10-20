@@ -281,6 +281,72 @@
 
 
 /* ===========================================================================
+   밀도(density) — 이슈 #10
+   `data-ui-density` 를 단 범위 안에서 간격·글자 토큰을 다시 정의한다.
+   components/ui 의 Density 컴포넌트가 이 속성을 단다(포털로 열린 대화상자·팝오버 포함).
+   CSS zoom · transform: scale() 이 아니라 실제 CSS 크기가 바뀐다.
+
+   compact (작업 화면 — 워크벤치)
+     간격  --spacing 4px → 3.2px (0.8배). 높이·폭·안쪽 여백·gap 이 모두 spacing 배수라
+           메뉴·탭·버튼·입력·카드·코드·표·대화상자가 같은 비율로 줄어든다.
+     글자  0.8배가 아니라 design.md 타입 스케일을 **한 단계씩 내린다**(새 크기를 만들지 않는다).
+           base 16→14 · sm 14→12 · lg 18→16 · xl 20→18 · 2xl 24→20 · 3xl 30→24 · 4xl 36→30
+           최소 글자는 caption-sm 12px — xs(12px)는 더 줄이지 않는다(가독성 예외).
+     줄지 않는 것  곡률(px 토큰) · 1px 테두리 · 2px 포커스 링과 그 간격 · 아이콘 선 두께.
+     모바일  768px 미만에서는 적용하지 않는다(터치 크기 유지). 기본값과 같다.
+
+   default 는 compact 범위 안에서 다시 기본 밀도로 되돌릴 때 쓴다.
+   =========================================================================== */
+@layer base {
+  [data-ui-density] {
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  [data-ui-density="default"] {
+    --spacing: 4px;
+    --text-xs: 12px;
+    --text-xs--line-height: 16px;
+    --text-sm: 14px;
+    --text-sm--line-height: 20px;
+    --text-base: 16px;
+    --text-base--line-height: 24px;
+    --text-lg: 18px;
+    --text-lg--line-height: 28px;
+    --text-xl: 20px;
+    --text-xl--line-height: 28px;
+    --text-2xl: 24px;
+    --text-2xl--line-height: 32px;
+    --text-3xl: 30px;
+    --text-3xl--line-height: 36px;
+    --text-4xl: 36px;
+    --text-4xl--line-height: 40px;
+  }
+
+  @media (min-width: 768px) {
+    [data-ui-density="compact"] {
+      --spacing: 3.2px;
+      --text-xs: 12px; /* 최소 — 줄이지 않는다 */
+      --text-xs--line-height: 16px;
+      --text-sm: 12px; /* = caption-sm */
+      --text-sm--line-height: 16px;
+      --text-base: 14px; /* = body-sm */
+      --text-base--line-height: 20px;
+      --text-lg: 16px; /* = body-md */
+      --text-lg--line-height: 24px;
+      --text-xl: 18px; /* = heading-sm */
+      --text-xl--line-height: 28px;
+      --text-2xl: 20px; /* = heading-md */
+      --text-2xl--line-height: 28px;
+      --text-3xl: 24px; /* = heading-lg */
+      --text-3xl--line-height: 32px;
+      --text-4xl: 30px; /* = display-lg */
+      --text-4xl--line-height: 36px;
+    }
+  }
+}
+
+/* ===========================================================================
    전역 기본값
    반드시 @layer base 안에 둔다. 레이어 밖에 두면 utilities 레이어를 이겨서
    컴포넌트에서 조정이 불가능해진다 (AGENTS.md 함정 2).

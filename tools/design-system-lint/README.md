@@ -18,6 +18,7 @@
 | | `guards/ui-only-elements` | 화면에서 raw `button·input·select·textarea·table·a·label·details` |
 | | `guards/no-surface-styling` | 화면에서 raw `div` 에 `bg·border·rounded·ring·shadow` 로 카드 만들기 |
 | | `guards/no-arbitrary-class` | 화면에서 Tailwind 임의값 |
+| 밀도 | `guards/density-via-component` | 화면에서 `data-ui-density` 직접 지정, `scale-80`·`zoom` 으로 화면 축소 — `<Density value="compact">` 를 쓴다 |
 
 화면 코드(`src/app`·`src/features`)는 **배치·간격·글자**만 정한다. 모양이 필요하면
 `components/ui` 에 컴포넌트나 variant 를 추가한다. `components/ui` 안쪽은 shadcn 원본

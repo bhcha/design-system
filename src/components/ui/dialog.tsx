@@ -23,6 +23,7 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
@@ -36,7 +37,8 @@ function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
 }
 
 function DialogPortal({ ...props }: DialogPrimitive.Portal.Props) {
-  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
+  const density = useDensity()
+  return <DialogPrimitive.Portal data-slot="dialog-portal" data-ui-density={density} {...props} />
 }
 
 function DialogClose({ ...props }: DialogPrimitive.Close.Props) {

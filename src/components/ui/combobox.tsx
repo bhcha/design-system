@@ -28,6 +28,7 @@
 import * as React from "react"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react"
 import { cn } from "@/lib/utils"
+import { useDensity } from "@/components/ui/density"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -124,8 +125,9 @@ function ComboboxContent({
     ComboboxPrimitive.Positioner.Props,
     "side" | "align" | "sideOffset" | "alignOffset" | "anchor"
   >) {
+  const density = useDensity()
   return (
-    <ComboboxPrimitive.Portal>
+    <ComboboxPrimitive.Portal data-ui-density={density}>
       <ComboboxPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}

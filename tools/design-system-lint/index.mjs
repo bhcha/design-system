@@ -23,6 +23,8 @@
  *     guards/ui-only-elements     화면에서 raw button·input·select·textarea·table·a·label…
  *     guards/no-surface-styling   화면에서 raw div 등에 배경·테두리·곡률·그림자·링 입히기
  *     guards/no-arbitrary-class   화면에서 Tailwind 임의값
+ *   밀도
+ *     guards/density-via-component 화면에서 data-ui-density 직접 지정 · scale·zoom 으로 축소 (Density 를 쓴다)
  *
  * 디자인 시스템 안쪽(uiDir)은 shadcn 원본 코드라 임의 변형자·재스타일이 허용되고,
  * 토큰 밖 색·클래스·리터럴만 막는다.
@@ -95,6 +97,7 @@ export function designSystemLint({
         "guards/no-arbitrary-class": "error",
         "guards/ui-only-elements": "error",
         "guards/no-surface-styling": "error",
+        "guards/density-via-component": "error",
       },
     },
     // 3) 디자인 시스템 안쪽 — 모양을 정의하는 곳이라 재스타일 규칙은 끈다
