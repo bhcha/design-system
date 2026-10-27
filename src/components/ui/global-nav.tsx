@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
  * 해부도
  *   [ 브랜드 ][ 링크 행 ......................... ][ 액션 클러스터 ]
  *   높이 56px. 콘텐츠 락 없이 화면 전체 폭을 쓰고 좌우 여백은 24px 이다.
+ *   layout="docs"는 60px 상단바 + 최대 1440px 안쪽 행이다(적용 차이 10).
  *
  * 토큰 — design.md {component.primary-nav}
  *   높이 h-14(56px) · 링크 {typography.body-sm-strong} 14px/500 · 링크 간격 gap-6(24px)
@@ -22,6 +23,7 @@ import { cn } from "@/lib/utils";
  *   tone="dark"        — 배경 --color-nav · 텍스트 --color-on-dark
  *                        (design.md 밖 — 어두운 면 위 크롬이 필요할 때만)
  *   접이식 트레이의 구분선: light 는 --color-border, dark 는 --color-on-dark-border.
+ *   docs 배치는 h-15 · max-w-app · px-4.5 sm:px-6이며 색·서체는 공유한다.
  *
  * 반응형 (design.md Collapsing Strategy)
  *   ≥ 850px(lg): 링크 행 전개.
@@ -40,6 +42,7 @@ import { cn } from "@/lib/utils";
  *   - 첫 안쪽 div 의 높이가 정확히 56px(선 포함).
  *   - 링크가 14px/500 · ink 다.
  *   - 링크 행이 850px 미만에서 사라지고 디스클로저가 나타난다.
+ *   - docs 배치는 60px 높이이며 넓은 화면에서 문서 셸과 중앙 정렬된다.
  */
 export type NavItem = {
   label: string;
@@ -63,6 +66,8 @@ export type GlobalNavProps = {
   label?: string;
   /** 놓이는 면. 기본은 밝은 면(작업 도구), design.md 원문은 dark. */
   tone?: "light" | "dark";
+  /** 문서 셸은 60px 상단바와 1440px 콘텐츠 락을 쓴다. */
+  layout?: "app" | "docs";
   className?: string;
 };
 
@@ -104,6 +109,7 @@ export function GlobalNav({
   actions,
   label = "전역",
   tone = "light",
+  layout = "app",
   className,
 }: GlobalNavProps) {
   const dark = tone === "dark";
@@ -116,7 +122,7 @@ export function GlobalNav({
         className,
       )}
     >
-      {/* 작업 도구의 상단바는 콘텐츠 락 없이 **화면 전체 폭**을 쓴다(작업 도구 계열).
+      {/* 기본 작업 도구의 상단바는 콘텐츠 락 없이 **화면 전체 폭**을 쓴다(작업 도구 계열).
           max-w-app 으로 가운데 정렬하면 넓은 화면에서 좌우 여백이 수백 px 씩 생겨
           브랜드·경로가 화면 모서리에서 떨어져 보인다. 여백은 px-6(24px)이다.
           띠가 h-14 + border-b 를 함께 들고(box-sizing:border-box) 안쪽 행이 h-full 을
@@ -124,11 +130,12 @@ export function GlobalNav({
           여기에 결박돼 있다. */}
       <div
         className={cn(
-          "h-14 w-full",
+          "w-full",
+          layout === "docs" ? "h-15" : "h-14",
           dark ? undefined : "border-b border-border",
         )}
       >
-        <div className="flex h-full items-center gap-6 px-6">
+        <div className={cn("flex h-full items-center gap-6", layout === "docs" ? "mx-auto max-w-app px-4.5 sm:px-6" : "px-6")}>
           <span className="shrink-0 text-sm font-semibold">{brand}</span>
 
           {breadcrumb ? (

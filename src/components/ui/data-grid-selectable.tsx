@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { DataGrid, type DataGridProps } from "./data-grid";
+import { cn } from "@/lib/utils";
 
 /**
  * SelectableDataGrid — 이동하지 않고 **그 자리에서 고르는** 목록.
@@ -35,6 +36,8 @@ import { DataGrid, type DataGridProps } from "./data-grid";
  * 수용 기준
  *   - 마우스로 길게 눌렀다 떼도 선택이 유지된다.
  *   - 키보드만으로 모든 행에 도달하고 선택할 수 있다.
+ *   - 호출부의 폭·배치는 바깥 래퍼에 적용하고 DataGrid는 그 폭을 채운다.
+ *     flex 안에서도 보이는 열과 행의 클릭 영역이 같은 폭을 갖는다.
  */
 export type SelectableDataGridProps<Row> = Omit<
   DataGridProps<Row>,
@@ -49,6 +52,7 @@ export function SelectableDataGrid<Row>({
   onSelectRow,
   rows,
   getRowId,
+  className,
   ...props
 }: SelectableDataGridProps<Row>) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
@@ -82,6 +86,7 @@ export function SelectableDataGrid<Row>({
   return (
     <div
       ref={containerRef}
+      className={cn("min-w-0 w-full", className)}
       onPointerDown={(event) => {
         if (event.pointerType !== "mouse") return;
         const id = rowIdFrom(event.target);
@@ -135,6 +140,7 @@ export function SelectableDataGrid<Row>({
     >
       <DataGrid
         {...props}
+        className="w-full"
         rows={rows}
         getRowId={getRowId}
         selectedId={selectedId}

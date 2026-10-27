@@ -72,6 +72,8 @@ import { CountBadge } from "./count-badge";
  * 무엇으로 만드나 — 내비게이션 사용 기준(카탈로그 "내비게이션 사용 기준")
  *   전역 상단 GlobalNav · 앱 좌측 탐색 SideNav(접기가 필요하면 Sidebar)
  *   프로젝트 수평 탭(주소가 바뀐다) LinkTabs · 상세 보기 탭(같은 화면 안 패널 전환) Tabs
+ *   문서 읽기 화면은 DocsShell + DocsSideNav + DocsToc + DocsMobileMenu를 쓴다.
+ *   SideNav의 compact는 작업 도구의 촘촘한 목록이며 문서 읽기 메뉴의 대체가 아니다.
  */
 export type SideNavItem = {
   label: string;

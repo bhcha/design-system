@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "docs-pager",
+  "title": "docs-pager",
+  "description": "DocsPager — 이전·다음 문서 이동",
+  "dependencies": [
+    "lucide-react@^1.57.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/docs-pager.tsx",
+      "content": "import Link from \"next/link\";\nimport { ArrowLeft, ArrowRight } from \"lucide-react\";\nimport { Card, CardContent } from \"@/components/ui/card\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * DocsPager — 이전·다음 문서 이동\n *\n * 해부도\n *   [이전 문서 · ← 제목] [다음 문서 · 제목 →]. 카드 전체가 하나의 링크다.\n *\n * 토큰\n *   Card의 background·border·rounded-xl, text-xs 보조 라벨, text-sm/medium 제목.\n *   gap-4 · py-4, hover muted, focus ring-ring. 새 색·곡률·그림자는 없다.\n *\n * 상태\n *   양쪽 링크 / 이전만 / 다음만 / 둘 다 없으면 숨김 / hover / focus-visible.\n *\n * 키보드·ARIA\n *   nav에 이름을 주고 링크는 rel=prev/next와 방향을 포함한 접근 가능한 이름을 갖는다.\n *   링크마다 Tab 정지점은 하나이며 중첩된 버튼·링크가 없다.\n *\n * 수용 기준\n *   긴 제목은 줄바꿈하며 작은 화면에서는 세로로 쌓인다.\n *   없는 문서를 비활성 버튼이나 빈 카드로 표시하지 않는다.\n */\nexport type DocsPagerLink = { label: string; href: string };\n\nfunction PagerLink({ item, direction }: { item: DocsPagerLink; direction: \"prev\" | \"next\" }) {\n  const next = direction === \"next\";\n  const label = next ? \"다음 문서\" : \"이전 문서\";\n  return (\n    <Card\n      render={<Link href={item.href} rel={direction} aria-label={`${label}: ${item.label}`} />}\n      className={cn(\"gap-0 py-4 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\", next && \"text-right sm:col-start-2\")}\n    >\n      <CardContent className={cn(\"flex min-w-0 flex-col gap-2\", next && \"items-end\")}>\n        <span className=\"text-xs text-muted-foreground\">{label}</span>\n        <span className=\"flex items-center gap-2 text-sm font-medium\">\n          {!next ? <ArrowLeft className=\"size-4 shrink-0\" aria-hidden=\"true\" /> : null}\n          <span className=\"min-w-0 break-words\">{item.label}</span>\n          {next ? <ArrowRight className=\"size-4 shrink-0\" aria-hidden=\"true\" /> : null}\n        </span>\n      </CardContent>\n    </Card>\n  );\n}\n\nexport function DocsPager({ previous, next, label = \"이전과 다음 문서\" }: { previous?: DocsPagerLink; next?: DocsPagerLink; label?: string }) {\n  if (!previous && !next) return null;\n  return (\n    <nav aria-label={label} className=\"grid grid-cols-1 gap-4 sm:grid-cols-2\">\n      {previous ? <PagerLink item={previous} direction=\"prev\" /> : null}\n      {next ? <PagerLink item={next} direction=\"next\" /> : null}\n    </nav>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

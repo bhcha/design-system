@@ -1,0 +1,125 @@
+/**
+ * Export a mockup route as one offline HTML file.
+ * Uses the existing Next build's CSS, fonts, and first-render markup; the same
+ * React screen is bundled independently so file:// needs no Next server.
+ * Run: npm run build && npm run mockup:export [-- docs]
+ */
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { dirname, extname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { build } from "vite";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const profiles = {
+  projects: {
+    route: "mockup", file: "project-library.html", component: "src/app/mockup/project-library.tsx",
+    exportName: "ProjectLibrary", title: "Folio · 나의 프로젝트", description: "Folio — 개인 프로젝트 라이브러리 인터랙티브 목업",
+  },
+  docs: {
+    route: "mockup/docs", file: "docs-library.html", component: "src/app/mockup/docs/docs-reader.tsx",
+    exportName: "DocsReader", title: "Folio Docs · 문서 공간", description: "Folio Docs — 왼쪽 문서 메뉴, 본문 목차, 검색을 갖춘 문서 시스템 목업",
+  },
+};
+const name = process.argv[2] ?? "projects";
+const profile = profiles[name];
+if (!profile) throw new Error(`Unknown mockup: ${name}. Choose projects or docs.`);
+const output = resolve(root, "public/mockups", profile.file);
+const source = await readFile(resolve(root, `.next/server/app/${profile.route}.html`), "utf8");
+const entry = resolve(root, `.next/mockup-entry-${name}.mjs`);
+const link = "\0folio-offline-link";
+const mimeTypes = { ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".svg": "image/svg+xml", ".png": "image/png" };
+const embeddedAssets = new Map();
+
+async function inlineAssets(css, filename) {
+  const matches = [...css.matchAll(/url\(\s*["']?([^\s"')]+)["']?\s*\)/g)];
+  const replacements = await Promise.all(matches.map(async ([original, url]) => {
+    if (url.startsWith("data:") || url.startsWith("#")) return [original, original];
+    if (/^https?:/.test(url)) throw new Error(`Unexpected external CSS asset: ${url}`);
+    const path = url.startsWith("/_next/")
+      ? resolve(root, ".next", url.slice("/_next/".length))
+      : resolve(dirname(filename), url);
+    if (!embeddedAssets.has(path)) {
+      embeddedAssets.set(path, readFile(path).then((data) => `data:${mimeTypes[extname(path)] ?? "application/octet-stream"};base64,${data.toString("base64")}`));
+    }
+    return [original, `url("${await embeddedAssets.get(path)}")`];
+  }));
+  for (const [original, replacement] of replacements) css = css.replaceAll(original, replacement);
+  return css;
+}
+
+const stylesheets = [...source.matchAll(/<link\b[^>]*>/g)]
+  .map(([tag]) => tag)
+  .filter((tag) => /rel="stylesheet"/.test(tag))
+  .map((tag) => tag.match(/href="([^"]+)"/)[1]);
+if (!stylesheets.length) throw new Error("No built stylesheet found. Run npm run build first.");
+const css = (await Promise.all(stylesheets.map(async (href) => {
+  const filename = resolve(root, ".next", href.replace(/^\/_next\//, ""));
+  return inlineAssets(await readFile(filename, "utf8"), filename);
+}))).join("\n");
+
+await writeFile(entry, `
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { ${profile.exportName} } from ${JSON.stringify(resolve(root, profile.component))};
+  createRoot(document.getElementById('mockup-root')).render(createElement(${profile.exportName}));
+`);
+
+const result = await build({
+  root,
+  configFile: false,
+  logLevel: "error",
+  define: { "process.env.NODE_ENV": JSON.stringify("production") },
+  resolve: { alias: { "@": resolve(root, "src") } },
+  plugins: [{
+    name: "folio-offline-entry",
+    enforce: "pre",
+    resolveId(id) {
+      if (id === "next/link" || id === link) return link;
+    },
+    load(id) {
+      // Existing UI components also serve Next routes. In the standalone file,
+      // their links use the browser's ordinary anchor navigation.
+      if (id === link) return `
+        import { createElement, forwardRef } from 'react';
+        export default forwardRef(function OfflineLink({href, children, prefetch, replace, scroll, ...props}, ref) {
+          return createElement('a', {...props, ref, href}, children);
+        });
+      `;
+    },
+  }],
+  build: {
+    write: false,
+    target: "es2022",
+    minify: true,
+    lib: { entry, name: "FolioMockup", formats: ["iife"] },
+  },
+});
+
+const outputs = (Array.isArray(result) ? result : [result]).flatMap((item) => item.output);
+const chunks = outputs.filter((item) => item.type === "chunk");
+if (chunks.length !== 1) throw new Error(`Expected one inline JavaScript bundle; got ${chunks.length}.`);
+const htmlClass = source.match(/<html[^>]*class="([^"]*)"/)?.[1] ?? "";
+const body = source.match(/<body[^>]*>([\s\S]*?)<\/body>/)?.[1]
+  .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+  .replace(/<link\b[^>]*>/gi, "");
+if (!body) throw new Error("Missing rendered mockup body.");
+
+const html = `<!doctype html>
+<!-- Generated by npm run mockup:export -- ${name}. Edit ${profile.component}. -->
+<html lang="ko" class="${htmlClass}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="${profile.description}">
+<title>${profile.title}</title>
+<link rel="icon" href="data:,">
+<style>${css.replaceAll("</style", "<\\/style")}</style>
+</head>
+<body><div id="mockup-root" class="flex min-h-screen flex-col">${body}</div>
+<noscript>검색과 화면 전환 기능을 사용하려면 JavaScript를 켜주세요.</noscript>
+<script>${chunks[0].code.replaceAll("</script", "<\\/script")}</script>
+</body></html>`;
+
+await mkdir(dirname(output), { recursive: true });
+await writeFile(output, html);
+console.log(`${output}\n${(Buffer.byteLength(html) / 1024 / 1024).toFixed(2)} MB · CSS, JavaScript, fonts embedded`);

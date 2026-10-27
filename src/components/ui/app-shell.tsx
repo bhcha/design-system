@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
  * AppShell — 사이드바 + 작업 영역 2열 셸
  *
  * shadcn 기반
- *   레이아웃 컨테이너라 대응하는 shadcn 프리미티브가 없다(Sidebar 는 설치돼 있지 않다).
+ *   레이아웃 컨테이너다. 작업 화면의 고정 2열에는 AppShell, 접는 앱 탐색에는 Sidebar,
+ *   카테고리·본문 목차가 있는 문서 읽기 화면에는 DocsShell을 쓴다.
  *   ScrollArea 는 **쓰지 않는다** — 다음 세 가지를 깨기 때문이다.
  *   1. e2e 가 `main` 의 바로 앞 형제(= <aside>)에서 배경(--color-muted)과 top 56px ·
  *      bottom = 뷰포트를 잰다. ScrollArea 는 Root·Viewport 두 겹 div 를 끼우고

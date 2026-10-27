@@ -557,6 +557,9 @@
       "type": "registry:ui",
       "title": "data-grid-selectable",
       "description": "SelectableDataGrid — 이동하지 않고 **그 자리에서 고르는** 목록.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/data-grid-selectable.tsx",
@@ -655,6 +658,78 @@
       "files": [
         {
           "path": "src/components/ui/disclosure-tray.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "docs-mobile-menu",
+      "type": "registry:ui",
+      "title": "docs-mobile-menu",
+      "description": "DocsMobileMenu — 문서용 모바일 메뉴 (Sheet + DocsSideNav)",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/button.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/docs-navigation.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/docs-mobile-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "docs-navigation",
+      "type": "registry:ui",
+      "title": "docs-navigation",
+      "description": "DocsSideNav · DocsToc — 문서의 좌측 탐색과 우측 본문 목차 (design.md 적용 차이 10)",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/docs-navigation.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "docs-pager",
+      "type": "registry:ui",
+      "title": "docs-pager",
+      "description": "DocsPager — 이전·다음 문서 이동",
+      "dependencies": [
+        "lucide-react@^1.57.0"
+      ],
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/card.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/docs-pager.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "docs-shell",
+      "type": "registry:ui",
+      "title": "docs-shell",
+      "description": "DocsShell · DocsSection — 문서용 3열 셸과 본문 절 (design.md 적용 차이 10)",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/docs-shell.tsx",
           "type": "registry:ui"
         }
       ]
@@ -2078,6 +2153,10 @@
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/density.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dialog.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/disclosure-tray.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/docs-mobile-menu.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/docs-navigation.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/docs-pager.json",
+        "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/docs-shell.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/drawer.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/dropdown-menu.json",
         "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/empty-state.json",

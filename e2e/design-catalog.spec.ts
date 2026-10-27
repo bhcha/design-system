@@ -131,7 +131,9 @@ test.describe("DataGrid — 행 클릭형 목록의 계약", () => {
   const GRID = '[data-specimen="data-grid.tsx"]';
 
   test("마우스를 길게 눌렀다 떼도 선택이 유지된다", async ({ page }) => {
-    await page.goto("/design");
+    await page.goto("/design", { waitUntil: "networkidle" });
+    // 실제 포인터 좌표를 쓰므로 서체 로딩으로 행 위치가 바뀌기 전에 누르지 않는다.
+    await page.evaluate(() => document.fonts.ready);
     await unstickPageChrome(page);
     const row = page.locator(GRID).getByRole("option", { name: /PRJ-03/ });
 
@@ -140,6 +142,10 @@ test.describe("DataGrid — 행 클릭형 목록의 계약", () => {
     await row.hover();
     const box = await row.boundingBox();
     if (!box) throw new Error("행의 위치를 찾지 못했다");
+    const lastCell = await row.locator(":scope > div").last().boundingBox();
+    if (!lastCell) throw new Error("마지막 열의 위치를 찾지 못했다");
+    // 보이는 열이 행의 클릭 영역 밖으로 벗어나면 텍스트 위를 눌러도 선택되지 않는다.
+    expect(lastCell.x + lastCell.width).toBeLessThanOrEqual(box.x + box.width);
     await page.mouse.down();
     await page.mouse.move(box.x + box.width / 2 + 4, box.y + box.height / 2 + 3);
     await expect(row).toHaveAttribute("aria-selected", "true");

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "docs-shell",
+  "title": "docs-shell",
+  "description": "DocsShell · DocsSection — 문서용 3열 셸과 본문 절 (design.md 적용 차이 10)",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/bhcha/design-system/main/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/docs-shell.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * DocsShell · DocsSection — 문서용 3열 셸과 본문 절 (design.md 적용 차이 10)\n *\n * 해부도\n *   GlobalNav(layout=docs) → LinkTabs(variant=docs) 아래에 놓는다.\n *   [왼쪽 문서 탐색] [article: 제목·본문·페이지 이동] [오른쪽 본문 목차]\n *   DocsSection은 앵커 id + H2 + 본문을 묶는다.\n *\n * 토큰\n *   max-w-app · sidebar w-55 / 2xl:w-60 · toc w-52 · article max-w-docs.\n *   본문 px-4.5 → sm:px-6 → xl:px-9, 위아래 py-6 → xl:pt-8 pb-12.\n *   두 메뉴 아래 sticky top-31 / top-33. 본문 앵커는 scroll-mt-38.\n *   표면·색·곡률은 추가하지 않는다. 메뉴의 스크롤 한계는 셸에서만 정한다.\n *\n * 상태\n *   3열 / 1280 미만 목차 숨김 / 1024 미만 사이드바 숨김.\n *   좁은 화면의 탐색은 상단에 조립한 DocsMobileMenu가 맡는다.\n *   sticky=false는 카탈로그·내장 미리보기에서 고정을 해제한다.\n *\n * 키보드·ARIA\n *   본문 mainId + tabIndex=-1은 SkipLink와 모바일 메뉴의 포커스 복귀 지점이다.\n *   카탈로그처럼 main 안에 넣을 때는 contentAs=section을 사용한다.\n *   DocsSection은 aria-labelledby로 자신의 H2와 연결된다.\n *\n * 수용 기준\n *   본문과 양쪽 탐색이 겹치거나 화면을 가로로 넘치지 않는다.\n *   긴 메뉴는 각각 스크롤하고 목차로 이동한 제목은 상단 메뉴에 가려지지 않는다.\n *   슬롯이 없으면 그 열을 만들지 않으며 서버 컴포넌트에서도 조립할 수 있다.\n */\nexport type DocsShellProps = {\n  sidebar?: ReactNode;\n  toc?: ReactNode;\n  children: ReactNode;\n  mainId?: string;\n  articleLabelledBy?: string;\n  sidebarLabel?: string;\n  contentAs?: \"main\" | \"section\";\n  sticky?: boolean;\n  className?: string;\n};\n\nexport function DocsShell({\n  sidebar,\n  toc,\n  children,\n  mainId = \"docs-main\",\n  articleLabelledBy,\n  sidebarLabel = \"문서 탐색\",\n  contentAs: Content = \"main\",\n  sticky = true,\n  className,\n}: DocsShellProps) {\n  return (\n    <div data-slot=\"docs-shell\" className={cn(\"mx-auto flex w-full max-w-app flex-1 items-start\", className)}>\n      {sidebar ? (\n        <aside data-slot=\"docs-sidebar\" aria-label={sidebarLabel} className={cn(\n          \"hidden w-55 shrink-0 xl:block 2xl:w-60\",\n          sticky && \"sticky top-31 max-h-[calc(100dvh-var(--spacing)*35)] overflow-y-auto overscroll-contain\",\n        )}>{sidebar}</aside>\n      ) : null}\n      <Content id={mainId} tabIndex={-1} className=\"min-w-0 flex-1\">\n        <article data-slot=\"docs-article\" aria-labelledby={articleLabelledBy} className=\"mx-auto flex w-full max-w-docs flex-col gap-8 px-4.5 py-6 sm:px-6 sm:py-7 xl:px-9 xl:pt-8 xl:pb-12\">\n          {children}\n        </article>\n      </Content>\n      {toc ? (\n        <div data-slot=\"docs-toc-rail\" className={cn(\n          \"hidden w-52 shrink-0 2xl:block\",\n          sticky && \"sticky top-33 max-h-[calc(100dvh-var(--spacing)*38)] overflow-y-auto overscroll-contain\",\n        )}>{toc}</div>\n      ) : null}\n    </div>\n  );\n}\n\nexport function DocsSection({ id, title, children }: { id: string; title: ReactNode; children: ReactNode }) {\n  return (\n    <section id={id} aria-labelledby={`${id}-title`} className=\"flex scroll-mt-38 flex-col gap-4\">\n      <h2 id={`${id}-title`} className=\"font-heading text-2xl font-semibold\">{title}</h2>\n      {children}\n    </section>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

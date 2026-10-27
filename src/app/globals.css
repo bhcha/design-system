@@ -3,6 +3,10 @@
 @import "shadcn/tailwind.css";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
+/* 배포용 HTML·레지스트리는 생성물이다. CSS 클래스는 원본 컴포넌트에서만 수집한다. */
+@source not "../../public/mockups";
+@source not "../../public/r";
+
 /* ===========================================================================
    토큰 단일 정본 — shadcn/ui(Base UI, base-nova) 테마 + Ollama 값
    ---------------------------------------------------------------------------
@@ -230,6 +234,7 @@
   /* 컨테이너 — design.md Grid & Container */
   --container-*: initial;
   --container-reading: 720px;
+  --container-docs: 900px; /* 문서 3열 레이아웃의 본문 — design.md 적용 차이 10 */
   --container-pricing: 960px;
   --container-app: 1440px; /* 작업 화면 콘텐츠 락 — 앱 확장 */
   --container-md: 768px;

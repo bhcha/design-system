@@ -5,6 +5,10 @@ import { CodeAvatar } from "@/components/ui/code-avatar";
 import { PathBreadcrumb } from "@/components/ui/path-breadcrumb";
 import { Button } from "@/components/ui/button";
 import { GlobalNav } from "@/components/ui/global-nav";
+import { DocsSideNav, DocsToc } from "@/components/ui/docs-navigation";
+import { DocsShell, DocsSection } from "@/components/ui/docs-shell";
+import { DocsMobileMenu } from "@/components/ui/docs-mobile-menu";
+import { DocsPager } from "@/components/ui/docs-pager";
 import { PageHeader } from "@/components/ui/page-header";
 import { SideNav } from "@/components/ui/side-nav";
 import { SkipLink } from "@/components/ui/skip-link";
@@ -76,10 +80,23 @@ const DOC_NAV_GROUPS = [
   },
 ] as const;
 
+const READER_NAV_GROUPS = [
+  { id: "docs-demo-writing", label: "문서 만들기", items: [
+    { label: "읽기 쉬운 문서 만들기", href: "/mockup/docs#doc=writing", current: true },
+    { label: "정보 구조와 탐색", href: "/mockup/docs#doc=navigation" },
+  ] },
+  { id: "docs-demo-sharing", label: "함께 관리하기", defaultOpen: false, items: [
+    { label: "검토와 업데이트", href: "/mockup/docs#doc=reviewing" },
+  ] },
+] as const;
+
 /** 내비게이션 사용 기준 — 어떤 자리에 어떤 컴포넌트를 쓰나. */
 const NAV_GUIDE = [
   { place: "전역 상단", component: "GlobalNav", when: "제품 전체에 걸친 이동·위치(브레드크럼)" },
-  { place: "앱 좌측 탐색", component: "SideNav", when: "화면 사이 이동. 문서·작업 도구는 density=\"compact\"" },
+  { place: "앱 좌측 탐색", component: "SideNav", when: "작업 화면 사이 이동. 촘촘한 도구 목록은 density=\"compact\"" },
+  { place: "문서 읽기 화면", component: "DocsShell · DocsSideNav · DocsToc", when: "3열 배치 + 카테고리별 문서 + 현재 본문 절. 상단은 docs 변형" },
+  { place: "문서 모바일 탐색", component: "DocsMobileMenu", when: "1024px 미만에서 현재 카테고리의 문서를 서랍으로 탐색" },
+  { place: "문서 본문·이동", component: "DocsSection · DocsPager", when: "고정 메뉴를 피하는 H2 앵커와 이전·다음 문서 이동" },
   { place: "접히는 좌측 탐색", component: "Sidebar", when: "아이콘 모드·오프캔버스로 접어야 할 때" },
   { place: "프로젝트 수평 탭", component: "LinkTabs", when: "탭마다 주소가 바뀐다(새로고침·딥링크 유지)" },
   { place: "상세 보기 탭", component: "Tabs", when: "같은 화면 안에서 패널만 바꾼다(주소 그대로)" },
@@ -218,6 +235,57 @@ export function AppFrameSection() {
           </Card>
         </div>
       </Specimen>
+
+      <Specimen
+        name="docs-shell.tsx · docs-navigation.tsx"
+        state="문서용 상단 · 3열 셸 · 접이식 목록 · 본문 목차"
+        span
+        note="대웅 문서 시스템의 배치만 참고한다. GlobalNav layout=docs · LinkTabs variant=docs, 기존 색·서체를 공유한다."
+      >
+        <Card className="w-full gap-0 overflow-hidden py-0">
+          <GlobalNav
+            brand={<span className="flex items-center gap-3"><DocsMobileMenu title="작성 가이드" groups={READER_NAV_GROUPS} returnFocusId="catalog-docs-main" />Sample Docs</span>}
+            layout="docs" label="문서 상단 (표본)" className="static"
+          />
+          <LinkTabs
+            variant="docs"
+            className="static"
+            label="문서 카테고리 (표본)"
+            current="docs-guide"
+            items={[
+              { value: "docs-start", label: "시작하기", href: "/mockup/docs#doc=overview" },
+              { value: "docs-guide", label: "작성 가이드", href: "/mockup/docs#doc=writing" },
+              { value: "docs-ref", label: "참고 자료", href: "/mockup/docs#doc=shortcuts" },
+            ]}
+          />
+          <DocsShell
+            contentAs="section" sticky={false} mainId="catalog-docs-main" articleLabelledBy="catalog-docs-title" sidebarLabel="문서 탐색 (표본)"
+            sidebar={<DocsSideNav title="작성 가이드" label="문서 목록 (표본)" groups={READER_NAV_GROUPS} />}
+            toc={<DocsToc label="본문 목차 (표본)" items={[{ label: "문서의 기본 구조", href: "#catalog-docs-structure", current: true }]} />}
+          >
+            <header className="flex flex-col gap-3">
+              <h2 id="catalog-docs-title" className="font-heading text-2xl font-semibold">읽기 쉬운 문서 만들기</h2>
+              <p className="text-sm text-charcoal">상단에서 주제를, 왼쪽에서 문서를, 오른쪽에서 본문 절을 고릅니다.</p>
+            </header>
+            <DocsSection id="catalog-docs-structure" title="문서의 기본 구조">
+              <p className="text-sm text-charcoal">읽는 사람이 알아야 할 목적, 조건, 다음 행동을 순서대로 정리합니다.</p>
+            </DocsSection>
+            <DocsPager label="문서 이동 (셸 표본)" previous={{ label: "첫 문서 시작하기", href: "/mockup/docs#doc=quick-start" }} next={{ label: "정보 구조와 탐색", href: "/mockup/docs#doc=navigation" }} />
+          </DocsShell>
+        </Card>
+      </Specimen>
+
+      <Grid>
+        <Specimen name="docs-mobile-menu.tsx" state="독립 호출 · 접힌 그룹 · Esc와 포커스 복귀" note="기본 호출 버튼은 1024px 미만에서 보인다. 이 표본은 trigger 슬롯으로 모든 폭에서 연다.">
+          <DocsMobileMenu title="작성 가이드" groups={READER_NAV_GROUPS} returnFocusId="design-main" trigger={<Button variant="outline">문서 메뉴 표본 열기</Button>} />
+        </Specimen>
+        <Specimen name="docs-pager.tsx" state="다음만 / 이전만 · 긴 제목">
+          <div className="flex w-full flex-col gap-4">
+            <DocsPager label="다음 문서만 (표본)" next={{ label: "팀이 함께 읽고 계속 업데이트하는 문서 만들기", href: "/mockup/docs#doc=writing" }} />
+            <DocsPager label="이전 문서만 (표본)" previous={{ label: "첫 문서 시작하기", href: "/mockup/docs#doc=quick-start" }} />
+          </div>
+        </Specimen>
+      </Grid>
 
       <Specimen
         name="내비게이션 사용 기준"
